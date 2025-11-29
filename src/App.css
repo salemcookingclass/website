@@ -24,11 +24,14 @@
   z-index: 999;
 }
 
+/* Navigation container */
 .nav-links {
   display: flex;
+  flex-wrap: wrap;            /* ⬅ allows menus to wrap on small screens */
   justify-content: center;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
+  padding: 0 10px;
   list-style: none;
 }
 
@@ -37,22 +40,59 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 15px;
+  white-space: nowrap;        /* prevents breaking words */
 }
 
+/* Social icons inside menu */
 .social-icons {
   display: flex;
-  gap: 14px;
+  gap: 12px;
 }
 
 .social-icons svg {
   color: white;
   font-size: 20px;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
 .social-icons svg:hover {
   transform: scale(1.2);
 }
+
+/* ⭐ Mobile Optimized Menu */
+@media (max-width: 600px) {
+  .nav-links {
+    flex-wrap: wrap;               /* wrap items */
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    padding: 4px 0;
+  }
+
+  .social-icons {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ⭐ Extra safety: horizontal scroll (if many menu items) */
+@media (max-width: 420px) {
+  .menu {
+    overflow-x: auto;
+  }
+  .nav-links {
+    flex-wrap: nowrap;             /* force single row */
+    gap: 20px;
+  }
+  .nav-links a,
+  .social-icons {
+    flex-shrink: 0;                /* prevent items disappearing */
+  }
+}
+
 
 /* ------------------------------
    HEADER
