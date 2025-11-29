@@ -84,7 +84,7 @@ DM to Register or WhatsApp (7810940789)
 
 Let’s turn your pizza dreams into reality – one cheesy slice at a time!
 
-https://www.youtube.com/watch?v=Q_onad00alw`,
+<LINK:https://www.youtube.com/watch?v=Q_onad00alw>`,
   type: "offline"
 }
 
@@ -180,7 +180,26 @@ https://www.youtube.com/watch?v=Q_onad00alw`,
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <p>{cls.date}</p>
-          <p>{cls.details}</p>
+          <p><div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
+  {details.split("\n").map((line, index) => {
+    const trimmed = line.trim();
+
+    // If line is a URL → make it a link
+    if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+      return (
+        <p key={index}>
+          <a href={trimmed} target="_blank" rel="noopener noreferrer" style={{ color: "#4a90e2", fontWeight: "bold" }}>
+            {trimmed}
+          </a>
+        </p>
+      );
+    }
+
+    // Normal text
+    return <p key={index}>{line}</p>;
+  })}
+</div>
+{cls.details}</p>
           <button onClick={() => handleRegisterClick(cls)} className="registerBtn">
             Register Now
           </button>
