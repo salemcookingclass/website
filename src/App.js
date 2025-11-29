@@ -180,7 +180,7 @@ export default function App() {
             onClick={() => handleRegisterClick(cls)}
             className="registerBtn"
           >
-            Register Now
+            Enquire Now
           </button>
         </article>
       ))}
@@ -233,7 +233,7 @@ export default function App() {
             onClick={() => handleRegisterClick(cls)}
             className="registerBtn"
           >
-            Register Now
+            Enquire Now
           </button>
         </article>
       ))}
@@ -245,7 +245,7 @@ export default function App() {
       <div className="register-anchor" />
       {showRegisterForm && selectedClass && (
         <section className="register-section" aria-labelledby="register-heading">
-          <h2 id="register-heading">Register for: {selectedClass.title}</h2>
+          <h2 id="register-heading">Enquire for: {selectedClass.title } on {selectedClass.date }</h2>
           <form onSubmit={handleSubmit} className="register-form">
             <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
             <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
