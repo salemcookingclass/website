@@ -139,12 +139,13 @@ export default function App() {
           <h4>{cls.date}</h4>
           <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
             {cls.details.split("\n").map((line, index) => {
-              <p>
+             <p>
   <a href={cls.details.match(/https?:\/\/\S+/)} target="_blank" rel="noopener noreferrer">
     Watch Video
   </a>
 </p>
 
+              return <p key={index}>{line}</p>;
             })}
           </div>
           <button
