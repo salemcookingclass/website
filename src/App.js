@@ -51,7 +51,7 @@ export default function App() {
 const classes = [
  {
   id: 2,
-  title: "Cupcake PIZZA MAKING WORKSHOP ON December",
+  title: "PIZZA MAKING WORKSHOP",
   date: "December 26, 2025",
   details: `PIZZA LOVERS, THIS ONE'S FOR YOU!
 Get ready to roll, top, and bake your way to perfection at our PIZZA MAKING WORKSHOP DECEMBER 26th 
@@ -216,7 +216,7 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
       .map((cls) => (
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
-          <p>{cls.date}</p>
+          <h4>{cls.date}</h4>
           <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
             {cls.details.split("\n").map((line, index) => {
               const trimmed = line.trim();
@@ -257,7 +257,7 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
       .map((cls) => (
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
-          <p>{cls.date}</p>
+          <h4>{cls.date}</h4>
           <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
             {cls.details.split("\n").map((line, index) => {
               const trimmed = line.trim();
