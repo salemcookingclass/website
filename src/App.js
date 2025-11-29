@@ -133,6 +133,7 @@ export default function App() {
       </section>
 
 {/* OFFLINE WORKSHOPS */}
+<section id="classes" className="classes-section"></section>
 <section id="offline-workshops" className="classes-section">
   <h2>Offline Workshops</h2>
   <div className="horizontal-scroll" role="list">
