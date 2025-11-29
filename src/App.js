@@ -81,7 +81,7 @@ export default function App() {
       return;
     }
 
-    const body = `Registration for: ${selectedClass.title}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
+    const body = `Registration for: ${selectedClass.title} on ${selectedClass.date}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
     window.location.href = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Class Registration")}&body=${encodeURIComponent(body)}`;
   };
 
