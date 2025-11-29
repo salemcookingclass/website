@@ -19,13 +19,25 @@ LOGO_URL = "https://via.placeholder.com/140x140.png?text=Logo";
 }
 
 
+let PHOTO_URLS = [];
 
-// Auto-import all photos from assets/photos folder
-const images = import.meta.glob("./assets/photos/*.{png,jpg,jpeg}", {
-  eager: true,
-});
+try {
+  function importAll(r) {
+    return r.keys().map(r);
+  }
 
-const PHOTO_URLS = Object.values(images).map((img) => img.default);
+  PHOTO_URLS = importAll(
+    require.context("./assets/photos", false, /\.(png|jpe?g)$/)
+  );
+} catch (err) {
+  console.warn("Local photos not found, using fallback images.");
+
+  PHOTO_URLS = [
+    "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f",
+    "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb",
+    "https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6",
+  ];
+}
 
 
 
