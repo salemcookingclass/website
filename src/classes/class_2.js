@@ -29,9 +29,9 @@ Join us for an irresistible workshop where you'll master both egg and eggless br
 *Location:* 46/18, Gun Firing Street, Fort, Salem, TN  
 *Registration:* WhatsApp 07810940789
 
-https://www.youtube.com/watch?v=Q_onad00alw
+
 `,
-    type: "online",
+    type: "offline",
   }
 
 

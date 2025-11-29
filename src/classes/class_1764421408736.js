@@ -4,7 +4,7 @@ const class_1764421408736 =
   {
     id: 1764421408736,
     title: "Whipped Wonders: Fresh Cream Pastry Masterclass",
-    date: "25th December 2025",
+    date: "December 25, 2025",
     details: `🎉  Join us for an exclusive workshop where you'll learn everything from perfecting pastry cream to mastering decorative techniques.
 👩‍🍳 *What You'll Learn:*
 - 🍰 Crafting delicious pastry bases

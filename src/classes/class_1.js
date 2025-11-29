@@ -36,7 +36,7 @@ DM to Register or WhatsApp (7810940789)
 
 Let’s turn your pizza dreams into reality – one cheesy slice at a time!
 
-https://www.youtube.com/watch?v=Q_onad00alw`,
+`,
     type: "offline",
   }
 
