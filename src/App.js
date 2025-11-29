@@ -180,7 +180,7 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <p>{cls.date}</p>
-          <p><div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
+          <p>{cls.details}<div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
   {details.split("\n").map((line, index) => {
     const trimmed = line.trim();
 
@@ -199,7 +199,7 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
     return <p key={index}>{line}</p>;
   })}
 </div>
-{cls.details}</p>
+</p>
           <button onClick={() => handleRegisterClick(cls)} className="registerBtn">
             Register Now
           </button>
@@ -217,7 +217,26 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <p>{cls.date}</p>
-          <p>{cls.details}</p>
+          <p>{cls.details}<div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
+  {details.split("\n").map((line, index) => {
+    const trimmed = line.trim();
+
+    // If line is a URL → make it a link
+    if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+      return (
+        <p key={index}>
+          <a href={trimmed} target="_blank" rel="noopener noreferrer" style={{ color: "#4a90e2", fontWeight: "bold" }}>
+            {trimmed}
+          </a>
+        </p>
+      );
+    }
+
+    // Normal text
+    return <p key={index}>{line}</p>;
+  })}
+</div>
+</p>
           <button onClick={() => handleRegisterClick(cls)} className="registerBtn">
             Register Now
           </button>
