@@ -51,8 +51,8 @@ export default function App() {
 const classes = [
  {
   id: 2,
-  title: "Cupcake PIZZA MAKING WORKSHOP ON December 26th",
-  date: "December 26, 2015",
+  title: "Cupcake PIZZA MAKING WORKSHOP ON December",
+  date: "December 26, 2025",
   details: `PIZZA LOVERS, THIS ONE'S FOR YOU!
 Get ready to roll, top, and bake your way to perfection at our PIZZA MAKING WORKSHOP DECEMBER 26th 
 
@@ -90,7 +90,45 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
 
 ,
   { id: 3, title: "Fondant Art Class", date: "Feb 25",details:"", type: "online" },
-  { id: 4, title: "Advanced Cake Decoration", date: "Mar 2", details:"", type: "offline" }
+  { id: 4, title: "Advanced Cake Decoration", date: "Mar 2", details:"", type: "offline" },
+  {
+  id: 5,
+  title: "BROWNIE AND BROOKIE MASTERCLASS",
+  date: "December 27, 2025",
+  details: ` Join us for an irresistible workshop where you'll master both egg and eggless brownies from scratch! Learn the secrets to creating fudgy, cakey, and crinkly-top brownies, brookies, and blondies that will wow your taste buds.
+*What You'll Learn:*
+- Crafting perfect egg and eggless brownies
+- Differences between cakey and fudgy brownies
+- Techniques to achieve that coveted crinkle top
+- Delicious variations and flavor pairings
+*Featured Recipes:*
+- Belgium Chocolate Brownie
+- Espresso Brookies
+- Caramel Blondie
+- Brownie Cake with 5 Flavors (Snickers, Ferrero Rocher, Oreo, Caramel Milk Chocolate, Biscoff)
+- Red Velvet Cheesecake Brownie
+- Eggless Crinkle Top Brownie
+- Ganache Icing
+*Date: December 27th 
+*Time:* 10:30 AM to 5 PM  
+*Location:* 46/18, Gun Firing Street, Fort, Salem, Tamil Nadu (Near Kamala Mahal)  
+*Fees:* ₹2800 per person  
+*Why You Should Attend:*
+- we use coverture chocolates only ( no compound) 
+-  group Hands - on  baking experience with OTG
+- Certification upon completion
+- Recipe printouts and ingredients provided
+- Take home your creations (please bring containers!)
+*Spaces are limited*—secure your spot today and immerse yourself in the art of baking delightful treats!
+📲 *For Registration:* WhatsApp or SMS to 07810940789
+*Bake, Create, and Enjoy the Magic of Brownies and More
+
+<LINK:https://www.youtube.com/watch?v=Q_onad00alw>`,
+  type: "offline"
+}
+
+,
+ 
 ];
 
 
