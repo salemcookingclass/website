@@ -169,10 +169,9 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
       </section>
 
 
-
-{/* OFFLINE CLASSES */}
-<section id="offline-classes" className="classes-section">
-  <h2>Offline Classes (Hands-on Workshops at the Studio)</h2>
+{/* OFFLINE WORKSHOPS */}
+<section id="offline-workshops" className="classes-section">
+  <h2>Offline Workshops</h2>
   <div className="horizontal-scroll" role="list">
     {classes
       .filter((c) => c.type === "offline")
@@ -180,34 +179,38 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <p>{cls.date}</p>
-          <p>{cls.details}<div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
-  {details.split("\n").map((line, index) => {
-    const trimmed = line.trim();
-
-    // If line is a URL → make it a link
-    if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
-      return (
-        <p key={index}>
-          <a href={trimmed} target="_blank" rel="noopener noreferrer" style={{ color: "#4a90e2", fontWeight: "bold" }}>
-            {trimmed}
-          </a>
-        </p>
-      );
-    }
-
-    // Normal text
-    return <p key={index}>{line}</p>;
-  })}
-</div>
-</p>
-          <button onClick={() => handleRegisterClick(cls)} className="registerBtn">
+          <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
+            {cls.details.split("\n").map((line, index) => {
+              const trimmed = line.trim();
+              if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+                return (
+                  <p key={index}>
+                    <a
+                      href={trimmed}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#4a90e2", fontWeight: "bold" }}
+                    >
+                      {trimmed}
+                    </a>
+                  </p>
+                );
+              }
+              return <p key={index}>{line}</p>;
+            })}
+          </div>
+          <button
+            onClick={() => handleRegisterClick(cls)}
+            className="registerBtn"
+          >
             Register Now
           </button>
         </article>
       ))}
   </div>
 </section>
-      {/* ONLINE WORKSHOPS */}
+
+{/* ONLINE WORKSHOPS */}
 <section id="online-workshops" className="classes-section">
   <h2>Online Pre Recorded Videos</h2>
   <div className="horizontal-scroll" role="list">
@@ -217,27 +220,30 @@ Let’s turn your pizza dreams into reality – one cheesy slice at a time!
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <p>{cls.date}</p>
-          <p>{cls.details}<div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
-  {details.split("\n").map((line, index) => {
-    const trimmed = line.trim();
-
-    // If line is a URL → make it a link
-    if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
-      return (
-        <p key={index}>
-          <a href={trimmed} target="_blank" rel="noopener noreferrer" style={{ color: "#4a90e2", fontWeight: "bold" }}>
-            {trimmed}
-          </a>
-        </p>
-      );
-    }
-
-    // Normal text
-    return <p key={index}>{line}</p>;
-  })}
-</div>
-</p>
-          <button onClick={() => handleRegisterClick(cls)} className="registerBtn">
+          <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
+            {cls.details.split("\n").map((line, index) => {
+              const trimmed = line.trim();
+              if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+                return (
+                  <p key={index}>
+                    <a
+                      href={trimmed}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#4a90e2", fontWeight: "bold" }}
+                    >
+                      {trimmed}
+                    </a>
+                  </p>
+                );
+              }
+              return <p key={index}>{line}</p>;
+            })}
+          </div>
+          <button
+            onClick={() => handleRegisterClick(cls)}
+            className="registerBtn"
+          >
             Register Now
           </button>
         </article>
