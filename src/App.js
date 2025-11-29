@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
-import classes from "./data/classes";
+function importAll(r) {
+  return r.keys().map(r);
+}
+
+const classes = importAll(
+  require.context("./classes", false, /^\.\/class_.*\.js$/)
+).map((mod) => mod.default);
 
 // NOTE: Using external image URLs so the app builds even if local assets are missing.
 let LOGO_URL;
@@ -126,7 +132,6 @@ export default function App() {
         <p>Professional online & offline baking courses for all skill levels.</p>
       </section>
 
-
 {/* OFFLINE WORKSHOPS */}
 <section id="offline-workshops" className="classes-section">
   <h2>Offline Workshops</h2>
@@ -137,17 +142,39 @@ export default function App() {
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <h4>{cls.date}</h4>
+
           <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
             {cls.details.split("\n").map((line, index) => {
-             <p>
-  <a href={cls.details.match(/https?:\/\/\S+/)} target="_blank" rel="noopener noreferrer">
-    Watch Video
-  </a>
-</p>
+              const trimmed = line.trim();
 
-              return <p key={index}>{line}</p>;
+              // Check if the line is a URL
+              const isURL =
+                trimmed.startsWith("http://") ||
+                trimmed.startsWith("https://");
+
+              if (isURL) {
+                return (
+                  <p key={index}>
+                    <a
+                      href={trimmed}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: "#4a90e2",
+                        fontWeight: "bold",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      Watch Video
+                    </a>
+                  </p>
+                );
+              }
+
+              return <p key={index}>{trimmed}</p>;
             })}
           </div>
+
           <button
             onClick={() => handleRegisterClick(cls)}
             className="registerBtn"
@@ -169,26 +196,38 @@ export default function App() {
         <article key={cls.id} className="class-card" role="listitem">
           <h3>{cls.title}</h3>
           <h4>{cls.date}</h4>
+
           <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
             {cls.details.split("\n").map((line, index) => {
               const trimmed = line.trim();
-              if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+
+              const isURL =
+                trimmed.startsWith("http://") ||
+                trimmed.startsWith("https://");
+
+              if (isURL) {
                 return (
                   <p key={index}>
                     <a
                       href={trimmed}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "#4a90e2", fontWeight: "bold" }}
+                      style={{
+                        color: "#4a90e2",
+                        fontWeight: "bold",
+                        textDecoration: "underline",
+                      }}
                     >
-                      {trimmed}
+                      Watch Video
                     </a>
                   </p>
                 );
               }
-              return <p key={index}>{line}</p>;
+
+              return <p key={index}>{trimmed}</p>;
             })}
           </div>
+
           <button
             onClick={() => handleRegisterClick(cls)}
             className="registerBtn"
@@ -199,6 +238,7 @@ export default function App() {
       ))}
   </div>
 </section>
+
 
       {/* Register Section (hidden by default) */}
       <div className="register-anchor" />
