@@ -49,43 +49,45 @@ export default function App() {
   const prevPhoto = () => setPhotoIndex((i) => (i - 1 + PHOTO_URLS.length) % PHOTO_URLS.length);
 
 const classes = [
-  { id: 1, title: "Basic Cake Baking", date: "Feb 12",details:"", type: "online" },
-  {
+ {
   id: 2,
   title: "Cupcake PIZZA MAKING WORKSHOP ON December 26th",
   date: "December 26, 2015",
   details: `PIZZA LOVERS, THIS ONE'S FOR YOU!
-Get ready to roll, top, and bake your way to perfection at our PIZZA MAKING WORKSHOP DECEMBER 26th
+Get ready to roll, top, and bake your way to perfection at our PIZZA MAKING WORKSHOP DECEMBER 26th 
 
 What’s on the Menu?
 
 Dough that dreams are made of:
-• Regular Pizza Dough
-• Dominos-Style Pizza Dough
+Regular Pizza Dough
+Dominos-Style Pizza Dough
 
 Varieties you’ll master:
-• Cheese Burst Pizza
-• Gluten-Free Pizza
-• Whole Wheat Pizza
-• Margherita Pizza
-• Paneer Tikka Pizza
-• Frozen Pizza (Make & Store!)
-• Pizza Pockets
-• Calzone Pockets
+Cheese Burst Pizza
+Gluten-Free Pizza
+Whole Wheat Pizza
+Margherita Pizza
+Paneer Tikka Pizza
+Frozen Pizza (Make & Store!)
+Pizza Pockets
+Calzone Pockets
 
-Date: December 26th
+Date: December 26th 
 Time: 10.30am to 5.30pm
 Location: 46/18, Gun Firing Street, Fort, Salem, Tamil Nadu (Near Kamala Mahal)
-Price: 2700 / person
+Price: 2700 / person 
 
 Group Hands-on | Certificate of Completion | Lots of Fun & Flavors!
 
 Limited Seats!
 DM to Register or WhatsApp (7810940789)
 
-Let’s turn your pizza dreams into reality – one cheesy slice at a time!`,
+Let’s turn your pizza dreams into reality – one cheesy slice at a time!
+
+https://www.youtube.com/watch?v=Q_onad00alw`,
   type: "offline"
 }
+
 ,
   { id: 3, title: "Fondant Art Class", date: "Feb 25",details:"", type: "online" },
   { id: 4, title: "Advanced Cake Decoration", date: "Mar 2", details:"", type: "offline" }
