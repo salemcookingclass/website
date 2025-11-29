@@ -19,24 +19,14 @@ LOGO_URL = "https://via.placeholder.com/140x140.png?text=Logo";
 }
 
 
-let PHOTO_URLS = [];
-try {
-PHOTO_URLS = [
-require("./assets/photo1.jpg"),
-require("./assets/photo2.jpg"),
-require("./assets/photo3.jpg"),
-require("./assets/photo4.jpg"),
-require("./assets/photo5.jpg"),
-];
-} catch (e) {
-PHOTO_URLS = [
-"https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a8c5b2b2d4a2b1a6d1b3a4e5f6a7b8c",
-"https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f5f5b7e6a2c3d4b5e6f7a8b9c0d1e2f",
-"https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3a2b1c4d5e6f7081928374655a6b7c8d",
-"https://images.unsplash.com/photo-1481931098730-6ca43defd7a3?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9f8e7d6c5b4a39281726354433221100",
-"https://images.unsplash.com/photo-1544033522-1bf2dd1b6a9b?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=abcdef1234567890abcdef1234567890"
-];
-}
+
+// Auto-import all photos from assets/photos folder
+const images = import.meta.glob("./assets/photos/*.{png,jpg,jpeg}", {
+  eager: true,
+});
+
+const PHOTO_URLS = Object.values(images).map((img) => img.default);
+
 
 
 
