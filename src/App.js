@@ -31,13 +31,16 @@ function importClasses() {
 }
 const classes = importClasses();
 
-// Load all images from src/assets/photos with extensions png/jpg/jpeg
+/* ---------------------------
+   Dynamic Image Loader using import.meta.glob
+   --------------------------- */
+
 function importPhotos() {
   try {
-    const req = require.context("./assets/photos", false, /\.(png|jpe?g)$/);
-    return req.keys().map((k) => req(k).default);
+    const images = import.meta.glob("./assets/photos/*.{png,jpg,jpeg}", { eager: true });
+    return Object.values(images).map((img) => img.default);
   } catch (e) {
-    console.warn("No local photos found in ./assets/photos — using fallback URLs.");
+    console.warn("Error loading photos. Using fallback.");
     return [
       "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f?q=80&w=1200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?q=80&w=1200&auto=format&fit=crop",
@@ -45,7 +48,9 @@ function importPhotos() {
     ];
   }
 }
+
 const PHOTO_URLS = importPhotos();
+
 
 // Try local logo, else fallback
 let LOGO_URL;
