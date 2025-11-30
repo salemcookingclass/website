@@ -317,9 +317,71 @@ function ClassDetails() {
   }
 
   // Prepare mailto link for Enquire button
-  const mailto = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Enquiry: " + cls.title)}&body=${encodeURIComponent(
-    `I am interested in ${cls.title} on ${cls.date || "TBA"}.\n\nPlease contact me.\n\nThanks.`
-  )}`;
+const [showEnquiryForm, setShowEnquiryForm] = useState(false);
+const [enquiryData, setEnquiryData] = useState({
+  name: "",
+  phone: "",
+  email: ""
+});
+const [enquiryClass, setEnquiryClass] = useState(null);
+
+{showEnquiryForm && enquiryClass && (
+  <section className="enquiry-section">
+    <h2>Enquiry for: {enquiryClass.title} {enquiryClass.date ? `on ${enquiryClass.date}` : ""}</h2>
+
+    <form
+      className="enquiry-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+
+        // Build mailto using form values
+        const mailto = `mailto:salemcookingclass@gmail.com
+?subject=${encodeURIComponent("Enquiry: " + enquiryClass.title)}
+&body=${encodeURIComponent(
+`I am interested in ${enquiryClass.title} on ${enquiryClass.date || "TBA"}.
+
+Name: ${enquiryData.name}
+Phone: ${enquiryData.phone}
+Email: ${enquiryData.email || "Not provided"}
+
+Please contact me.
+
+Thanks.`)}`;
+
+        window.location.href = mailto;
+      }}
+    >
+      <input
+        name="name"
+        required
+        placeholder="Name (Required)"
+        value={enquiryData.name}
+        onChange={(e) => setEnquiryData({ ...enquiryData, name: e.target.value })}
+      />
+
+      <input
+        name="phone"
+        required
+        placeholder="Phone (Required)"
+        value={enquiryData.phone}
+        onChange={(e) => setEnquiryData({ ...enquiryData, phone: e.target.value })}
+      />
+
+      <input
+        name="email"
+        placeholder="Email (Optional)"
+        value={enquiryData.email}
+        onChange={(e) => setEnquiryData({ ...enquiryData, email: e.target.value })}
+      />
+
+      <div className="form-actions">
+        <button type="submit">Send Enquiry</button>
+        <button type="button" onClick={() => setShowEnquiryForm(false)}>Cancel</button>
+      </div>
+    </form>
+  </section>
+)}
+
 
   return (
     <div style={{ padding: 20 }}>
@@ -334,16 +396,17 @@ function ClassDetails() {
       <h3>Details</h3>
       <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
 
-      <a href={mailto} className="registerBtn">Enquire</a>
-      <form onSubmit={handleSubmit} className="register-form">
-            <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
-            <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
-            <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-            <div className="form-actions">
-              <button type="submit">Submit</button>
-              <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
-            </div>
-          </form>
+      <button
+  className="registerBtn"
+  onClick={() => {
+    setEnquiryClass(cls);
+    setShowEnquiryForm(true);
+  }}
+>
+  Enquire
+</button>
+
+      
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
   );

@@ -364,3 +364,30 @@
     min-width: 220px;
   }
 }
+.enquiry-section {
+  margin: 40px auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 450px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.enquiry-form input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.form-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-actions button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
