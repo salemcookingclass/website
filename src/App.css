@@ -267,6 +267,7 @@ html {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.25);
   text-align: center;
+  color: #e6a648;
   transition: transform 0.2s, box-shadow 0.2s;
   border: 1px solid #4d3c57;
 }
@@ -336,7 +337,7 @@ html {
   border: 1px solid #4d3c57;
   background: #3a2a45;
   border-radius: 6px;
-  color: #f7f2ec;
+  color: #e6a648;
 }
 
 .form-actions button {
