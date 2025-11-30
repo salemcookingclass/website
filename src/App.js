@@ -1,7 +1,12 @@
+
+
 // App.js
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ClassDetails from "./ClassDetails";
+
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -41,9 +46,8 @@ try {
 
 
 
-
 export default function App() {
-  const [photoIndex, setPhotoIndex] = useState(0);
+    const [photoIndex, setPhotoIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
@@ -86,8 +90,23 @@ export default function App() {
     const body = `Registration for: ${selectedClass.title} on ${selectedClass.date}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
     window.location.href = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Class Registration")}&body=${encodeURIComponent(body)}`;
   };
-
   return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/class/:id" element={<ClassDetails />} />
+      </Routes>
+    </Router>
+  );
+}
+function HomePage() {
+  return (
+    <>
+      
+
+
+
+  
     <div className="page-wrapper">
       {/* Menu */}
       <nav className="menu" aria-label="Main menu">
@@ -231,12 +250,9 @@ export default function App() {
             })}
           </div>
 
-          <button
-            onClick={() => handleRegisterClick(cls)}
-            className="registerBtn"
-          >
-            Enquire Now
-          </button>
+         <a href={`/class/${cls.id}`} className="registerBtn">
+  Learn More
+</a>
         </article>
       ))}
   </div>
@@ -303,5 +319,10 @@ export default function App() {
 
       <footer className="footer">© 2025 Salem Cake Craft Studio</footer>
     </div>
+  
+
+    </>
   );
 }
+
+
