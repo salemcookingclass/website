@@ -192,7 +192,7 @@ function HomePage() {
 
       {/* OFFLINE WORKSHOPS */}
       <section id="offline-workshops" className="classes-section">
-        <h2>Offline (Hands-on at Studio)</h2>
+        <h2>Offline (Group Hands-on at Studio)</h2>
         <div className="horizontal-scroll" role="list">
           {offlineClasses.length === 0 && <div className="class-card">No offline classes available.</div>}
           {offlineClasses.map((cls) => (
