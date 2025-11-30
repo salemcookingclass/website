@@ -188,7 +188,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #faf8fc;
+  background: #3a2a45;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -200,8 +200,8 @@ body, html {
 }
 
 .navBtn {
-  background: #6b5dd5;
-  color: white;
+  background: #e6a648;
+  color: #2e2035;
   border: none;
   font-size: 30px;
   cursor: pointer;
@@ -211,7 +211,7 @@ body, html {
 }
 
 .navBtn:hover {
-  background: #8369e8;
+  background: #f7c87a;
 }
 
 /* ==============================
@@ -224,13 +224,13 @@ body, html {
 
 .caption h2 {
   font-size: 30px;
-  color: #4a3b7f;
+  color: #e6a648;
   margin-bottom: 10px;
 }
 
 .caption p {
   font-size: 17px;
-  color: #555;
+  color: #f7f2ec;
 }
 
 /* ==============================
