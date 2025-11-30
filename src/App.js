@@ -103,6 +103,8 @@ export default function App() {
    --------------------------- */
 
 function HomePage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const [photoIndex, setPhotoIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
 
@@ -156,23 +158,45 @@ function HomePage() {
 
   return (
     <div className="page-wrapper">
-      {/* NAV */}
-      <nav className="menu">
-        <div className="nav-inner">
-          <div className="nav-left">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#online-workshops">Online</a>
-            <a href="#offline-workshops">Offline</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <div className="nav-right">
-            <a href="https://facebook.com/SalemCakeCraftStudio" target="_blank"><FaFacebook /></a>
-            <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank"><FaYoutube /></a>
-            <a href="https://instagram.com/salemcakecraftstudio" target="_blank"><FaInstagram /></a>
-          </div>
-        </div>
-      </nav>
+      {/* NAV + HAMBURGER */}
+<nav className="menu">
+  <div className="nav-inner">
+
+    {/* LOGO on left */}
+    <div className="nav-logo">
+      <img src={LOGO_URL} alt="logo" />
+      <span>Salem Cake Craft Studio</span>
+    </div>
+
+    {/* Hamburger (mobile only) */}
+    <button
+      className="hamburger"
+      onClick={() => setMenuOpen(!menuOpen)}
+      aria-label="Menu"
+    >
+      <span className={menuOpen ? "bar open" : "bar"}></span>
+      <span className={menuOpen ? "bar open" : "bar"}></span>
+      <span className={menuOpen ? "bar open" : "bar"}></span>
+    </button>
+
+    {/* NAV LINKS */}
+    <div className={`nav-links ${menuOpen ? "open" : ""}`}>
+      <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+      <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+      <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online</a>
+      <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Offline</a>
+      <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+
+      {/* SOCIAL ICONS */}
+      <div className="nav-icons">
+        <a href="https://facebook.com/SalemCakeCraftStudio" target="_blank"><FaFacebook /></a>
+        <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank"><FaYoutube /></a>
+        <a href="https://instagram.com/salemcakecraftstudio" target="_blank"><FaInstagram /></a>
+      </div>
+    </div>
+  </div>
+</nav>
+
 
       {/* HEADER */}
       <header id="home" className="header">
