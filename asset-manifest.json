@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.82aa6ee5.css",
-    "main.js": "/static/js/main.a10048d7.js",
-    "static/js/453.d12bf0f8.chunk.js": "/static/js/453.d12bf0f8.chunk.js",
-    "static/media/photo3.jpg": "/static/media/photo3.5d397594b3885296387d.jpg",
-    "static/media/photo2.jpg": "/static/media/photo2.d36e52f0a3832cfcff94.jpg",
-    "static/media/photo1.jpg": "/static/media/photo1.173cc19a0038327e3b51.jpg",
-    "static/media/logo.png": "/static/media/logo.3a07e47778cd51a8e169.png",
-    "index.html": "/index.html",
-    "main.82aa6ee5.css.map": "/static/css/main.82aa6ee5.css.map",
-    "main.a10048d7.js.map": "/static/js/main.a10048d7.js.map",
-    "453.d12bf0f8.chunk.js.map": "/static/js/453.d12bf0f8.chunk.js.map"
+    "main.css": "/salemcakecraftstudio.in/static/css/main.82aa6ee5.css",
+    "main.js": "/salemcakecraftstudio.in/static/js/main.3bde8c23.js",
+    "static/js/453.d12bf0f8.chunk.js": "/salemcakecraftstudio.in/static/js/453.d12bf0f8.chunk.js",
+    "static/media/photo3.jpg": "/salemcakecraftstudio.in/static/media/photo3.5d397594b3885296387d.jpg",
+    "static/media/photo2.jpg": "/salemcakecraftstudio.in/static/media/photo2.d36e52f0a3832cfcff94.jpg",
+    "static/media/photo1.jpg": "/salemcakecraftstudio.in/static/media/photo1.173cc19a0038327e3b51.jpg",
+    "static/media/logo.png": "/salemcakecraftstudio.in/static/media/logo.3a07e47778cd51a8e169.png",
+    "index.html": "/salemcakecraftstudio.in/index.html",
+    "main.82aa6ee5.css.map": "/salemcakecraftstudio.in/static/css/main.82aa6ee5.css.map",
+    "main.3bde8c23.js.map": "/salemcakecraftstudio.in/static/js/main.3bde8c23.js.map",
+    "453.d12bf0f8.chunk.js.map": "/salemcakecraftstudio.in/static/js/453.d12bf0f8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.82aa6ee5.css",
-    "static/js/main.a10048d7.js"
+    "static/js/main.3bde8c23.js"
   ]
 }
