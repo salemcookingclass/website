@@ -1,14 +1,11 @@
-// src/data/classes.js
+// src/classes/class_1764484915358.js
 
-const class_2 = 
+const class_1764484915358 = 
   {
-    id: 2,
+    id: 1764484915358,
     title: "BROWNIE AND BROOKIE MASTERCLASS",
     date: "December 27, 2025",
-    details: `
-Join us for an irresistible workshop where you'll master both egg and eggless brownies from scratch! 
-
-*What You'll Learn:*
+    details: `*What You'll Learn:*
 - Crafting perfect egg and eggless brownies
 - Differences between cakey and fudgy brownies
 - Techniques to achieve that coveted crinkle top
@@ -23,16 +20,11 @@ Join us for an irresistible workshop where you'll master both egg and eggless br
 - Eggless Crinkle Top Brownie
 - Ganache Icing
 
-*Date:* December 27th  
-*Time:* 10:30 AM to 5 PM  
-*Fees:* ₹2800  
 *Location:* 46/18, Gun Firing Street, Fort, Salem, TN  
-*Registration:* WhatsApp 07810940789
-
-
-`,
+*Registration:* WhatsApp 07810940789`,
+    time: "10:30 AM to 5 PM  ",
+    price: "Rs. 2800/-",
     type: "offline",
   }
 
-
-export default class_2;
+export default class_1764484915358;
