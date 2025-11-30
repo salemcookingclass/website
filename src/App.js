@@ -389,7 +389,7 @@ function ClassDetails() {
         </section>
       )}
        <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
-        <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
+       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
     
   );
