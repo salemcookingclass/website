@@ -46,28 +46,6 @@ try {
 
 
 
-  const handleRegisterClick = (cls) => {
-    setSelectedClass(cls);
-    setShowRegisterForm(true);
-    // scroll to the register section (which is right below classes)
-    setTimeout(() => {
-      const el = document.querySelector(".register-section");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-    }, 80);
-  };
-
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.phone.trim()) {
-      alert("Phone is mandatory");
-      return;
-    }
-
-    const body = `Registration for: ${selectedClass.title} on ${selectedClass.date}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
-    window.location.href = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Class Registration")}&body=${encodeURIComponent(body)}`;
-  };
 
 
 export default function App() {
@@ -91,24 +69,31 @@ export default function App() {
   const [selectedClass, setSelectedClass] = useState(null);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
-      return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/class/:id" element={<ClassDetails />} />
-      </Routes>
-    </Router>
-  );
-}
 
-function HomePage() {
+  const handleRegisterClick = (cls) => {
+    setSelectedClass(cls);
+    setShowRegisterForm(true);
+    // scroll to the register section (which is right below classes)
+    setTimeout(() => {
+      const el = document.querySelector(".register-section");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 80);
+  };
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.phone.trim()) {
+      alert("Phone is mandatory");
+      return;
+    }
+
+    const body = `Registration for: ${selectedClass.title} on ${selectedClass.date}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
+    window.location.href = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Class Registration")}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
-    <>
-      
-
-
-
-  
     <div className="page-wrapper">
       {/* Menu */}
       <nav className="menu" aria-label="Main menu">
@@ -252,9 +237,12 @@ function HomePage() {
             })}
           </div>
 
-         <a href={`/class/${cls.id}`} className="registerBtn">
-  Learn More
-</a>
+          <button
+            onClick={() => handleRegisterClick(cls)}
+            className="registerBtn"
+          >
+            Enquire Now
+          </button>
         </article>
       ))}
   </div>
@@ -321,10 +309,5 @@ function HomePage() {
 
       <footer className="footer">© 2025 Salem Cake Craft Studio</footer>
     </div>
-  
-
-    </>
   );
 }
-
-
