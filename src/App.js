@@ -335,6 +335,7 @@ function ClassDetails() {
       <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
 
       <a href={mailto} className="registerBtn">Enquire</a>
+      <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
   );
