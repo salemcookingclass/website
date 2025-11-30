@@ -159,13 +159,13 @@ body, html {
   height: 160px;
   object-fit: cover;
   border-radius: 50%;
-  border: 6px solid #f4e8ff;
+  border: 6px solid #3a2a45;
 }
 
 .header h1 {
   margin-top: 18px;
   font-size: 36px;
-  color: #4a3b7f;
+  color: #e6a648;
   font-weight: 600;
 }
 
