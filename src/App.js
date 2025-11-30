@@ -44,10 +44,7 @@ try {
   ];
 }
 
-
-
-export default function App() {
-    const [photoIndex, setPhotoIndex] = useState(0);
+const [photoIndex, setPhotoIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
@@ -90,7 +87,10 @@ export default function App() {
     const body = `Registration for: ${selectedClass.title} on ${selectedClass.date}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
     window.location.href = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Class Registration")}&body=${encodeURIComponent(body)}`;
   };
-  return (
+
+
+export default function App() {
+      return (
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -99,6 +99,7 @@ export default function App() {
     </Router>
   );
 }
+
 function HomePage() {
   return (
     <>
