@@ -392,3 +392,55 @@
   padding: 8px 16px;
   cursor: pointer;
 }
+
+/* ----------------------
+   Testimonials Scroller
+----------------------- */
+
+.testimonials-section {
+  padding: 40px 20px;
+  background: #fff7fb;
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  margin-bottom: 20px;
+  color: #d6336c;
+}
+
+.testi-scroll-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.testi-scroll {
+  display: flex;
+  gap: 30px;
+  white-space: nowrap;
+  animation: scrollTesti 35s linear infinite;
+}
+
+.testi-card {
+  min-width: 250px;
+  background: white;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  display: inline-block;
+}
+
+.testi-text {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.testi-name {
+  font-weight: bold;
+  color: #d6336c;
+}
+
+@keyframes scrollTesti {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

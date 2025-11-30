@@ -63,6 +63,25 @@ try {
   LOGO_URL = "https://via.placeholder.com/140x140.png?text=Logo";
 }
 
+
+/* ---------------------------
+   Load testimonials dynamically
+   --------------------------- */
+function importTestimonials() {
+  try {
+    const req = require.context("./testimonials", false, /^\.\/testi_.*\.js$/);
+    return req.keys().map((k) => req(k).default);
+  } catch (e) {
+    console.warn("No testimonials found. Using fallback.");
+    return [
+      { name: "Student A", feedback: "Great learning experience!" },
+      { name: "Student B", feedback: "Loved the hands-on approach." },
+    ];
+  }
+}
+
+const testimonials = importTestimonials();
+
 /* ---------------------------
    App Router
    --------------------------- */
@@ -261,6 +280,30 @@ function HomePage() {
         </p>
       </section>
 
+{/* TESTIMONIALS SCROLLER */}
+<section className="testimonials-section">
+  <h2>What Our Students Say</h2>
+
+  <div className="testi-scroll-wrapper">
+    <div className="testi-scroll">
+      {testimonials.map((t, idx) => (
+        <div key={idx} className="testi-card">
+          <p className="testi-text">“{t.feedback}”</p>
+          <p className="testi-name">— {t.name}</p>
+        </div>
+      ))}
+
+      {/* Duplicate for infinite loop */}
+      {testimonials.map((t, idx) => (
+        <div key={`dup-${idx}`} className="testi-card">
+          <p className="testi-text">“{t.feedback}”</p>
+          <p className="testi-name">— {t.name}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
       {/* Contact & Map */}
       <section id="contact" className="contact-section">
         <h2>Contact Us</h2>
@@ -280,6 +323,8 @@ function HomePage() {
           ></iframe>
         </div>
       </section>
+
+      
 
       {/* Social */}
       <section id="social" className="social-section">
