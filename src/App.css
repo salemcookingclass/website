@@ -321,6 +321,7 @@ html {
   padding: 50px 20px;
   background: #2e2035;
   margin: 40px 0;
+  color: #e6a648;
 }
 
 .register-form {
@@ -329,6 +330,7 @@ html {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  color: #e6a648;
 }
 
 .register-form input {
