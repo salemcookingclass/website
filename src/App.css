@@ -326,15 +326,19 @@
 
 /* DETAILS PAGE */
 .backBtn {
-  display: inline-block;
-  margin-bottom: 16px;
+  position: absolute;      /* allows free positioning */
+  top: 16px;               /* space from top */
+  right: 16px;             /* space from right */
+  
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid #ccc;
   background: white;
   cursor: pointer;
-  position: relative;
+
+  z-index: 10;             /* stays above content */
 }
+
 
 /* FOOTER */
 .footer {
