@@ -86,13 +86,18 @@
 /* SLIDER */
 .slider-section {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 15px;
-  padding: 20px;
-  width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
 }
+
+.slider-img {
+  max-height: 340px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  background: white;
+}
+
 
 .big-photo-wrap {
   width: 90%;
