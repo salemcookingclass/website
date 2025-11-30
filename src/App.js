@@ -335,7 +335,15 @@ function ClassDetails() {
       <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
 
       <a href={mailto} className="registerBtn">Enquire</a>
-      <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
+      <form onSubmit={handleSubmit} className="register-form">
+            <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+            <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
+            <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+            <div className="form-actions">
+              <button type="submit">Submit</button>
+              <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
+            </div>
+          </form>
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
   );
