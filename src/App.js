@@ -1,59 +1,89 @@
-
-
 // App.js
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ClassDetails from "./ClassDetails";
+import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 
-function importAll(r) {
-  return r.keys().map(r);
+/* ---------------------------
+   Dynamic imports: classes & photos
+   (Webpack's require.context) 
+   --------------------------- */
+
+// Load class modules dynamically from /src/classes/class_*.js
+function importClasses() {
+  try {
+    const req = require.context("./classes", false, /^\.\/class_.*\.js$/);
+    return req.keys().map((k) => req(k).default);
+  } catch (e) {
+    console.warn("No classes found in ./classes. Falling back to sample classes.");
+    return [
+      {
+        id: "demo-1",
+        title: "Demo Class — Pastry Basics",
+        date: "TBA",
+        time: "TBA",
+        price: "Rs. 999 /-",
+        type: "offline",
+        details: "Demo details: This is a fallback class."
+      }
+    ];
+  }
 }
+const classes = importClasses();
 
-const classes = importAll(
-  require.context("./classes", false, /^\.\/class_.*\.js$/)
-).map((mod) => mod.default);
+// Load all images from src/assets/photos with extensions png/jpg/jpeg
+function importPhotos() {
+  try {
+    const req = require.context("./assets/photos", false, /\.(png|jpe?g)$/);
+    return req.keys().map((k) => req(k).default);
+  } catch (e) {
+    console.warn("No local photos found in ./assets/photos — using fallback URLs.");
+    return [
+      "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6?q=80&w=1200&auto=format&fit=crop",
+    ];
+  }
+}
+const PHOTO_URLS = importPhotos();
 
-// NOTE: Using external image URLs so the app builds even if local assets are missing.
+// Try local logo, else fallback
 let LOGO_URL;
 try {
-LOGO_URL = require("./assets/logo.png");
+  LOGO_URL = require("./assets/logo.png");
 } catch (e) {
-LOGO_URL = "https://via.placeholder.com/140x140.png?text=Logo";
+  LOGO_URL = "https://via.placeholder.com/140x140.png?text=Logo";
 }
 
-
-let PHOTO_URLS = [];
-
-try {
-  function importAll(r) {
-    return r.keys().map(r);
-  }
-
-  PHOTO_URLS = importAll(
-    require.context("./assets/photos", false, /\.(png|jpe?g)$/)
-  );
-} catch (err) {
-  console.warn("Local photos not found, using fallback images.");
-
-  PHOTO_URLS = [
-    "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f",
-    "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb",
-    "https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6",
-  ];
-}
-
-
-
-
+/* ---------------------------
+   App Root (Router)
+   --------------------------- */
 
 export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/class/:id" element={<ClassDetails />} />
+        {/* Fallback route to Home */}
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </Router>
+  );
+}
+
+/* ---------------------------
+   HomePage Component
+   Contains slider, classes (online/offline), register form
+   --------------------------- */
+
+function HomePage() {
+  // Slider state
   const [photoIndex, setPhotoIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
-    if (!autoPlay) return;
+    if (!autoPlay || PHOTO_URLS.length === 0) return;
     const t = setInterval(() => {
       setPhotoIndex((i) => (i + 1) % PHOTO_URLS.length);
     }, 3500);
@@ -63,9 +93,7 @@ export default function App() {
   const nextPhoto = () => setPhotoIndex((i) => (i + 1) % PHOTO_URLS.length);
   const prevPhoto = () => setPhotoIndex((i) => (i - 1 + PHOTO_URLS.length) % PHOTO_URLS.length);
 
-
-
-
+  // Registration form state
   const [selectedClass, setSelectedClass] = useState(null);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
@@ -73,7 +101,6 @@ export default function App() {
   const handleRegisterClick = (cls) => {
     setSelectedClass(cls);
     setShowRegisterForm(true);
-    // scroll to the register section (which is right below classes)
     setTimeout(() => {
       const el = document.querySelector(".register-section");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -88,37 +115,35 @@ export default function App() {
       alert("Phone is mandatory");
       return;
     }
-
-    const body = `Registration for: ${selectedClass.title} on ${selectedClass.date}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
+    const body = `Registration for: ${selectedClass.title} on ${selectedClass.date || "TBA"}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
     window.location.href = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Class Registration")}&body=${encodeURIComponent(body)}`;
   };
+
+  // Separate online/offline arrays
+  const onlineClasses = classes.filter((c) => c.type === "online");
+  const offlineClasses = classes.filter((c) => c.type === "offline");
 
   return (
     <div className="page-wrapper">
       {/* Menu */}
       <nav className="menu" aria-label="Main menu">
-        <ul className="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#classes">Classes</a>
-        <a href="#contact">Contact</a>
-        <a href="#social">Follow Us</a>
-        {/* Social Icons in Menu */}
-          <li className="social-icons">
-            <a href="https://www.facebook.com/SalemCakeCraftStudio/" target="_blank" rel="noreferrer">
-              <FaFacebook />
-            </a>
-            <a href="https://www.youtube.com/@SalemCakeCraftStudio" target="_blank" rel="noreferrer">
-              <FaYoutube />
-            </a>
-            <a href="https://www.instagram.com/salemcakecraftstudio" target="_blank" rel="noreferrer">
-              <FaInstagram />
-            </a>
-          </li>
-        </ul>
+        <div className="nav-inner">
+          <div className="nav-left">
+            <a className="home-link" href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#online-workshops">Online</a>
+            <a href="#offline-workshops">Offline</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div className="nav-right">
+            <a className="icon-link" href="https://www.facebook.com/SalemCakeCraftStudio/" target="_blank" rel="noreferrer"><FaFacebook /></a>
+            <a className="icon-link" href="https://www.youtube.com/@SalemCakeCraftStudio" target="_blank" rel="noreferrer"><FaYoutube /></a>
+            <a className="icon-link" href="https://www.instagram.com/salemcakecraftstudio" target="_blank" rel="noreferrer"><FaInstagram /></a>
+          </div>
+        </div>
       </nav>
- 
- 
+
       {/* Header */}
       <header id="home" className="header">
         <img src={LOGO_URL} alt="Salem Cake Craft Studio logo" className="logo-img" />
@@ -128,9 +153,12 @@ export default function App() {
       {/* Slider */}
       <section className="slider-section" aria-label="Gallery">
         <button className="navBtn" onClick={prevPhoto} aria-label="Previous photo">❮</button>
+
         <div className="big-photo-wrap" onMouseEnter={() => setAutoPlay(false)} onMouseLeave={() => setAutoPlay(true)}>
+          {/* Uses object-fit: contain so full image always visible; wrapper centers it */}
           <img src={PHOTO_URLS[photoIndex]} alt={`Slide ${photoIndex + 1}`} className="big-photo" />
         </div>
+
         <button className="navBtn" onClick={nextPhoto} aria-label="Next photo">❯</button>
       </section>
 
@@ -140,120 +168,53 @@ export default function App() {
         <p>Professional online & offline baking courses for all skill levels.</p>
       </section>
 
-{/* OFFLINE WORKSHOPS */}
-<section id="classes" className="classes-section"></section>
-<section id="offline-workshops" className="classes-section">
-  <h2>Offline Workshops</h2>
-  <div className="horizontal-scroll" role="list">
-    {classes
-      .filter((c) => c.type === "offline")
-      .map((cls) => (
-        <article key={cls.id} className="class-card" role="listitem">
-          <h3>{cls.title}</h3>
-          <h4>{cls.date}</h4>
+      {/* ONLINE WORKSHOPS */}
+      <section id="online-workshops" className="classes-section">
+        <h2>Online Workshops</h2>
+        <div className="horizontal-scroll" role="list">
+          {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}
+          {onlineClasses.map((cls) => (
+            <article key={cls.id} className="class-card" role="listitem">
+              <h3>{cls.title}</h3>
+              <p><strong>Date:</strong> {cls.date || "TBA"}</p>
+              <p><strong>Time:</strong> {cls.time || "TBA"}</p>
+              <p><strong>Fees:</strong> {cls.price || "—"}</p>
 
-          <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
-            {cls.details.split("\n").map((line, index) => {
-              const trimmed = line.trim();
+              <div className="card-actions">
+                <Link to={`/class/${cls.id}`} className="learnMoreBtn">Learn More</Link>
+                <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-              // Check if the line is a URL
-              const isURL =
-                trimmed.startsWith("http://") ||
-                trimmed.startsWith("https://");
+      {/* OFFLINE WORKSHOPS */}
+      <section id="offline-workshops" className="classes-section">
+        <h2>Offline (Hands-on at Studio)</h2>
+        <div className="horizontal-scroll" role="list">
+          {offlineClasses.length === 0 && <div className="class-card">No offline classes available.</div>}
+          {offlineClasses.map((cls) => (
+            <article key={cls.id} className="class-card" role="listitem">
+              <h3>{cls.title}</h3>
+              <p><strong>Date:</strong> {cls.date || "TBA"}</p>
+              <p><strong>Time:</strong> {cls.time || "TBA"}</p>
+              <p><strong>Fees:</strong> {cls.price || "—"}</p>
 
-              if (isURL) {
-                return (
-                  <p key={index}>
-                    <a
-                      href={trimmed}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: "#4a90e2",
-                        fontWeight: "bold",
-                        textDecoration: "underline",
-                      }}
-                    >
-                      Watch Video
-                    </a>
-                  </p>
-                );
-              }
-
-              return <p key={index}>{trimmed}</p>;
-            })}
-          </div>
-
-          <button
-            onClick={() => handleRegisterClick(cls)}
-            className="registerBtn"
-          >
-            Enquire Now
-          </button>
-        </article>
-      ))}
-  </div>
-</section>
-
-{/* ONLINE WORKSHOPS */}
-<section id="online-workshops" className="classes-section">
-  <h2>Online Pre Recorded Videos</h2>
-  <div className="horizontal-scroll" role="list">
-    {classes
-      .filter((c) => c.type === "online")
-      .map((cls) => (
-        <article key={cls.id} className="class-card" role="listitem">
-          <h3>{cls.title}</h3>
-          <h4>{cls.date}</h4>
-
-          <div style={{ whiteSpace: "pre-line", lineHeight: "1.6" }}>
-            {cls.details.split("\n").map((line, index) => {
-              const trimmed = line.trim();
-
-              const isURL =
-                trimmed.startsWith("http://") ||
-                trimmed.startsWith("https://");
-
-              if (isURL) {
-                return (
-                  <p key={index}>
-                    <a
-                      href={trimmed}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        color: "#4a90e2",
-                        fontWeight: "bold",
-                        textDecoration: "underline",
-                      }}
-                    >
-                      Watch Video
-                    </a>
-                  </p>
-                );
-              }
-
-              return <p key={index}>{trimmed}</p>;
-            })}
-          </div>
-
-          <button
-            onClick={() => handleRegisterClick(cls)}
-            className="registerBtn"
-          >
-            Enquire Now
-          </button>
-        </article>
-      ))}
-  </div>
-</section>
-
+              <div className="card-actions">
+                <Link to={`/class/${cls.id}`} className="learnMoreBtn">Learn More</Link>
+                <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       {/* Register Section (hidden by default) */}
       <div className="register-anchor" />
       {showRegisterForm && selectedClass && (
         <section className="register-section" aria-labelledby="register-heading">
-          <h2 id="register-heading">Enquire for: {selectedClass.title } on {selectedClass.date }</h2>
+          <h2 id="register-heading">Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}</h2>
           <form onSubmit={handleSubmit} className="register-form">
             <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
             <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
@@ -308,6 +269,48 @@ export default function App() {
       </section>
 
       <footer className="footer">© 2025 Salem Cake Craft Studio</footer>
+    </div>
+  );
+}
+
+/* ---------------------------
+   ClassDetails Component (route /class/:id)
+   --------------------------- */
+
+function ClassDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const cls = classes.find((c) => String(c.id) === String(id));
+
+  if (!cls) {
+    return (
+      <div style={{ padding: 30 }}>
+        <button onClick={() => navigate(-1)}>← Back</button>
+        <h2>Class not found</h2>
+        <p>The class you requested does not exist.</p>
+      </div>
+    );
+  }
+
+  // Prepare mailto link for Enquire button
+  const mailto = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Enquiry: " + cls.title)}&body=${encodeURIComponent(
+    `I am interested in ${cls.title} on ${cls.date || "TBA"}.\n\nPlease contact me.\n\nThanks.`
+  )}`;
+
+  return (
+    <div style={{ padding: 20 }}>
+      <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
+
+      <h1>{cls.title}</h1>
+      <p><strong>Date:</strong> {cls.date || "TBA"}</p>
+      <p><strong>Time:</strong> {cls.time || "TBA"}</p>
+      <p><strong>Fees:</strong> {cls.price || "—"}</p>
+
+      <h3>Details</h3>
+      <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
+
+      <a href={mailto} className="registerBtn">Enquire / Register</a>
     </div>
   );
 }
