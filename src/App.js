@@ -88,7 +88,7 @@ const testimonials = importTestimonials();
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/class/:id" element={<ClassDetails />} />
