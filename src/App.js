@@ -332,7 +332,7 @@ function ClassDetails() {
       body
     )}`;
   };
-
+/*
   const onlineClasses = classes.filter((c) => c.type === "online");
   const offlineClasses = classes.filter((c) => c.type === "offline");
 
@@ -349,12 +349,12 @@ function ClassDetails() {
         <p>The class you requested does not exist.</p>
       </div>
     );
-  }
-
+  }*
+/*
   // Prepare mailto link for Enquire button
   const mailto = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Enquiry: " + cls.title)}&body=${encodeURIComponent(
     `I am interested in ${cls.title} on ${cls.date || "TBA"}.\n\nPlease contact me.\n\nThanks.`
-  )}`;
+  )}`;*/
 
   return (
 
