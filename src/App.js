@@ -357,6 +357,7 @@ function ClassDetails() {
   )}`;
 
   return (
+
     <div style={{ padding: 20 }}>
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
 
@@ -370,7 +371,10 @@ function ClassDetails() {
       <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
 
     <a href={mailto} className="registerBtn">Enquire</a>
-    {showRegisterForm && selectedClass && (
+    
+       {/* Register Section (hidden by default) */}
+      <div className="register-anchor" />
+      {showRegisterForm && selectedClass && (
         <section className="register-section" aria-labelledby="register-heading">
           <h2 id="register-heading">Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}</h2>
           <form onSubmit={handleSubmit} className="register-form">
@@ -382,8 +386,11 @@ function ClassDetails() {
               <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
             </div>
           </form>
+        </section>
+      )}
       
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
+    
   );
 }
