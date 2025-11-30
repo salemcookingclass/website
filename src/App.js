@@ -31,21 +31,14 @@ function importClasses() {
 }
 const classes = importClasses();
 
-// Load all images from src/assets/photos with extensions png/jpg/jpeg
-function importPhotos() {
-  try {
-    const req = require.context("./assets/photos", false, /\.(png|jpe?g)$/);
-    return req.keys().map((k) => req(k).default);
-  } catch (e) {
-    console.warn("No local photos found in ./assets/photos — using fallback URLs.");
-    return [
-      "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6?q=80&w=1200&auto=format&fit=crop",
-    ];
-  }
-}
-const PHOTO_URLS = importPhotos();
+// Auto-load every image inside assets/photos
+const photoFiles = import.meta.glob("./assets/photos/*.{jpg,jpeg,png}", {
+  eager: true,
+});
+
+// Convert to usable URLs
+const PHOTO_URLS = Object.values(photoFiles).map((file) => file.default);
+
 
 // Try local logo, else fallback
 let LOGO_URL;
