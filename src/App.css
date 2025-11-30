@@ -333,6 +333,7 @@
   border: 1px solid #ccc;
   background: white;
   cursor: pointer;
+  position: relative;
 }
 
 /* FOOTER */
