@@ -299,24 +299,7 @@ function HomePage() {
 /* ---------------------------
    ClassDetails Component (route /class/:id)
    --------------------------- */
-
-function ClassDetails() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  const cls = classes.find((c) => String(c.id) === String(id));
-
-  if (!cls) {
-    return (
-      <div style={{ padding: 30 }}>
-        <button onClick={() => navigate(-1)}>← Back</button>
-        <h2>Class not found</h2>
-        <p>The class you requested does not exist.</p>
-      </div>
-    );
-  }
-
-  // Prepare mailto link for Enquire button
+// Prepare mailto link for Enquire button
 const [showEnquiryForm, setShowEnquiryForm] = useState(false);
 const [enquiryData, setEnquiryData] = useState({
   name: "",
@@ -382,6 +365,23 @@ Thanks.`)}`;
   </section>
 )}
 
+function ClassDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const cls = classes.find((c) => String(c.id) === String(id));
+
+  if (!cls) {
+    return (
+      <div style={{ padding: 30 }}>
+        <button onClick={() => navigate(-1)}>← Back</button>
+        <h2>Class not found</h2>
+        <p>The class you requested does not exist.</p>
+      </div>
+    );
+  }
+
+  
 
   return (
     <div style={{ padding: 20 }}>
@@ -410,4 +410,6 @@ Thanks.`)}`;
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
   );
+
+  
 }
