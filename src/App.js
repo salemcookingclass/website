@@ -332,9 +332,9 @@ function ClassDetails() {
       body
     )}`;
   };
-/*
-  const onlineClasses = classes.filter((c) => c.type === "online");
-  const offlineClasses = classes.filter((c) => c.type === "offline");
+
+  //const onlineClasses = classes.filter((c) => c.type === "online");
+  //const offlineClasses = classes.filter((c) => c.type === "offline");
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -349,7 +349,7 @@ function ClassDetails() {
         <p>The class you requested does not exist.</p>
       </div>
     );
-  }*
+  }
 /*
   // Prepare mailto link for Enquire button
   const mailto = `mailto:salemcookingclass@gmail.com?subject=${encodeURIComponent("Enquiry: " + cls.title)}&body=${encodeURIComponent(
