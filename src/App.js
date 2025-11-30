@@ -30,26 +30,24 @@ function importClasses() {
   }
 }
 const classes = importClasses();
+// Load ALL images from assets/photos automatically
+let PHOTO_URLS = [];
 
-/* ---------------------------
-   Dynamic Image Loader using import.meta.glob
-   --------------------------- */
+try {
+  const importAll = (r) => r.keys().map(r);
 
-function importPhotos() {
-  try {
-    const images = import.meta.glob("./assets/photos/*.{png,jpg,jpeg}", { eager: true });
-    return Object.values(images).map((img) => img.default);
-  } catch (e) {
-    console.warn("Error loading photos. Using fallback.");
-    return [
-      "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6?q=80&w=1200&auto=format&fit=crop",
-    ];
-  }
+  PHOTO_URLS = importAll(
+    require.context("./assets/photos", false, /\.(png|jpe?g)$/)
+  ).map((mod) => mod.default);   // <-- VERY IMPORTANT!
+} catch (err) {
+  console.warn("Local photos not found, using fallback images.");
+  PHOTO_URLS = [
+    "https://images.unsplash.com/photo-1542826438-9b1d6f5d9f8f",
+    "https://images.unsplash.com/photo-1505250469679-203ad9ced0cb",
+    "https://images.unsplash.com/photo-1512058564366-c9e3e3b9f5f6",
+  ];
 }
 
-const PHOTO_URLS = importPhotos();
 
 
 // Try local logo, else fallback
@@ -155,17 +153,29 @@ function HomePage() {
         <h1>Salem Cake Craft Studio</h1>
       </header>
 
-      {/* Slider */}
-      <section className="slider-section" aria-label="Gallery">
-        <button className="navBtn" onClick={prevPhoto} aria-label="Previous photo">❮</button>
+        {/* Slider */}
+<section className="slider-section" aria-label="Gallery">
+  <button className="navBtn" onClick={prevPhoto} aria-label="Previous photo">
+    ❮
+  </button>
 
-        <div className="big-photo-wrap" onMouseEnter={() => setAutoPlay(false)} onMouseLeave={() => setAutoPlay(true)}>
-          {/* Uses object-fit: contain so full image always visible; wrapper centers it */}
-          <img src={PHOTO_URLS[photoIndex]} alt={`Slide ${photoIndex + 1}`} className="big-photo" />
-        </div>
+  <div
+    className="big-photo-wrap"
+    onMouseEnter={() => setAutoPlay(false)}
+    onMouseLeave={() => setAutoPlay(true)}
+  >
+    <img
+      src={PHOTO_URLS[photoIndex]}
+      alt={`Slide ${photoIndex + 1}`}
+      className="big-photo"
+    />
+  </div>
 
-        <button className="navBtn" onClick={nextPhoto} aria-label="Next photo">❯</button>
-      </section>
+  <button className="navBtn" onClick={nextPhoto} aria-label="Next photo">
+    ❯
+  </button>
+</section>
+
 
       {/* Caption */}
       <section className="caption">
