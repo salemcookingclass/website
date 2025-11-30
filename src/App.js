@@ -301,6 +301,41 @@ function HomePage() {
    --------------------------- */
 
 function ClassDetails() {
+  // Register form
+
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
+
+  const handleRegisterClick = (cls) => {
+    setSelectedClass(cls);
+    setShowRegisterForm(true);
+    setTimeout(() => {
+      document.querySelector(".register-section")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 80);
+  };
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.phone.trim()) {
+      alert("Phone is mandatory");
+      return;
+    }
+    const body = `Registration for: ${selectedClass.title}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
+    window.location.href = `mailto:salemcookingclass@gmail.com?subject=Class Registration&body=${encodeURIComponent(
+      body
+    )}`;
+  };
+
+  const onlineClasses = classes.filter((c) => c.type === "online");
+  const offlineClasses = classes.filter((c) => c.type === "offline");
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -335,6 +370,18 @@ function ClassDetails() {
       <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
 
     <a href={mailto} className="registerBtn">Enquire</a>
+    {showRegisterForm && selectedClass && (
+        <section className="register-section" aria-labelledby="register-heading">
+          <h2 id="register-heading">Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}</h2>
+          <form onSubmit={handleSubmit} className="register-form">
+            <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+            <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
+            <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+            <div className="form-actions">
+              <button type="submit">Submit</button>
+              <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
+            </div>
+          </form>
       
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
     </div>
