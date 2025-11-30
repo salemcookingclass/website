@@ -26,9 +26,7 @@ export default function ClassDetails() {
       <pre style={{ whiteSpace: "pre-wrap", lineHeight: "1.6" }}>
         {cls.details}
       </pre>
-      <button onClick={() => navigate(-1)} style={{ marginBottom: "15px" }}>
-        ⬅ Back
-      </button>
+     
     </div>
   );
 }
