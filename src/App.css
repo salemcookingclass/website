@@ -392,55 +392,61 @@
   padding: 8px 16px;
   cursor: pointer;
 }
-
-/* ----------------------
-   Testimonials Scroller
------------------------ */
-
+/* Testimonial Section */
 .testimonials-section {
-  padding: 40px 20px;
-  background: #fff7fb;
-  text-align: center;
-}
-
-.testimonials-section h2 {
-  margin-bottom: 20px;
-  color: #d6336c;
-}
-
-.testi-scroll-wrapper {
-  overflow: hidden;
   width: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
+/* Wrapper to hide overflow */
+.testi-scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Horizontal scrolling container */
 .testi-scroll {
   display: flex;
-  gap: 30px;
-  white-space: nowrap;
-  animation: scrollTesti 35s linear infinite;
+  gap: 20px;
+  animation: scroll 40s linear infinite;
 }
 
+/* Each card */
 .testi-card {
-  min-width: 250px;
-  background: white;
+  min-width: 320px;       /* Prevent too-narrow squeezing */
+  max-width: 420px;       /* Prevent super-wide expansion */
+  padding: 20px;
   border-radius: 12px;
-  padding: 15px 20px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-  display: inline-block;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  flex-shrink: 0;         /* Prevent shrinking when text is long */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+/* Testimonial text */
 .testi-text {
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: normal;            /* Let long text wrap naturally */
+  word-break: break-word;         /* Break long words if needed */
+  overflow-wrap: break-word;
+  max-height: 260px;              /* Optional: limit card height */
+  overflow: hidden;               /* Keeps layout clean */
 }
 
+/* Name styling */
 .testi-name {
+  margin-top: 12px;
   font-weight: bold;
-  color: #d6336c;
+  font-size: 0.95rem;
 }
 
-@keyframes scrollTesti {
+/* Smooth infinite scroll */
+@keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
