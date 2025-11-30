@@ -44,26 +44,7 @@ try {
   ];
 }
 
-const [photoIndex, setPhotoIndex] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(true);
 
-  useEffect(() => {
-    if (!autoPlay) return;
-    const t = setInterval(() => {
-      setPhotoIndex((i) => (i + 1) % PHOTO_URLS.length);
-    }, 3500);
-    return () => clearInterval(t);
-  }, [autoPlay]);
-
-  const nextPhoto = () => setPhotoIndex((i) => (i + 1) % PHOTO_URLS.length);
-  const prevPhoto = () => setPhotoIndex((i) => (i - 1 + PHOTO_URLS.length) % PHOTO_URLS.length);
-
-
-
-
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [showRegisterForm, setShowRegisterForm] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
 
   const handleRegisterClick = (cls) => {
     setSelectedClass(cls);
@@ -90,6 +71,26 @@ const [photoIndex, setPhotoIndex] = useState(0);
 
 
 export default function App() {
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+
+  useEffect(() => {
+    if (!autoPlay) return;
+    const t = setInterval(() => {
+      setPhotoIndex((i) => (i + 1) % PHOTO_URLS.length);
+    }, 3500);
+    return () => clearInterval(t);
+  }, [autoPlay]);
+
+  const nextPhoto = () => setPhotoIndex((i) => (i + 1) % PHOTO_URLS.length);
+  const prevPhoto = () => setPhotoIndex((i) => (i - 1 + PHOTO_URLS.length) % PHOTO_URLS.length);
+
+
+
+
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
       return (
     <Router>
       <Routes>
