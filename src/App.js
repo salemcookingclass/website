@@ -371,7 +371,7 @@ function ClassDetails() {
       <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20 }}>{cls.details}</div>
 
    
-    
+     <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
        {/* Register Section (hidden by default) */}
       <div className="register-anchor" />
       {showRegisterForm && selectedClass && (
@@ -389,7 +389,7 @@ function ClassDetails() {
         </section>
       )}
        <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
-      <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
+      
     </div>
     
   );
