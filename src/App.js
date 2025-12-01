@@ -82,6 +82,8 @@ function importTestimonials() {
 
 const testimonials = importTestimonials();
 
+
+
 /* ---------------------------
    App Router
    --------------------------- */
@@ -155,6 +157,32 @@ function HomePage() {
 
   const onlineClasses = classes.filter((c) => c.type === "online");
   const offlineClasses = classes.filter((c) => c.type === "offline");
+
+  useEffect(() => {
+  const wrapper = document.querySelector(".testi-scroll-wrapper");
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("center-highlight");
+        } else {
+          entry.target.classList.remove("center-highlight");
+        }
+      });
+    },
+    {
+      root: wrapper,
+      rootMargin: "-40% 0px -40% 0px",
+      threshold: 0.5,
+    }
+  );
+
+  document.querySelectorAll(".testi-card").forEach(card => observer.observe(card));
+
+  return () => observer.disconnect();
+}, []);
+
 
   return (
     <div className="page-wrapper">
@@ -309,17 +337,11 @@ function HomePage() {
   <h2>What Our Students Say</h2>
 
   <div className="testi-scroll-wrapper">
-    <div className="testi-scroll">
-      {testimonials.map((t, idx) => (
+    <div className="testi-scroll"
+      style={{ animationDuration: "20s" }}   // speed increased
+    >
+      {testimonials.concat(testimonials).map((t, idx) => (
         <div key={idx} className="testi-card">
-          <p className="testi-text">“{t.feedback}”</p>
-          <p className="testi-name">— {t.name}</p>
-        </div>
-      ))}
-
-      {/* Duplicate for infinite loop */}
-      {testimonials.map((t, idx) => (
-        <div key={`dup-${idx}`} className="testi-card">
           <p className="testi-text">“{t.feedback}”</p>
           <p className="testi-name">— {t.name}</p>
         </div>
@@ -327,6 +349,7 @@ function HomePage() {
     </div>
   </div>
 </section>
+
 
       {/* Contact & Map */}
       <section id="contact" className="contact-section">
