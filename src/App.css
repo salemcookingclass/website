@@ -227,22 +227,22 @@ html {
   font-size: 17px;
   color: #555;
 }
-
 /* ==============================
    CLASSES / CARDS / WORKSHOPS
 ============================== */
 .classes-section {
   padding: 50px 20px;
-  background: #3a2a45;
+  background: #f8f5ef; /* warm creamy background */
 }
 
 .classes-section h2 {
   text-align: center;
   font-size: 28px;
-  color: #e6a648;
+  color: #1e1e1e; /* deep charcoal */
   margin-bottom: 24px;
 }
 
+/* Horizontal Scroll */
 .horizontal-scroll {
   display: flex;
   overflow-x: auto;
@@ -256,33 +256,35 @@ html {
 }
 
 .horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #4d3c57;
+  background: #d7c5aa; /* soft gold-beige */
   border-radius: 4px;
 }
 
+/* Card */
 .class-card {
   min-width: 260px;
-  background: #2e2035;
+  background: #ffffff; /* clean white card */
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
   text-align: center;
-  color: #e6a648;
+  color: #1e1e1e; /* charcoal body text */
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid #4d3c57;
+  border: 1px solid #e6dfd3; /* soft beige border */
 }
 
 .class-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 25px rgba(0,0,0,0.35);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.22);
 }
 
 .class-card h3 {
   font-size: 20px;
-  color: #e6a648;
+  color: #1e1e1e; /* deep charcoal */
   margin-bottom: 12px;
 }
 
+/* Buttons */
 .learnMoreBtn,
 .registerBtn {
   margin-top: 14px;
@@ -292,27 +294,30 @@ html {
   text-decoration: none;
   border: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
+/* Outline button */
 .learnMoreBtn {
   background: transparent;
-  border: 1px solid #e6a648;
-  color: #e6a648;
+  border: 1px solid #c8a97e; /* Harleys gold */
+  color: #1e1e1e; 
 }
 
 .learnMoreBtn:hover {
-  background: #3a2a45;
+  background: #f0e8db; /* soft warm beige */
 }
 
+/* Filled button */
 .registerBtn {
-  background: #e6a648;
-  color: #2e2035;
+  background: #c8a97e; /* Harleys gold */
+  color: #1e1e1e;
 }
 
 .registerBtn:hover {
-  background: #f7c87a;
+  background: #d9b893; /* lighter gold tone */
 }
+
 
 /* ==============================
    REGISTER / ENQUIRE FORM STYLES
