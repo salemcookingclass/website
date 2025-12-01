@@ -148,7 +148,7 @@ function HomePage() {
       return;
     }
     const body = `Registration for: ${selectedClass.title}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
-    window.location.href = `mailto:admin@salemcakecraftstudio.in?subject=Class Registration&body=${encodeURIComponent(
+    window.location.href = `mailto:salemcookingclass@gmail.com?subject=Class Registration&body=${encodeURIComponent(
       body
     )}`;
   };
@@ -397,7 +397,7 @@ function ClassDetails() {
       return;
     }
     const body = `Registration for: ${selectedClass.title}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
-    window.location.href = `mailto:admin@salemcakecraftstudio.in?subject=Class Registration&body=${encodeURIComponent(
+    window.location.href = `mailto:salemcookingclass@gmail.com?subject=Class Registration&body=${encodeURIComponent(
       body
     )}`;
   };
