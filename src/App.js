@@ -158,30 +158,96 @@ function HomePage() {
   const onlineClasses = classes.filter((c) => c.type === "online");
   const offlineClasses = classes.filter((c) => c.type === "offline");
 
-  useEffect(() => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+
+useEffect(() => {
   const wrapper = document.querySelector(".testi-scroll-wrapper");
+  const scrollTrack = document.querySelector(".testi-scroll");
+  const cards = [...document.querySelectorAll(".testi-card")];
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("center-highlight");
-        } else {
-          entry.target.classList.remove("center-highlight");
-        }
-      });
-    },
-    {
-      root: wrapper,
-      rootMargin: "-40% 0px -40% 0px",
-      threshold: 0.5,
+  // -----------------------------------------------------
+  // REMOVE ALL HIGHLIGHTS
+  // -----------------------------------------------------
+  function clearHighlights() {
+    cards.forEach(c => {
+      c.classList.remove("center-highlight");
+      c.classList.remove("selected-card");
+    });
+  }
+
+  // -----------------------------------------------------
+  // AUTO CENTER HIGHLIGHT (ONLY WHEN NO CARD SELECTED)
+  // -----------------------------------------------------
+  const autoCenter = () => {
+    if (selectedIndex !== null) {
+      requestAnimationFrame(autoCenter);
+      return;
     }
-  );
 
-  document.querySelectorAll(".testi-card").forEach(card => observer.observe(card));
+    const wrapRect = wrapper.getBoundingClientRect();
+    const centerX = wrapRect.left + wrapRect.width / 2;
 
-  return () => observer.disconnect();
-}, []);
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const isCenter = Math.abs(cardCenter - centerX) < rect.width * 0.5;
+
+      card.classList.toggle("center-highlight", isCenter);
+    });
+
+    requestAnimationFrame(autoCenter);
+  };
+
+  requestAnimationFrame(autoCenter);
+
+  // -----------------------------------------------------
+  // CLICK TO SELECT A CARD
+  // -----------------------------------------------------
+  cards.forEach((card, idx) => {
+    card.onclick = () => {
+      // If clicked again → deselect
+      if (selectedIndex === idx) {
+        setSelectedIndex(null);
+        scrollTrack.style.animationPlayState = "running";
+        clearHighlights();
+        return;
+      }
+
+      // New selection
+      setSelectedIndex(idx);
+      scrollTrack.style.animationPlayState = "paused";
+
+      clearHighlights();           // ← IMPORTANT
+      card.classList.add("selected-card");
+
+      // Move selected card to center
+      const wrapRect = wrapper.getBoundingClientRect();
+      const wrapCenter = wrapRect.left + wrapRect.width / 2;
+
+      const cardRect = card.getBoundingClientRect();
+      const cardCenter = cardRect.left + cardRect.width / 2;
+
+      const diff = wrapCenter - cardCenter;
+
+      const currentMatrix = getComputedStyle(scrollTrack).transform;
+      let currentX = 0;
+
+      if (currentMatrix !== "none") {
+        currentX = parseFloat(currentMatrix.split(",")[4]);
+      }
+
+      scrollTrack.style.transition = "transform 0.6s ease";
+      scrollTrack.style.transform = `translateX(${currentX + diff}px)`;
+
+      setTimeout(() => {
+        scrollTrack.style.transition = "";
+      }, 650);
+    };
+  });
+
+}, [selectedIndex]);
+
 
 
   return (
@@ -334,21 +400,19 @@ function HomePage() {
 
 {/* TESTIMONIALS SCROLLER */}
 <section className="testimonials-section">
-  <h2>What Our Students Say</h2>
+      <h2>What Our Students Say</h2>
 
-  <div className="testi-scroll-wrapper">
-    <div className="testi-scroll"
-      style={{ animationDuration: "20s" }}   // speed increased
-    >
-      {testimonials.concat(testimonials).map((t, idx) => (
-        <div key={idx} className="testi-card">
-          <p className="testi-text">“{t.feedback}”</p>
-          <p className="testi-name">— {t.name}</p>
+      <div className="testi-scroll-wrapper">
+        <div className="testi-scroll" style={{ animationDuration: "20s" }}>
+          {testimonials.concat(testimonials).map((t, idx) => (
+            <div key={idx} className="testi-card">
+              <p className="testi-text">“{t.feedback}”</p>
+              <p className="testi-name">— {t.name}</p>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
 
 
       {/* Contact & Map */}

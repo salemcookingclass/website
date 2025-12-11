@@ -11,7 +11,7 @@
 
 body,
 html {
-  background: #F8F9FF;
+  background: #6b5dd5;;
   color: #333;
   line-height: 1.6;
 }
@@ -27,7 +27,7 @@ html {
 ============================== */
 .menu {
   width: 100%;
-  background: #6b5dd5;
+  background: #edd8e4;
   padding: 14px 24px;
   position: sticky;
   top: 0;
@@ -59,7 +59,7 @@ html {
 .nav-logo span {
   font-size: 22px;
   font-weight: 600;
-  color: #ffffff;   /* gold */
+  color: #2e2035;   /* gold */
 }
 
 .nav-links {
@@ -70,7 +70,7 @@ html {
 
 .nav-links a {
   text-decoration: none;
-  color: #f7f2ec;
+  color: #2e2035;
   font-weight: 500;
   font-size: 15px;
   padding: 6px 8px;
@@ -78,7 +78,7 @@ html {
 }
 
 .nav-links a:hover {
-  background: #3a2a45;
+  background: #e6a648;
   border-radius: 4px;
 }
 
@@ -89,14 +89,15 @@ html {
 }
 
 .nav-icons a {
-  color: #e6a648;    /* gold */
+  color: #2e2035;    /* gold */
   font-size: 20px;
   transition: transform 0.2s, color 0.2s;
 }
 
 .nav-icons a:hover {
   transform: scale(1.1);
-  color: #f7f2ec;
+  color: #2e2035;    /* gold */
+  
 }
 
 .hamburger {
@@ -126,12 +127,12 @@ html {
     top: 65px;
     right: 15px;
     left: 15px;
-    background: #2e2035;
+    background: #edd8e4;
     border-radius: 10px;
     padding: 20px;
     flex-direction: column;
     gap: 18px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(237, 234, 234, 0.3);
   }
   .nav-links.open {
     display: flex;
@@ -147,6 +148,7 @@ html {
 .header {
   text-align: center;
   padding: 60px 20px;
+   background:#cfe8f0;
 }
 
 .logo-img {
@@ -174,7 +176,7 @@ html {
   gap: 16px;
   width: 100%;
   padding: 24px 0;
-  background: #faf8fc;
+  background:#faf8fc;
 }
 
 .big-photo-wrap {
@@ -184,7 +186,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #faf8fc;
+  background:  #f0e2e2;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -196,8 +198,8 @@ html {
 }
 
 .navBtn {
-  background: #6b5dd5;
-  color: white;
+  background: #edd8e4;
+  color: #2e2035;
   border: none;
   font-size: 30px;
   cursor: pointer;
@@ -207,7 +209,8 @@ html {
 }
 
 .navBtn:hover {
-  background: #8369e8;
+  background: #e6a648;
+  
 }
 
 /* ==============================
@@ -216,6 +219,7 @@ html {
 .caption {
   text-align: center;
   padding: 40px 20px;
+  background: #f9f5ff
 }
 
 .caption h2 {
@@ -373,43 +377,58 @@ html {
   background: #f7c87a;
 }
 
-/* Wrapper */
+/* ----- WRAPPER ----- */
 .testi-scroll-wrapper {
   overflow: hidden;
   width: 100%;
   position: relative;
+  padding: 40px 0;
 }
 
-/* Scroll Track */
 .testi-scroll {
   display: flex;
   gap: 1.5rem;
   animation: scrollLeft linear infinite;
 }
 
-/* Faster scroll (adjustable) */
 @keyframes scrollLeft {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-/* Cards */
+/*TESTIMONIAL*/
+
+/* Base State */
 .testi-card {
   min-width: 280px;
   padding: 20px;
-  background: #f9f5ff;
+  background: #f2e8ea;
   border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
   opacity: 0.5;
   transform: scale(0.9);
-  transition: 0.3s ease;
+  transition: 0.35s ease;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
-/* Highlight center card */
+/* Auto Highlight (center only when no selection) */
+.center-highlight {
+  opacity: 1 !important;
+  transform: scale(1.07) !important;
+  z-index: 3;
+}
+
+/* Manual Selection (stronger, overrides auto-highlight) */
+.selected-card {
+  opacity: 1 !important;
+  transform: scale(1.15) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  z-index: 10 !important;
+}
+
+
+/* Center visual band */
 .testi-scroll-wrapper::after {
   content: "";
   position: absolute;
@@ -421,12 +440,8 @@ html {
   pointer-events: none;
 }
 
-/* Using intersection: highlight the card located under center mask */
-.testi-card:is(:hover, .center-highlight) {
-  opacity: 1;
-  transform: scale(1.07);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-}
+
+
 
 /* ==============================
    CONTACT / ABOUT / FOOTER
