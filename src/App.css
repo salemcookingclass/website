@@ -162,7 +162,7 @@ html {
 .header h1 {
   margin-top: 18px;
   font-size: 36px;
-  color: #4a3b7f;
+  color: #2e2035;
   font-weight: 600;
 }
 
@@ -483,7 +483,7 @@ html {
 .footer {
   text-align: center;
   padding: 24px 10px;
-  background: #6b5dd5;
+  background: #2e2035;
   color: white;
   margin-top: 40px;
   font-weight: 500;
