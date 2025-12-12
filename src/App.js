@@ -1,5 +1,5 @@
 // App.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
@@ -158,95 +158,25 @@ function HomePage() {
   const onlineClasses = classes.filter((c) => c.type === "online");
   const offlineClasses = classes.filter((c) => c.type === "offline");
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const [selectedIndex, setSelectedIndex] = useState(null);
+  const wrapperRef = useRef(null);
 
-
-useEffect(() => {
-  const wrapper = document.querySelector(".testi-scroll-wrapper");
-  const scrollTrack = document.querySelector(".testi-scroll");
-  const cards = [...document.querySelectorAll(".testi-card")];
-
-  // -----------------------------------------------------
-  // REMOVE ALL HIGHLIGHTS
-  // -----------------------------------------------------
-  function clearHighlights() {
-    cards.forEach(c => {
-      c.classList.remove("center-highlight");
-      c.classList.remove("selected-card");
-    });
-  }
-
-  // -----------------------------------------------------
-  // AUTO CENTER HIGHLIGHT (ONLY WHEN NO CARD SELECTED)
-  // -----------------------------------------------------
-  const autoCenter = () => {
-    if (selectedIndex !== null) {
-      requestAnimationFrame(autoCenter);
-      return;
-    }
-
-    const wrapRect = wrapper.getBoundingClientRect();
-    const centerX = wrapRect.left + wrapRect.width / 2;
-
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const isCenter = Math.abs(cardCenter - centerX) < rect.width * 0.5;
-
-      card.classList.toggle("center-highlight", isCenter);
-    });
-
-    requestAnimationFrame(autoCenter);
+  const handleCardClick = (idx) => {
+    setSelectedIndex(idx);
+    scrollToCard(idx);
   };
 
-  requestAnimationFrame(autoCenter);
+  const scrollToCard = (idx) => {
+    const wrapper = wrapperRef.current;
+    const card = wrapper.querySelectorAll(".testi-card")[idx];
+    const left = card.offsetLeft - wrapper.clientWidth / 2 + card.clientWidth / 2;
+    wrapper.scrollTo({ left, behavior: "smooth" });
+  };
 
-  // -----------------------------------------------------
-  // CLICK TO SELECT A CARD
-  // -----------------------------------------------------
-  cards.forEach((card, idx) => {
-    card.onclick = () => {
-      // If clicked again → deselect
-      if (selectedIndex === idx) {
-        setSelectedIndex(null);
-        scrollTrack.style.animationPlayState = "running";
-        clearHighlights();
-        return;
-      }
+  const closePopup = () => setSelectedIndex(null);
 
-      // New selection
-      setSelectedIndex(idx);
-      scrollTrack.style.animationPlayState = "paused";
-
-      clearHighlights();           // ← IMPORTANT
-      card.classList.add("selected-card");
-
-      // Move selected card to center
-      const wrapRect = wrapper.getBoundingClientRect();
-      const wrapCenter = wrapRect.left + wrapRect.width / 2;
-
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-
-      const diff = wrapCenter - cardCenter;
-
-      const currentMatrix = getComputedStyle(scrollTrack).transform;
-      let currentX = 0;
-
-      if (currentMatrix !== "none") {
-        currentX = parseFloat(currentMatrix.split(",")[4]);
-      }
-
-      scrollTrack.style.transition = "transform 0.6s ease";
-      scrollTrack.style.transform = `translateX(${currentX + diff}px)`;
-
-      setTimeout(() => {
-        scrollTrack.style.transition = "";
-      }, 650);
-    };
-  });
-
-}, [selectedIndex]);
+  const selectedTestimonial =
+    selectedIndex !== null ? testimonials[selectedIndex] : null;
 
 
 
@@ -283,9 +213,9 @@ useEffect(() => {
 
       {/* SOCIAL ICONS */}
       <div className="nav-icons">
-        <a href="https://facebook.com/SalemCakeCraftStudio" target="_blank"><FaFacebook /></a>
-        <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank"><FaYoutube /></a>
-        <a href="https://instagram.com/salemcakecraftstudio" target="_blank"><FaInstagram /></a>
+        <a href="https://facebook.com/SalemCakeCraftStudio" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+        <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+        <a href="https://instagram.com/salemcakecraftstudio" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
       </div>
     </div>
   </div>
@@ -399,20 +329,39 @@ useEffect(() => {
       </section>
 
 {/* TESTIMONIALS SCROLLER */}
-<section className="testimonials-section">
-      <h2>What Our Students Say</h2>
+<>
+      <section className="testimonials-section">
+        <h2>What Our Students Say</h2>
 
-      <div className="testi-scroll-wrapper">
-        <div className="testi-scroll" style={{ animationDuration: "20s" }}>
-          {testimonials.concat(testimonials).map((t, idx) => (
-            <div key={idx} className="testi-card">
-              <p className="testi-text">“{t.feedback}”</p>
-              <p className="testi-name">— {t.name}</p>
-            </div>
-          ))}
+        <div className="testi-scroll-wrapper" ref={wrapperRef}>
+          <div className="testi-scroll">
+            {testimonials.map((t, idx) => (
+              <div
+                key={idx}
+                className={
+                  "testi-card " +
+                  (selectedIndex === idx ? "selected-card" : "")
+                }
+                onClick={() => handleCardClick(idx)}
+              >
+                <p className="testi-text">“{t.feedback}”</p>
+                <p className="testi-name">— {t.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* POPUP */}
+      {selectedIndex !== null && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+            <h3>{selectedTestimonial.name}</h3>
+            <p style={{ marginTop: "10px" }}>{selectedTestimonial.feedback}</p>
+          </div>
+        </div>
+      )}
+    </>
 
 
       {/* Contact & Map */}

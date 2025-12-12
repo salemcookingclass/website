@@ -338,9 +338,9 @@ html {
 ============================== */
 .register-section {
   padding: 50px 20px;
-  background: #2e2035;
+  background: #edd8e4;
   margin: 40px 0;
-  color: #e6a648;
+  color: #2e2035;
 }
 
 .register-form {
@@ -356,19 +356,20 @@ html {
   padding: 12px;
   font-size: 15px;
   border: 1px solid #4d3c57;
-  background: #3a2a45;
+  background: #f9f5ff;
   border-radius: 6px;
-  color: #e6a648;
+  color: #2e2035;
 }
 
 .form-actions button {
   flex: 1;
   padding: 12px;
   font-size: 15px;
-  border: none;
+  border: 1px solid #4d3c57;;
   border-radius: 6px;
-  background: #e6a648;
+  background: #cfe8f0;
   color: #2e2035;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -377,70 +378,104 @@ html {
   background: #f7c87a;
 }
 
-/* ----- WRAPPER ----- */
-.testi-scroll-wrapper {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-  padding: 40px 0;
-}
 
-.testi-scroll {
-  display: flex;
-  gap: 1.5rem;
-  animation: scrollLeft linear infinite;
-}
 
-@keyframes scrollLeft {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
 
 /*TESTIMONIAL*/
 
-/* Base State */
+/* Horizontal scroll enabled */
+.testi-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+  white-space: nowrap;
+}
+
+/* Scrollbar */
+.testi-scroll-wrapper::-webkit-scrollbar {
+  height: 10px;
+}
+.testi-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: #c5a5ad;
+  border-radius: 10px;
+}
+.testi-scroll-wrapper::-webkit-scrollbar-track {
+  background: #f3e9eb;
+}
+
+/* Row container */
+.testi-scroll {
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+}
+
+/* Base card */
 .testi-card {
   min-width: 280px;
+  max-width: 280px;      /* 👈 Prevent overflow */
   padding: 20px;
   background: #f2e8ea;
   border-radius: 12px;
-  opacity: 0.5;
-  transform: scale(0.9);
+  opacity: 0.6;
+  transform: scale(0.95);
   transition: 0.35s ease;
   cursor: pointer;
-  position: relative;
-  z-index: 1;
+  white-space: normal;    /* 👈 Allow wrapping inside card */
+  overflow-wrap: break-word; /* 👈 Prevent text spilling out */
+  word-break: break-word;    /* 👈 Long words split properly */
 }
 
-/* Auto Highlight (center only when no selection) */
-.center-highlight {
-  opacity: 1 !important;
-  transform: scale(1.07) !important;
-  z-index: 3;
-}
-
-/* Manual Selection (stronger, overrides auto-highlight) */
+/* When user selects a card */
 .selected-card {
   opacity: 1 !important;
   transform: scale(1.15) !important;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-  z-index: 10 !important;
+  box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+  z-index: 5;
 }
 
+/* Testimonial text */
+.testi-text {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
 
-/* Center visual band */
-.testi-scroll-wrapper::after {
-  content: "";
-  position: absolute;
+/* Name under testimonial — now bold */
+.testi-name {
+  font-weight: 700;     /* 👈 Bold name */
+  margin-top: 10px;
+  font-size: 15px;
+  display: block;
+}
+
+/* Popup */
+.popup-overlay {
+  position: fixed;
   top: 0;
-  left: 50%;
-  width: 280px;
+  left: 0;
+  width: 100%;
   height: 100%;
-  transform: translateX(-50%);
-  pointer-events: none;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
 }
 
-
+.popup-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  text-align: center;
+}
 
 
 /* ==============================
