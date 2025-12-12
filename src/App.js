@@ -106,6 +106,8 @@ export default function App() {
 
 function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
+  
+
 
   const [photoIndex, setPhotoIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
@@ -193,17 +195,28 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     </div>
 
     {/* Hamburger (mobile only) */}
-    <button
-      className="hamburger"
-      onClick={() => setMenuOpen(!menuOpen)}
-      aria-label="Menu"
-    >
-      <span className={menuOpen ? "bar open" : "bar"}></span>
-      <span className={menuOpen ? "bar open" : "bar"}></span>
-      <span className={menuOpen ? "bar open" : "bar"}></span>
-    </button>
+  {/* HAMBURGER BUTTON (mobile only) */}
+<button
+  className="hamburger"
+  onClick={() => setMenuOpen(!menuOpen)}
+  aria-label="Toggle menu"
+>
+  <span className={menuOpen ? "bar open" : "bar"}></span>
+  <span className={menuOpen ? "bar open" : "bar"}></span>
+  <span className={menuOpen ? "bar open" : "bar"}></span>
+</button>
+
+{/* BACKDROP (click to close) */}
+<div
+  className={`menu-backdrop ${menuOpen ? "show" : ""}`}
+  onClick={() => setMenuOpen(false)}
+></div>
+
+
+    
 
     {/* NAV LINKS */}
+   
     <div className={`nav-links ${menuOpen ? "open" : ""}`}>
       <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
       <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
@@ -217,7 +230,9 @@ const [selectedIndex, setSelectedIndex] = useState(null);
         <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
         <a href="https://instagram.com/salemcakecraftstudio" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
       </div>
+      
     </div>
+    
   </div>
 </nav>
 
@@ -258,7 +273,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       </section>
 
       {/* OFFLINE WORKSHOPS */}
-      <section id="offline-workshops" className="classes-section">
+      <section id="offline-workshops" className="classes-section offline-section">
         <h2>Offline (Group Hands-on at Studio)</h2>
         <div className="horizontal-scroll" role="list">
           {offlineClasses.length === 0 && <div className="class-card">No offline classes available.</div>}
@@ -279,7 +294,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       </section>
 
       {/* ONLINE WORKSHOPS */}
-      <section id="online-workshops" className="classes-section">
+      <section id="online-workshops" className="classes-section online-section">
         <h2>Online Workshops</h2>
         <div className="horizontal-scroll" role="list">
           {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}

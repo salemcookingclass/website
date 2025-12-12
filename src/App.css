@@ -233,24 +233,22 @@ html {
   color: #555;
 }
 /* ==============================
-   CLASSES / CARDS / WORKSHOPS
-  
+   BASE CLASSES SHARED BY BOTH
 ============================== */
 
 .classes-section {
   padding: 50px 20px;
-  background: #cfe8f0; /* pastel aqua similar to reference */
 }
 
+/* Section Title */
 .classes-section h2 {
   text-align: center;
   font-size: 32px;
   font-weight: 600;
-  color: #374151; /* charcoal */
   margin-bottom: 30px;
 }
 
-/* Scroll container */
+/* Horizontal Scroll Wrapper */
 .horizontal-scroll {
   display: flex;
   overflow-x: auto;
@@ -264,15 +262,13 @@ html {
 }
 
 .horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #b4ccd5; /* muted aqua */
   border-radius: 4px;
 }
 
-/* Card */
+/* Card Base */
 .class-card {
   min-width: 300px;
-  background: #f0e2e2;
-  border-radius: 24px; /* matches Harley's product cards */
+  border-radius: 24px;
   padding-bottom: 20px;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.10);
   text-align: center;
@@ -280,27 +276,19 @@ html {
   overflow: hidden;
 }
 
-.class-card img {
-  width: 100%;
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+.class-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 18px;
 }
 
-/* Hover effect */
+/* Hover */
 .class-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
 }
 
-/* Title under card */
-.class-card h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #374151;
-  margin-top: 18px;
-}
-
-/* Buttons (if used in future) */
+/* Buttons */
 .learnMoreBtn,
 .registerBtn {
   margin-top: 14px;
@@ -311,25 +299,110 @@ html {
   transition: 0.2s ease;
 }
 
-/* Outline button - pastel grey border */
 .learnMoreBtn {
   background: transparent;
-  border: 1px solid #b4ccd5;
-  color: #374151;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .learnMoreBtn:hover {
-  background: #e7f2f6;
-}
-
-/* Gold button (uses occasionally) */
-.registerBtn {
-  background: #c8a97e;
-  color: #1e1e1e;
+  opacity: 0.9;
 }
 
 .registerBtn:hover {
-  background: #d9b893;
+  opacity: 0.9;
+}
+
+/* ==============================
+   OFFLINE SECTION (Peach/Rose)
+============================== */
+
+.offline-section {
+  background: #ffe8df; /* warm peach */
+}
+
+.offline-section h2 {
+  color: #6b3f3f; /* warm brown */
+}
+
+/* Scroll Bar */
+.offline-section .horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #e9b8b3;
+}
+
+/* Card */
+.offline-section .class-card {
+  background: #fbe4e3; /* soft rose */
+  color: #4a2d2d;
+}
+
+.offline-section .class-card h3 {
+  color: #4a2d2d;
+}
+
+/* Buttons */
+.offline-section .learnMoreBtn {
+  border-color: #d9a6a3;
+  color: #4a2d2d;
+}
+
+.offline-section .learnMoreBtn:hover {
+  background: #f4cdca;
+}
+
+.offline-section .registerBtn {
+  background: #d1917f; /* warm brown gold */
+  color: #fff;
+}
+
+.offline-section .registerBtn:hover {
+  background: #e0a492;
+}
+
+/* ==============================
+   ONLINE SECTION (Aqua/Sky)
+============================== */
+
+.online-section {
+  background: #d8eff7; /* light aqua */
+}
+
+.online-section h2 {
+  color: #1f3b54; /* deep sky blue */
+}
+
+/* Scroll Bar */
+.online-section .horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #9fc9da;
+}
+
+/* Card */
+.online-section .class-card {
+  background: #e8f5fa; /* icy blue */
+  color: #2a4459;
+}
+
+.online-section .class-card h3 {
+  color: #2a4459;
+}
+
+/* Buttons */
+.online-section .learnMoreBtn {
+  border-color: #9fc9da;
+  color: #2a4459;
+}
+
+.online-section .learnMoreBtn:hover {
+  background: #d9eef5;
+}
+
+.online-section .registerBtn {
+  background: #78b3d4; /* sky blue */
+  color: #fff;
+}
+
+.online-section .registerBtn:hover {
+  background: #8cc8e6;
 }
 
 
