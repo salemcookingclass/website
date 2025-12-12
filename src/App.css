@@ -318,7 +318,8 @@ html {
 ============================== */
 
 .offline-section {
-  background: #ffe8df; /* warm peach */
+  background: #d8eff7; /* light aqua */
+; /* warm peach */
 }
 
 .offline-section h2 {
@@ -368,41 +369,41 @@ html {
 }
 
 .online-section h2 {
-  color: #1f3b54; /* deep sky blue */
+  color: #6b3f3f; /* deep sky blue */
 }
 
 /* Scroll Bar */
 .online-section .horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #9fc9da;
+   background: #e9b8b3;
 }
 
 /* Card */
 .online-section .class-card {
-  background: #e8f5fa; /* icy blue */
-  color: #2a4459;
+   background: #fbe4e3; /* soft rose */
+  color: #4a2d2d;
 }
 
 .online-section .class-card h3 {
-  color: #2a4459;
+  color: #4a2d2d;
 }
 
 /* Buttons */
 .online-section .learnMoreBtn {
-  border-color: #9fc9da;
-  color: #2a4459;
+   border-color: #d9a6a3;
+  color: #4a2d2d;
 }
 
 .online-section .learnMoreBtn:hover {
-  background: #d9eef5;
+   background: #f4cdca;
 }
 
 .online-section .registerBtn {
-  background: #78b3d4; /* sky blue */
+  background: #d1917f; /* warm brown gold */
   color: #fff;
 }
 
 .online-section .registerBtn:hover {
-  background: #8cc8e6;
+  background: #e0a492;
 }
 
 
