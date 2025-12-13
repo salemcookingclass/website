@@ -252,6 +252,11 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   </div>
 </header>
 
+      {/* Caption */}
+      <section className="caption">
+        <h2>Learn Baking The Right Way</h2>
+        <p>Professional online & offline baking courses for all skill levels.</p>
+      </section>
 
 
       {/* FIXED SLIDER */}
@@ -277,11 +282,6 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
 
 
-      {/* Caption */}
-      <section className="caption">
-        <h2>Learn Baking The Right Way</h2>
-        <p>Professional online & offline baking courses for all skill levels.</p>
-      </section>
 
       {/* OFFLINE WORKSHOPS */}
       <section id="offline-workshops" className="classes-section offline-section">
