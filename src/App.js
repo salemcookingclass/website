@@ -236,12 +236,23 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   </div>
 </nav>
 
+{/* HEADER */}
+<header id="home" className="header">
+  <img src={LOGO_URL} alt="Logo" className="logo-img" />
+  <h1>Salem Cake Craft Studio</h1>
 
-      {/* HEADER */}
-      <header id="home" className="header">
-        <img src={LOGO_URL} alt="Logo" className="logo-img" />
-        <h1>Salem Cake Craft Studio</h1>
-      </header>
+  <div className="header-video">
+    <iframe
+      src="https://www.youtube.com/embed/kJyQpzrg5tU?si=U2j2SZIoXRZRhsuM"
+      title="Salem Cake Craft Studio Video"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  </div>
+</header>
+
+
 
       {/* FIXED SLIDER */}
       <section className="slider-section" aria-label="Gallery">

@@ -166,6 +166,27 @@ html {
   font-weight: 600;
 }
 
+.header-video {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.header-video iframe {
+  width: 100%;
+  max-width: 720px;
+  height: 405px;
+  border-radius: 16px;
+}
+
+@media (max-width: 760px) {
+  .header-video iframe {
+    height: 220px;
+  }
+}
+
+
+
 /* ==============================
    SLIDER / HERO IMAGES
 ============================== */
