@@ -184,6 +184,27 @@ html {
   }
 }
 
+.mobile-contact {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #c6b4c0;
+  font-size: 14px;
+  text-align: center;
+  color: #2e2035;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mobile-contact:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
 @media (min-width: 801px) {
   .mobile-contact {
     display: none;

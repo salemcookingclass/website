@@ -220,10 +220,15 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
 
   {/* MOBILE-ONLY CONTACT INFO */}
-  <div className="mobile-contact">
-    <p>📍 46/18, Gun Firing Street,<br />Fort, Salem-636001</p>
-    <p>📞 7810940789</p>
-  </div>
+  <a
+  href="#contact"
+  className="mobile-contact"
+  onClick={() => setMenuOpen(false)}
+>
+  <p>📍 45, Gun Fireing Street,<br />Fort Salem-1</p>
+  <p>📞 7810876578</p>
+</a>
+
 
       {/* SOCIAL ICONS */}
       <div className="nav-icons">
