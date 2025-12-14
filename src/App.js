@@ -240,7 +240,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 <header id="home" className="header">
  {/* <img src={LOGO_URL} alt="Logo" className="logo-img" />*/}
   <h1>Learn Baking The Right Way</h1>
- <h2>Professional online & offline baking courses for all skill levels.</h2>
+ <p>Professional online & offline baking courses for all skill levels.</p>
   <div className="header-video">
     <iframe
       src="https://www.youtube.com/embed/is-FgT2uP0I"
@@ -254,32 +254,9 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* Caption */}
       <section className="caption">
-        <h2>Join us this December 2025 for our thoughtfully curated offline classes.</h2>
+        <p>Join us this December 2025 for our thoughtfully curated offline classes.</p>
         <h3>Registrations are open — connect with us on WhatsApp at <b>7810940789</b></h3>
       </section>
-
-
-      {/* FIXED SLIDER */}
-      <section className="slider-section" aria-label="Gallery">
-        <button className="navBtn" onClick={prevPhoto}>❮</button>
-
-        <div
-          className="big-photo-wrap"
-          onMouseEnter={() => setAutoPlay(false)}
-          onMouseLeave={() => setAutoPlay(true)}
-        >
-          <img
-            src={PHOTO_URLS[photoIndex]}
-            alt={`slide ${photoIndex}`}
-            className="big-photo"
-          />
-        </div>
-
-        <button className="navBtn" onClick={nextPhoto}>❯</button>
-      </section>
-
-      {/* REST OF YOUR CODE REMAINS SAME — omitted for brevity */}
-
 
 
 
@@ -325,6 +302,29 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       </section>
 
       
+      {/* FIXED SLIDER */}
+      <section className="slider-section" aria-label="Gallery">
+        <button className="navBtn" onClick={prevPhoto}>❮</button>
+
+        <div
+          className="big-photo-wrap"
+          onMouseEnter={() => setAutoPlay(false)}
+          onMouseLeave={() => setAutoPlay(true)}
+        >
+          <img
+            src={PHOTO_URLS[photoIndex]}
+            alt={`slide ${photoIndex}`}
+            className="big-photo"
+          />
+        </div>
+
+        <button className="navBtn" onClick={nextPhoto}>❯</button>
+      </section>
+
+      {/* REST OF YOUR CODE REMAINS SAME — omitted for brevity */}
+
+
+
 
       {/* Register Section (hidden by default) */}
       <div className="register-anchor" />
