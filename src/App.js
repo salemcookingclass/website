@@ -262,7 +262,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* OFFLINE WORKSHOPS */}
       <section id="offline-workshops" className="classes-section offline-section">
-        <h3>Hands On Workshops</h3>
+        <h2>Hands On Workshops</h2>
         <div className="horizontal-scroll" role="list">
           {offlineClasses.length === 0 && <div className="class-card">No offline classes available.</div>}
           {offlineClasses.map((cls) => (
@@ -283,7 +283,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* ONLINE WORKSHOPS */}
       <section id="online-workshops" className="classes-section online-section">
-        <h3>Online Workshops</h3>
+        <h2>Online Workshops</h2>
         <div className="horizontal-scroll" role="list">
           {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}
           {onlineClasses.map((cls) => (
