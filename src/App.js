@@ -220,8 +220,8 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     <div className={`nav-links ${menuOpen ? "open" : ""}`}>
       <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
       <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-      <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online</a>
-      <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Offline</a>
+      <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online Classes</a>
+      <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Hands On Classes</a>
       <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
 
       {/* SOCIAL ICONS */}
@@ -262,7 +262,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* OFFLINE WORKSHOPS */}
       <section id="offline-workshops" className="classes-section offline-section">
-        <h2>Offline (Group Hands-on at Studio)</h2>
+        <h3>Hands On Workshops</h3>
         <div className="horizontal-scroll" role="list">
           {offlineClasses.length === 0 && <div className="class-card">No offline classes available.</div>}
           {offlineClasses.map((cls) => (
@@ -283,7 +283,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* ONLINE WORKSHOPS */}
       <section id="online-workshops" className="classes-section online-section">
-        <h2>Online Workshops</h2>
+        <h3>Online Workshops</h3>
         <div className="horizontal-scroll" role="list">
           {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}
           {onlineClasses.map((cls) => (
