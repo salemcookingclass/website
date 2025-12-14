@@ -152,7 +152,7 @@ function HomePage() {
       return;
     }
     const body = `Registration for: ${selectedClass.title}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
-    window.location.href = `mailto:salemcookingclass@gmail.com?subject=Class Registration&body=${encodeURIComponent(
+    window.location.href = `mailto:enquire@salemcakecraftstudio.in?subject=Class Registration&body=${encodeURIComponent(
       body
     )}`;
   };
@@ -399,7 +399,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       {/* Contact & Map */}
       <section id="contact" className="contact-section">
         <h2>Contact Us</h2>
-        <p>Email: <a href="mailto:salemcookingclass@gmail.com">salemcookingclass@gmail.com</a></p>
+        <p>Email: <a href="mailto:enquire@salemcakecraftstudio.in">enquire@salemcakecraftstudio.in</a></p>
         <p>Phone: +91-7810940789</p>
         <h3>Location</h3>
         <p>46/18, Gun Firing Street, Fort, Salem - 636001</p>
@@ -465,7 +465,7 @@ function ClassDetails() {
       return;
     }
     const body = `Registration for: ${selectedClass.title}\nName: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}`;
-    window.location.href = `mailto:salemcookingclass@gmail.com?subject=Class Registration&body=${encodeURIComponent(
+    window.location.href = `mailto:enquire@salemcakecraftstudio.in?subject=Class Registration&body=${encodeURIComponent(
       body
     )}`;
   };
