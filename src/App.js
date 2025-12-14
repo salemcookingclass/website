@@ -240,7 +240,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 <header id="home" className="header">
  {/* <img src={LOGO_URL} alt="Logo" className="logo-img" />*/}
   <h1>Learn Baking The Right Way</h1>
- <p>Professional online & offline baking courses for all skill levels.</p>
+ <h2>Professional online & offline baking courses for all skill levels.</h2>
   <div className="header-video">
     <iframe
       src="https://www.youtube.com/embed/is-FgT2uP0I"
@@ -255,7 +255,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       {/* Caption */}
       <section className="caption">
         <h2>Join us this December 2025 for our thoughtfully curated offline classes.</h2>
-        <p>Registrations are open — connect with us on WhatsApp at <b>7810940789</b></p>
+        <h3>Registrations are open — connect with us on WhatsApp at <b>7810940789</b></h3>
       </section>
 
 
