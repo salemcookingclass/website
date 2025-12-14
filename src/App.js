@@ -254,7 +254,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* Caption */}
       <section className="caption">
-        <p>Join us this December 2025 for our thoughtfully curated offline classes.</p>
+        <p>Join us this <b>December 2025</b> for our thoughtfully curated <b>offline classes.</b></p>
         <h3>Registrations are open — connect with us on WhatsApp at <b>7810940789</b></h3>
       </section>
 
