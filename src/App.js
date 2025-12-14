@@ -238,9 +238,9 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
 {/* HEADER */}
 <header id="home" className="header">
-  <img src={LOGO_URL} alt="Logo" className="logo-img" />
-  <h1>Salem Cake Craft Studio</h1>
-
+ {/* <img src={LOGO_URL} alt="Logo" className="logo-img" />*/}
+  <h1>Learn Baking The Right Way</h1>
+ <p>Professional online & offline baking courses for all skill levels.</p>
   <div className="header-video">
     <iframe
       src="https://www.youtube.com/embed/is-FgT2uP0I"
@@ -254,8 +254,8 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
       {/* Caption */}
       <section className="caption">
-        <h2>Learn Baking The Right Way</h2>
-        <p>Professional online & offline baking courses for all skill levels.</p>
+        <h2>Join us this December 2025 for our thoughtfully curated offline classes.</h2>
+        <p>Registrations are open — connect with us on WhatsApp at <b>7810940789</b></p>
       </section>
 
 
