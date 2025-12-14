@@ -99,28 +99,61 @@ html {
   color: #2e2035;    /* gold */
   
 }
-
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 1002;
 }
 
 .hamburger .bar {
-  width: 28px;
+  width: 26px;
   height: 3px;
   background: #e6a648;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: 0.3s ease;
+}
+.hamburger.active .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
-/* MOBILE NAV */
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Close X */
+.close-x {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2e2035;
+}
+
+/* Backdrop */
+.menu-backdrop {
+  display: none;
+}
+
+.menu-backdrop.show {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+}
+
+/* Mobile styles */
 @media (max-width: 800px) {
   .hamburger {
     display: flex;
   }
+
   .nav-links {
     display: none;
     position: absolute;
@@ -128,20 +161,36 @@ html {
     right: 15px;
     left: 15px;
     background: #edd8e4;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 20px;
     flex-direction: column;
-    gap: 18px;
-    box-shadow: 0 8px 25px rgba(237, 234, 234, 0.3);
+    gap: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    z-index: 1001;
   }
+
   .nav-links.open {
     display: flex;
   }
-  .nav-icons {
-    justify-content: center;
-    margin-top: 12px;
+
+  /* Mobile contact info */
+  .mobile-contact {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #c6b4c0;
+    font-size: 14px;
+    text-align: center;
+    color: #2e2035;
   }
 }
+
+@media (min-width: 801px) {
+  .mobile-contact {
+    display: none;
+  }
+}
+
+
 /* ==============================
    HEADER / LOGO
 ============================== */

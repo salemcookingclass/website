@@ -194,35 +194,36 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       <span>Salem Cake Craft Studio</span>
     </div>
 
-    {/* Hamburger (mobile only) */}
-  {/* HAMBURGER BUTTON (mobile only) */}
+    {/* HAMBURGER BUTTON (mobile only) */}
 <button
-  className="hamburger"
+  className={`hamburger ${menuOpen ? "active" : ""}`}
   onClick={() => setMenuOpen(!menuOpen)}
   aria-label="Toggle menu"
 >
-  <span className={menuOpen ? "bar open" : "bar"}></span>
-  <span className={menuOpen ? "bar open" : "bar"}></span>
-  <span className={menuOpen ? "bar open" : "bar"}></span>
+  <span className="bar"></span>
+  <span className="bar"></span>
+  <span className="bar"></span>
 </button>
 
-{/* BACKDROP (click to close) */}
+{/* BACKDROP */}
 <div
   className={`menu-backdrop ${menuOpen ? "show" : ""}`}
   onClick={() => setMenuOpen(false)}
 ></div>
 
+{/* NAV LINKS */}
+<div className={`nav-links ${menuOpen ? "open" : ""}`}>
+  <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+  <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+  <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online Classes</a>
+  <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Hands On Classes</a>
+  <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
 
-    
-
-    {/* NAV LINKS */}
-   
-    <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-      <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
-      <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-      <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online Classes</a>
-      <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Hands On Classes</a>
-      <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+  {/* MOBILE-ONLY CONTACT INFO */}
+  <div className="mobile-contact">
+    <p>📍 46/18, Gun Firing Street,<br />Fort, Salem-636001</p>
+    <p>📞 7810940789</p>
+  </div>
 
       {/* SOCIAL ICONS */}
       <div className="nav-icons">
