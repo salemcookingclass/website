@@ -226,7 +226,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   onClick={() => setMenuOpen(false)}
 >
   <p>📍46/18, Gun Firing Street,<br />Fort, Salem-636001</p>
-  <p>📞 7810876578</p>
+  <p>📞 7810940789</p>
 </a>
 
 
