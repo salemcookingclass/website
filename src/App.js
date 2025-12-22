@@ -295,6 +295,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
           {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}
           {onlineClasses.map((cls) => (
             <article key={cls.id} className="class-card" role="listitem">
+              
               <h3>{cls.title}</h3>
               
               <p><strong>Fees:</strong> {cls.price || "—"}</p>
