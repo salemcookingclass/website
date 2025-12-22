@@ -339,12 +339,11 @@ html {
   margin-bottom: 30px;
 }
 
-/* Section Title */
+/* Section desc */
 .classes-section p {
   text-align: center;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
-  margin-bottom: 20px;
 }
 
 /* Horizontal Scroll Wrapper */
