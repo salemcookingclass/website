@@ -473,9 +473,6 @@ html {
   color: #6b3f3f; /* deep sky blue */
 }
 
-.online-section p {
-  color: #6b3f3f; /* deep sky blue */
-}
 
 /* Scroll Bar */
 .online-section .horizontal-scroll::-webkit-scrollbar-thumb {
