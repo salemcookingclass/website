@@ -290,6 +290,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       {/* ONLINE WORKSHOPS */}
       <section id="online-workshops" className="classes-section online-section">
         <h2>Online Workshops</h2>
+        <p>Pre-Recorded Videos</p>
         <div className="horizontal-scroll" role="list">
           {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}
           {onlineClasses.map((cls) => (
