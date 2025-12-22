@@ -339,6 +339,14 @@ html {
   margin-bottom: 30px;
 }
 
+/* Section Title */
+.classes-section p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
 /* Horizontal Scroll Wrapper */
 .horizontal-scroll {
   display: flex;
@@ -373,6 +381,8 @@ html {
   margin-top: 18px;
 }
 
+
+
 /* Hover */
 .class-card:hover {
   transform: translateY(-4px);
@@ -405,7 +415,7 @@ html {
 }
 
 /* ==============================
-   OFFLINE SECTION (Peach/Rose)
+   OFFLINE SECTION 
 ============================== */
 
 .offline-section {
@@ -452,7 +462,7 @@ html {
 }
 
 /* ==============================
-   ONLINE SECTION (Aqua/Sky)
+   ONLINE SECTION 
 ============================== */
 
 .online-section {
@@ -460,6 +470,10 @@ html {
 }
 
 .online-section h2 {
+  color: #6b3f3f; /* deep sky blue */
+}
+
+.online-section p {
   color: #6b3f3f; /* deep sky blue */
 }
 
