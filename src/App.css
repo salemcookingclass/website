@@ -7,6 +7,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
 }
 
 body,
@@ -420,11 +421,17 @@ html {
 
 .offline-section {
   background: #d8eff7; /* light aqua */
-; /* warm peach */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  
+  
 }
 
 .offline-section h2 {
   color: #6b3f3f; /* warm brown */
+  
 }
 
 /* Scroll Bar */
@@ -436,6 +443,7 @@ html {
 .offline-section .class-card {
   background: #fbe4e3; /* soft rose */
   color: #4a2d2d;
+  
 }
 
 .offline-section .class-card h3 {
@@ -467,6 +475,11 @@ html {
 
 .online-section {
   background: #d8eff7; /* light aqua */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  
 }
 
 .online-section h2 {
