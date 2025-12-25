@@ -310,7 +310,17 @@ const [selectedIndex, setSelectedIndex] = useState(null);
           ))}
         </div>
       </section>
-
+<h2>About Us</h2>
+ {/* About */}
+      <section id="about" className="about-section">
+        
+        <p>
+          Salem cake craft studio – Where Passion Meets Perfection in Pastry & Cake Art! At Salem cake craft studio we believe that baking is more than just a skill, it’s an art. Our institute is dedicated to providing world-class training in pastry and cake artistry, blending traditional techniques with modern innovations. Whether you’re a beginner exploring the world of baking or a professional looking to refine your skills, our hands-on courses cater to all levels.
+        </p>
+        <p>
+          Our workshops cover a wide range of topics, including classic pastries, artisanal bread, gourmet cakes, and advanced cake decorating techniques. With state-of-the-art facilities and small batch sizes, we ensure personalized attention and a comprehensive learning experience. Join us and embark on a sweet journey of creativity, precision, and excellence. Let’s bake your dreams into reality!
+        </p>
+      </section>
       
       {/* FIXED SLIDER */}
       <section className="slider-section" aria-label="Gallery">
@@ -353,21 +363,12 @@ const [selectedIndex, setSelectedIndex] = useState(null);
         </section>
       )}
 
-      {/* About */}
-      <section id="about" className="about-section">
-        <h2>About Us</h2>
-        <p>
-          Salem cake craft studio – Where Passion Meets Perfection in Pastry & Cake Art! At Salem cake craft studio we believe that baking is more than just a skill, it’s an art. Our institute is dedicated to providing world-class training in pastry and cake artistry, blending traditional techniques with modern innovations. Whether you’re a beginner exploring the world of baking or a professional looking to refine your skills, our hands-on courses cater to all levels.
-        </p>
-        <p>
-          Our workshops cover a wide range of topics, including classic pastries, artisanal bread, gourmet cakes, and advanced cake decorating techniques. With state-of-the-art facilities and small batch sizes, we ensure personalized attention and a comprehensive learning experience. Join us and embark on a sweet journey of creativity, precision, and excellence. Let’s bake your dreams into reality!
-        </p>
-      </section>
+   <h2>What Our Students Say</h2>  
 
 {/* TESTIMONIALS SCROLLER */}
 <>
       <section className="testimonials-section">
-        <h2>What Our Students Say</h2>
+        
 
         <div className="testi-scroll-wrapper" ref={wrapperRef}>
           <div className="testi-scroll">
