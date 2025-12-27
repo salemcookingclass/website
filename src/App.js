@@ -247,15 +247,15 @@ const [selectedIndex, setSelectedIndex] = useState(null);
  {/* <img src={LOGO_URL} alt="Logo" className="logo-img" />*/}
   <h1>Learn Baking The Right Way</h1>
  <p>Professional online & offline baking courses for all skill levels.</p>
-  <div className="header-video">
-    <iframe
-      src="https://www.youtube.com/embed/is-FgT2uP0I"
-      title="Salem Cake Craft Studio Video"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
-  </div>
+ <div className="header-video">
+  <iframe
+    src="https://www.youtube.com/embed/videoseries?list=PLaeY19RO3c9Yx550lJujzcKRpB_CaP9Iz"
+    title="Baking Shorts Playlist"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</div>
 </header>
 
       {/* Caption */}
