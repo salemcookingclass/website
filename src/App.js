@@ -310,7 +310,9 @@ const [selectedIndex, setSelectedIndex] = useState(null);
           ))}
         </div>
       </section>
+
 <h2>About Us</h2>
+
  {/* About */}
       <section id="about" className="about-section">
         
