@@ -533,6 +533,7 @@ html {
 }
 
 .register-form {
+  text-align: left;
   max-width: 380px;
   margin: auto;
   display: flex;
@@ -542,6 +543,7 @@ html {
 }
 
 .register-form input {
+  text-align: left;
   padding: 12px;
   font-size: 15px;
   border: 1px solid #4d3c57;
