@@ -736,87 +736,120 @@ h2 {
 }
 
 
-
-/* ==============================
-   TESTIMONIALS SECTION
-============================== */
+/* ======================================================
+   TESTIMONIAL SECTION — 2 VERTICAL FLOATING COLUMNS
+====================================================== */
 
 .testimonials-section {
   width: 100%;
-  padding: 60px 0;
-  position: relative;
-}
-
-/* Wrapper = horizontal scroll container */
-.testi-scroll-wrapper {
-  overflow-x: auto;
-  padding: 10px 0;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox hide scrollbar */
-}
-
-.testi-scroll-wrapper::-webkit-scrollbar {
-  display: none; /* Chrome hide scrollbar */
-}
-
-/* Horizontal items */
-.testi-scroll {
+  padding: 40px 0 60px;
   display: flex;
-  gap: 24px;
-  padding: 10px 20px;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f3f3f3;
 }
 
-/* Testimonial Card */
+/* GRID: 2 columns */
+.testi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  width: 90%;
+  max-width: 1100px;
+}
+
+/* TWO COLUMN WRAPPER */
+.testi-columns {
+  display: flex;
+  gap: 40px;
+  width: 90%;
+  max-width: 1400px;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+/* Each column */
+.testi-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 350px;
+  animation: floatScroll 18s linear infinite;
+}
+
+.testi-col.reverse {
+  animation-direction: reverse;
+}
+
+/* Scroll animation */
+@keyframes floatScroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+/* ======================================================
+   TESTIMONIAL CARD
+====================================================== */
+
 .testi-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 24px;
-  min-width: 260px;
-  max-width: 300px;
-  scroll-snap-align: start;
-  cursor: pointer;
-
+  background: #fff;
+  padding: 22px;
+  border-radius: 18px;
   border: 1px solid #eee;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 
-  transition: 
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    opacity 0.3s ease;
-  
-  opacity: 0.65;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  animation: floatUpDown 4s ease-in-out infinite alternate;
+  transition: transform 0.3s ease;
 }
 
 .testi-card:hover {
-  opacity: 1;
   transform: translateY(-4px);
 }
 
-/* Highlighted card (center) */
-.selected-card {
-  opacity: 1;
-  transform: scale(1.08);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-  border-color: #dd6633; /* Orange accent */
-}
+/* ======================================================
+   TEXT STYLES
+====================================================== */
 
-/* Text */
 .testi-text {
-  font-size: 1.05rem;
-  color: #3d2f3f;
-  line-height: 1.6;
-  margin-bottom: 14px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #474747;
+  margin-bottom: 16px;
 }
 
 .testi-name {
   font-weight: 600;
-  color: #dd6633; /* Orange accent */
-  text-align: right;
+  color: #dd6633;
 }
 
-/* ==============================
+.testi-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testi-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testi-role {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ======================================================
    POPUP
-============================== */
+====================================================== */
 
 .popup-overlay {
   position: fixed;
@@ -829,7 +862,6 @@ h2 {
   z-index: 999;
 }
 
-/* Popup box */
 .popup-box {
   background: #fff;
   padding: 30px 28px;
@@ -837,23 +869,14 @@ h2 {
   width: 90%;
   max-width: 360px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-
   animation: popupFade 0.3s ease forwards;
 }
 
-/* Popup animation */
 @keyframes popupFade {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
 }
 
-/* Name in popup */
 .popup-box h3 {
   margin-bottom: 10px;
   color: #dd6633;
@@ -865,13 +888,86 @@ h2 {
   line-height: 1.6;
 }
 
-/* Mobile adjustments */
-@media (max-width: 480px) {
-  .testi-card {
-    min-width: 200px;
-    padding: 18px;
+/* ======================================================
+   FLOAT ANIMATION
+====================================================== */
+
+@keyframes floatUpDown {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-12px); }
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .testi-grid {
+    grid-template-columns: 1fr;
+    width: 94%;
   }
 }
+
+/* Column animation container (if used) */
+.testi-col {
+  width: 90%;
+  animation-duration: 25s;
+}
+
+/* ======================================================
+   TESTIMONIAL POPUP — CLOSE BUTTON
+====================================================== */
+
+.popup-box button {
+  margin-top: 20px;
+  align-self: center;
+
+  padding: 10px 26px;
+  border-radius: 999px;
+
+  border: none;
+  outline: none;
+
+  background: linear-gradient(135deg, #dd6633, #f08b5d);
+  color: #fff;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(221, 102, 51, 0.35);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Hover */
+.popup-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(221, 102, 51, 0.45);
+}
+
+/* Active click */
+.popup-box button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(221, 102, 51, 0.3);
+}
+
+/* Keyboard focus (accessibility) */
+.popup-box button:focus-visible {
+  outline: 3px solid rgba(221, 102, 51, 0.45);
+  outline-offset: 4px;
+}
+
+/* Dark mode support */
+body.dark .popup-box button {
+  background: linear-gradient(135deg, #ff9966, #ff784e);
+  box-shadow: 0 6px 18px rgba(255, 153, 102, 0.35);
+}
+
 
 /* ==============================
    PAGE ACTION BUTTONS — NEAT & RESPONSIVE

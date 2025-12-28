@@ -93,6 +93,7 @@ const testimonials = importTestimonials();
 
 
 
+
 /* ---------------------------
    App Router
    --------------------------- */
@@ -109,9 +110,6 @@ export default function App() {
   );
 }
 
-/* ---------------------------
-   Home Page
-   --------------------------- */
  
 
 const ScrollRow = ({ items, isOffline }) => {
@@ -192,17 +190,49 @@ const ScrollRow = ({ items, isOffline }) => {
 export { ScrollRow};
 
 
+/* ---------------------------
+   Home Page
+   --------------------------- */
 
 function HomePage() {
 
 
+/* ---------------------------
+   TESTIMONIAL LOGIC
+--------------------------- */
 
+const [activeIndex, setActiveIndex] = useState(0);
+const [paused, setPaused] = useState(false);
+const [popupIndex, setPopupIndex] = useState(null);
+
+// auto-rotate testimonials
+useEffect(() => {
+  if (paused) return;
+
+  const interval = setInterval(() => {
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [paused]);
 
 
   const [menuOpen, setMenuOpen] = useState(false);
   
 
-  
+  const renderStars = (count = 5) => (
+  <div className="testi-stars" aria-label={`${count} star rating`}>
+    {Array.from({ length: 5 }).map((_, i) => (
+      <span key={i} aria-hidden="true">
+        {i < count ? "⭐" : "☆"}
+      </span>
+    ))}
+  </div>
+);
+
+const isBest = (i) => i === 0;
+const isRecent = (i) => i === testimonials.length - 1;
+
   <motion.div
   className="hero-inner"
   initial={{ opacity: 0, y: 30 }}
@@ -279,12 +309,22 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     scrollToCard(idx);
   };
 
-  const scrollToCard = (idx) => {
-    const wrapper = wrapperRef.current;
-    const card = wrapper.querySelectorAll(".testi-card")[idx];
-    const left = card.offsetLeft - wrapper.clientWidth / 2 + card.clientWidth / 2;
-    wrapper.scrollTo({ left, behavior: "smooth" });
-  };
+  const scrollToCard = (index) => {
+  if (!wrapperRef.current) return;   // ⛔ Prevent crash
+
+  const cards = wrapperRef.current.querySelectorAll(".testi-card");
+  if (!cards || !cards[index]) return;  // ⛔ Prevent crash
+
+  const card = cards[index];
+  const wrapper = wrapperRef.current;
+
+  wrapper.scrollTo({
+    left: card.offsetLeft - wrapper.clientWidth / 2 + card.clientWidth / 2,
+    behavior: "smooth",
+  });
+};
+
+
 
   const closePopup = () => setSelectedIndex(null);
 
@@ -511,43 +551,84 @@ const shorts = [
           </form>
         </section>
       )}
+<h2 id="testimonials-heading">What Our Students Say</h2>
 
-   <h2>What Our Students Say</h2>  
+<section
+  className="testimonials-section"
+  aria-labelledby="testimonials-heading"
+  aria-live="polite"
+>
+  <div className="testi-columns">
 
-{/* TESTIMONIALS SCROLLER */}
-<>
-      <section className="testimonials-section">
-        
+    {[0, 1].map((col) => (
+      <div
+        key={col}
+        className={`testi-col ${col === 1 ? "reverse" : ""}`}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {testimonials.map((t, idx) => {
+          const isActive = idx === activeIndex;
+          const highlight =
+            isBest(idx) ? "best" : isRecent(idx) ? "recent" : "";
 
-        <div className="testi-scroll-wrapper" ref={wrapperRef}>
-          <div className="testi-scroll">
-            {testimonials.map((t, idx) => (
-              <div
-                key={idx}
-                className={
-                  "testi-card " +
-                  (selectedIndex === idx ? "selected-card" : "")
-                }
-                onClick={() => handleCardClick(idx)}
-              >
-                <p className="testi-text">“{t.feedback}”</p>
-                <p className="testi-name">— {t.name}</p>
+          return (
+            <article
+              key={`${col}-${idx}`}
+              className={`testi-card ${isActive ? "active" : ""} ${highlight}`}
+              tabIndex={0}
+              role="button"
+              aria-label={`Testimonial from ${t.name}`}
+              onClick={() => setPopupIndex(idx)}
+            >
+              <p className="testi-text">“{t.feedback}”</p>
+
+              {renderStars(t.rating || 5)}
+
+              <div className="testi-bottom">
+                {t.avatar && (
+                  <img
+                    src={t.avatar}
+                    className="testi-avatar"
+                    alt={`Avatar of ${t.name}`}
+                    loading="lazy"
+                  />
+                )}
+
+                <div>
+                  <p className="testi-name">{t.name}</p>
+                  <p className="testi-role">{t.role || "Student"}</p>
+
+                  {isBest(idx) && <span className="badge">🌟 Best Review</span>}
+                  {isRecent(idx) && <span className="badge recent">🆕 Recent</span>}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </article>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+</section>
 
-      {/* POPUP */}
-      {selectedIndex !== null && (
-        <div className="popup-overlay" onClick={closePopup}>
-          <div className="popup-box" onClick={(e) => e.stopPropagation()}>
-            <h3>{selectedTestimonial.name}</h3>
-            <p style={{ marginTop: "10px" }}>{selectedTestimonial.feedback}</p>
-          </div>
-        </div>
-      )}
-    </>
+{popupIndex !== null && (
+  <div
+    className="popup-overlay"
+    role="dialog"
+    aria-modal="true"
+    onClick={() => setPopupIndex(null)}
+  >
+    <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+      <h3>{testimonials[popupIndex].name}</h3>
+
+      {renderStars(testimonials[popupIndex].rating || 5)}
+
+      <p>{testimonials[popupIndex].feedback}</p>
+
+      <button onClick={() => setPopupIndex(null)}>Close</button>
+    </div>
+  </div>
+)}
 
 
       {/* Contact & Map */}
