@@ -1,13 +1,16 @@
 // App.js
+
+
+
 import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
-import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
+
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 
-
-
+import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
+import WorkshopCarousel from "./components/WorkshopCarousel";
 
 /* ---------------------------
    Dynamic imports
@@ -34,6 +37,7 @@ function importClasses() {
 }
 
 const classes = importClasses();
+
 
 /* ---------------------------
    FIXED PHOTO IMPORT (THIS WAS THE BUG)
@@ -108,6 +112,86 @@ export default function App() {
 /* ---------------------------
    Home Page
    --------------------------- */
+ 
+
+const ScrollRow = ({ items, isOffline }) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({
+      x: ["0%", "-50%"],
+      transition: {
+        ease: "linear",
+        duration: 35,
+        repeat: Infinity,
+      },
+    });
+  }, [controls]);
+
+  return (
+    <div className="scroll-wrapper" role="region" aria-label="Workshop carousel">
+      <motion.div
+        className="horizontal-scroll"
+        animate={controls}
+        onHoverStart={() => controls.stop()}
+        onHoverEnd={() => controls.start()}
+        drag="x"
+        dragConstraints={{ left: -1000, right: 0 }}
+        dragElastic={0.08}
+      >
+        {[...items, ...items].map((cls, index) => (
+          <motion.article
+            key={`${cls.id}-${index}`}
+            className="class-card"
+            tabIndex={0}
+            aria-label={`Workshop: ${cls.title}`}
+            whileHover={{ scale: 1.12 }}
+            whileFocus={{ scale: 1.12 }}
+            transition={{ type: "spring", stiffness: 220 }}
+            style={{
+              backgroundImage: cls.image ? `url(${cls.image})` : undefined,
+            }}
+          >
+            <div className="card-overlay" />
+
+            <h3>{cls.title}</h3>
+
+            {isOffline && (
+              <>
+                <p>{cls.date || "TBA"}</p>
+                <p>{cls.time || "TBA"}</p>
+              </>
+            )}
+
+            <p className="price">{cls.price || "—"}</p>
+
+           <div className="card-actions">
+  <Link to={`/class/${cls.id}`} className="learnMoreBtn">
+    Details
+  </Link>
+
+  <a
+    href={`https://wa.me/917810940789?text=Hi%2C%20I%20want%20to%20enquire%20about%20${encodeURIComponent(
+      cls.title
+    )}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="registerBtn"
+  >
+    WhatsApp
+  </a>
+</div>
+
+          </motion.article>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+export { ScrollRow};
+
+
 
 function HomePage() {
 
@@ -130,7 +214,6 @@ function HomePage() {
 
 
 </motion.div>
-
 
 
 
@@ -214,6 +297,7 @@ const shorts = [
   "qdPtpqWKHok",
   "AIvEMthrgYo"
 ];
+
 
   return (
     <div className="page-wrapper">
@@ -324,6 +408,21 @@ const shorts = [
     ❯
   </button>
 </section>
+    
+{/* THUMBNAILS */}
+<div className="thumb-strip">
+  {PHOTO_URLS.map((url, i) => (
+    <button
+      key={i}
+      className={`thumb ${i === photoIndex ? "active" : ""}`}
+      onClick={() => setPhotoIndex(i)}
+      aria-label={`Go to slide ${i + 1}`}
+    >
+      <img src={url} alt={`thumbnail ${i}`} />
+    </button>
+  ))}
+</div>
+
 {/* AUTOPLAY PROGRESS */}
 <div className="progress-track" aria-hidden="true">
   <motion.div
@@ -359,54 +458,22 @@ const shorts = [
 </header>
 
 
+<WorkshopCarousel
+  title="Hands On Workshops"
+  classes={offlineClasses}
+  type="offline"
+  onEnquire={handleRegisterClick}
+/>
 
 
 
+<WorkshopCarousel
+  title="Online Workshops"
+  classes={onlineClasses}
+  type="online"
+  onEnquire={handleRegisterClick}
+/>
 
-      {/* OFFLINE WORKSHOPS */}
-      <h2>Hands On Workshops</h2>
-      <section id="offline-workshops" className="classes-section offline-section">
-        
-        <div className="horizontal-scroll" role="list">
-          {offlineClasses.length === 0 && <div className="class-card">No offline classes available.</div>}
-          {offlineClasses.map((cls) => (
-            <article key={cls.id} className="class-card" role="listitem">
-              <h3>{cls.title}</h3>
-              <p><strong>Date:</strong> {cls.date || "TBA"}</p>
-              <p><strong>Time:</strong> {cls.time || "TBA"}</p>
-              <p><strong>Fees:</strong> {cls.price || "—"}</p>
-
-              <div className="card-actions">
-                <Link to={`/class/${cls.id}`} className="learnMoreBtn">More Details</Link>
-                <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* ONLINE WORKSHOPS */}
-       <h2>Online Workshops</h2> 
-    
-      <section id="online-workshops" className="classes-section online-section">
-       
-        <div className="horizontal-scroll" role="list">
-          {onlineClasses.length === 0 && <div className="class-card">No online classes available.</div>}
-          {onlineClasses.map((cls) => (
-            <article key={cls.id} className="class-card" role="listitem">
-              
-              <h3>{cls.title}</h3>
-              
-              <p><strong>Fees:</strong> {cls.price || "—"}</p>
-
-              <div className="card-actions">
-                <Link to={`/class/${cls.id}`} className="learnMoreBtn">More Details</Link>
-                <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
 
 <h2>About Us</h2>
 
@@ -420,20 +487,6 @@ const shorts = [
           Our workshops cover a wide range of topics, including classic pastries, artisanal bread, gourmet cakes, and advanced cake decorating techniques. With state-of-the-art facilities and small batch sizes, we ensure personalized attention and a comprehensive learning experience. Join us and embark on a sweet journey of creativity, precision, and excellence. Let’s bake your dreams into reality!
         </p>
       </section>
-    
-{/* THUMBNAILS */}
-<div className="thumb-strip">
-  {PHOTO_URLS.map((url, i) => (
-    <button
-      key={i}
-      className={`thumb ${i === photoIndex ? "active" : ""}`}
-      onClick={() => setPhotoIndex(i)}
-      aria-label={`Go to slide ${i + 1}`}
-    >
-      <img src={url} alt={`thumbnail ${i}`} />
-    </button>
-  ))}
-</div>
 
 
 

@@ -530,59 +530,159 @@ h2 {
 
 
 /* ==============================
-   CLASS CARDS (UPDATED)
+   WRAPPER
+============================== *//* ==============================
+   CONTINUOUS CENTERED SCROLL
 ============================== */
+
+.scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 40px 0;
+  -webkit-overflow-scrolling: touch;
+}
 
 .horizontal-scroll {
   display: flex;
+  align-items: center;
   gap: 24px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  width: max-content;
+  padding: 0 16px;
 }
+
+/* ==============================
+   CLASS CARD – CLEAN, CENTERED
+============================== */
 
 .class-card {
-  min-width: 280px;
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 22px;
-  box-shadow: var(--shadow-soft);
-  text-align: center;
+  width: 240px;
+  height: 250px;
+  flex-shrink: 0;
 
-  /* Ensures content + buttons have proper spacing */
+  position: relative;
+  border-radius: 22px;
+  padding: 20px;
+
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;    /* vertical center */
+  align-items: center;        /* horizontal center */
+  text-align: center;
+
+  overflow: hidden;
+
+  background: linear-gradient(145deg, #e6f2f6, #cfe8f0);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
 }
+
+.class-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.18);
+}
+
+/* ==============================
+   GLOW OVERLAY
+============================== */
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(240,100,43,0.25),
+    rgba(207,232,240,0.45)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.class-card:hover .card-overlay {
+  opacity: 1;
+}
+
+/* ==============================
+   CARD TEXT
+============================== */
 
 .class-card h3 {
-  margin-bottom: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.35;
+  color: rgba(0,0,0,0.75);
 }
 
-/* BUTTON WRAPPER (your existing .card-actions) */
+.class-card p {
+  font-size: 13px;
+  margin: 4px 0;
+  line-height: 1.45;
+  color: rgba(0,0,0,0.65);
+}
+
+.price {
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* ==============================
+   TYPE LABEL (ONLINE/OFFLINE)
+============================== */
+
+.class-card::after {
+  content: attr(data-type);
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(0,0,0,0.35);
+}
+
+.class-card.online {
+  background: linear-gradient(145deg, #e8f8ff, #d8effa);
+}
+
+.class-card.offline {
+  background: linear-gradient(145deg, #fff4ee, #ffe7dd);
+}
+
+/* ==============================
+   BUTTONS – TIDY, CENTERED
+============================== */
+
 .card-actions {
-  margin-top: 20px;
+  width: 100%;
+  margin-top: 16px;
+
   display: flex;
   justify-content: center;
-  gap: 14px;              /* ← Key spacing between buttons */
-  flex-wrap: wrap;        /* Buttons wrap on small screens */
+  gap: 10px;
+
+  position: absolute;
+  bottom: 14px;
+  left: 0;
 }
 
-/* Buttons */
 .learnMoreBtn,
 .registerBtn {
-  padding: 10px 18px;
-  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
   font-weight: 600;
+  border-radius: 999px;
   border: none;
   cursor: pointer;
-  min-width: 120px;        /* Keeps both buttons same width */
-  text-align: center;
+  white-space: nowrap;
 }
 
 .learnMoreBtn {
-  background: #f6d4c6;
-  color: #2e2035;
- 
+  background: #ffffff;
+  color: #1f2937;
 }
 
 .registerBtn {
@@ -591,47 +691,52 @@ h2 {
 }
 
 /* ==============================
-   PAGE ACTION BUTTONS — COMPACT
+   DARK MODE
 ============================== */
 
-.page-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  margin-top: 28px;
+[data-theme="dark"] .class-card {
+  background: linear-gradient(145deg, #1f2937, #111827);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.65);
 }
 
-/* Shared button base */
-.page-actions button {
-  flex: 1;
-  padding: 10px 20px;      /* Reduced height + width */
-  font-size: 0.95rem;      /* Slightly smaller text */
-  font-weight: 600;        /* Still bold but not heavy */
-  border: none;
-  border-radius: 18px;     /* Softer rounded shape */
-  cursor: pointer;
-  transition: opacity 0.25s ease;
+[data-theme="dark"] .class-card h3,
+[data-theme="dark"] .class-card p {
+  color: rgba(255,255,255,0.85);
 }
 
-/* Enquire = Orange */
-.page-actions .enquireBtn {
-  background: #dd6633;
-  color: white;
+[data-theme="dark"] .class-card::after {
+  color: rgba(255,255,255,0.45);
 }
 
-.page-actions .enquireBtn:hover {
-  opacity: 0.88;
+/* ==============================
+   RESPONSIVENESS
+============================== */
+
+@media (max-width: 768px) {
+  .class-card {
+    width: 200px;
+    height: 220px;
+    padding: 16px;
+  }
+
+  .class-card h3 {
+    font-size: 15px;
+  }
+
+  .class-card p {
+    font-size: 12.5px;
+  }
 }
 
-/* Back = Peach */
-.page-actions .backBtn {
-  background: #f3d6cc;
-  color: #2d1f2f;
+@media (max-width: 480px) {
+  .class-card {
+    width: 180px;
+    height: 210px;
+  }
 }
 
-.page-actions .backBtn:hover {
-  opacity: 0.88;
-}
+
+
 /* ==============================
    TESTIMONIALS SECTION
 ============================== */
