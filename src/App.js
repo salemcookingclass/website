@@ -277,7 +277,7 @@ const shorts = [
 
     <p className="hero-sub">
       Join our vibrant community of baking enthusiasts and elevate your skills
-      with expert-led classes — online & hands-on.
+      with <br /> expert-led classes — online & hands-on.
     </p>
 
     <div className="hero-actions">
@@ -285,6 +285,60 @@ const shorts = [
       <a href="#about" className="hero-btn secondary">See more</a>
     </div>
   </div>
+
+  
+     {/* FIXED SLIDER */}
+<section className="slider-section" aria-label="Gallery">
+
+  <button className="navBtn" onClick={prevPhoto} aria-label="Previous photo">
+    ❮
+  </button>
+
+  <div
+    className="big-photo-wrap"
+    onMouseEnter={() => setAutoPlay(false)}
+    onMouseLeave={() => setAutoPlay(true)}
+  >
+    <AnimatePresence mode="wait">
+      <motion.img
+        key={photoIndex}
+        src={PHOTO_URLS[photoIndex]}
+        alt={`slide ${photoIndex}`}
+        className="big-photo"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -40 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.15}
+        onDragEnd={(e, info) => {
+          if (info.offset.x < -80) nextPhoto();
+          if (info.offset.x > 80) prevPhoto();
+        }}
+      />
+    </AnimatePresence>
+  </div>
+
+  <button className="navBtn" onClick={nextPhoto} aria-label="Next photo">
+    ❯
+  </button>
+</section>
+{/* AUTOPLAY PROGRESS */}
+<div className="progress-track" aria-hidden="true">
+  <motion.div
+    key={photoIndex}
+    className="progress-bar"
+    initial={{ width: "0%" }}
+    animate={{ width: "100%" }}
+    transition={{
+      duration: 5,          // autoplay duration (seconds)
+      ease: "linear"
+    }}
+  />
+</div>
+
+
 
   {/* Shorts strip */}
   <div className="shorts-wrapper hero-shorts">
@@ -366,59 +420,7 @@ const shorts = [
           Our workshops cover a wide range of topics, including classic pastries, artisanal bread, gourmet cakes, and advanced cake decorating techniques. With state-of-the-art facilities and small batch sizes, we ensure personalized attention and a comprehensive learning experience. Join us and embark on a sweet journey of creativity, precision, and excellence. Let’s bake your dreams into reality!
         </p>
       </section>
-      
-     {/* FIXED SLIDER */}
-<section className="slider-section" aria-label="Gallery">
-
-  <button className="navBtn" onClick={prevPhoto} aria-label="Previous photo">
-    ❮
-  </button>
-
-  <div
-    className="big-photo-wrap"
-    onMouseEnter={() => setAutoPlay(false)}
-    onMouseLeave={() => setAutoPlay(true)}
-  >
-    <AnimatePresence mode="wait">
-      <motion.img
-        key={photoIndex}
-        src={PHOTO_URLS[photoIndex]}
-        alt={`slide ${photoIndex}`}
-        className="big-photo"
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -40 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.15}
-        onDragEnd={(e, info) => {
-          if (info.offset.x < -80) nextPhoto();
-          if (info.offset.x > 80) prevPhoto();
-        }}
-      />
-    </AnimatePresence>
-  </div>
-
-  <button className="navBtn" onClick={nextPhoto} aria-label="Next photo">
-    ❯
-  </button>
-</section>
-{/* AUTOPLAY PROGRESS */}
-<div className="progress-track" aria-hidden="true">
-  <motion.div
-    key={photoIndex}
-    className="progress-bar"
-    initial={{ width: "0%" }}
-    animate={{ width: "100%" }}
-    transition={{
-      duration: 5,          // autoplay duration (seconds)
-      ease: "linear"
-    }}
-  />
-</div>
-
-
+    
 {/* THUMBNAILS */}
 <div className="thumb-strip">
   {PHOTO_URLS.map((url, i) => (
