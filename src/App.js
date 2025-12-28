@@ -180,7 +180,12 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   const selectedTestimonial =
     selectedIndex !== null ? testimonials[selectedIndex] : null;
 
-
+const shorts = [
+  "kJyQpzrg5tU",
+  "fu-UpbwDzbE",
+  "qdPtpqWKHok",
+  "AIvEMthrgYo"
+];
 
   return (
     <div className="page-wrapper">
@@ -247,15 +252,25 @@ const [selectedIndex, setSelectedIndex] = useState(null);
  {/* <img src={LOGO_URL} alt="Logo" className="logo-img" />*/}
   <h1>Learn Baking The Right Way</h1>
  <p>Professional online & offline baking courses for all skill levels.</p>
- <div className="header-video">
-  <iframe
-    src="https://www.youtube.com/embed/videoseries?list=PLaeY19RO3c9Yx550lJujzcKRpB_CaP9Iz"
-    title="Baking Shorts Playlist"
-    frameBorder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  />
+
+<div className="shorts-wrapper">
+  <div className="shorts-scroll">
+    {shorts.map((id) => (
+      <div className="short-card" key={id}>
+        <iframe
+          src={`https://www.youtube.com/embed/${id}`}
+          title="YouTube Short"
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    ))}
+  </div>
 </div>
+
+
+
 </header>
 
       {/* Caption */}
