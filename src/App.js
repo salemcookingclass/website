@@ -322,8 +322,6 @@ const shorts = [
               <p><strong>Time:</strong> {cls.time || "TBA"}</p>
               <p><strong>Fees:</strong> {cls.price || "—"}</p>
 
-              
-
               <div className="card-actions">
                 <Link to={`/class/${cls.id}`} className="learnMoreBtn">More Details</Link>
                 <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
@@ -596,48 +594,43 @@ function ClassDetails() {
 
   return (
 
-   <div style={{ padding: 20 }}>
-  <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
+    <div style={{ padding: 20 }}>
+      <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
 
-  <h1 style={{ textAlign: "left" }}>{cls.title}</h1>
+      <h1 style={{ textAlign: "left" }}>{cls.title}</h1>
+    
+      <p style={{ textAlign: "left" }}><strong>Date:</strong> {cls.date || "TBA"}</p>
+      <p style={{ textAlign: "left" }}><strong>Time:</strong> {cls.time || "TBA"}</p>
+      <p style={{ textAlign: "left" }}><strong>Fees:</strong> {cls.price || "—"}</p>
 
-  <p style={{ textAlign: "left" }}><strong>Date:</strong> {cls.date || "TBA"}</p>
-  <p style={{ textAlign: "left" }}><strong>Time:</strong> {cls.time || "TBA"}</p>
-  <p style={{ textAlign: "left" }}><strong>Fees:</strong> {cls.price || "—"}</p>
+      <h3 style={{ textAlign: "left" }}>Details</h3>
+      <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20, textAlign: "left" }}>{cls.details}</div>
 
-  <h3 style={{ textAlign: "left" }}>Details</h3>
-  <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20, textAlign: "left" }}>
-    {cls.details}
-  </div>
-
-  {/* Register Form */}
-  <div className="register-anchor" />
-  {showRegisterForm && selectedClass && (
-    <section className="register-section" aria-labelledby="register-heading">
-      <h2 id="register-heading">
-        Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}
-      </h2>
-
-      <form onSubmit={handleSubmit} className="register-form">
-        <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
-        <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
-        <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-
-        <div className="form-actions">
-          <button type="submit">Submit</button>
-          <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
-        </div>
-      </form>
-    </section>
-  )}
-
+   
+    
+       {/* Register Section (hidden by default) */}
+      <div className="register-anchor" />
+      {showRegisterForm && selectedClass && (
+        <section className="register-section" aria-labelledby="register-heading">
+          <h2 id="register-heading">Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}</h2>
+          <form onSubmit={handleSubmit} className="register-form">
+            <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+            <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
+            <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+            <div className="form-actions">
+              <button type="submit">Submit</button>
+              <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
+            </div>
+          </form>
+        </section>
+      )}
+       
   {/* New styled buttons */}
   <div className="page-actions">
     <button onClick={() => handleRegisterClick(cls)} className="enquireBtn">Enquire</button>
     <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
   </div>
-</div>
-
+    </div>
     
   );
 }
