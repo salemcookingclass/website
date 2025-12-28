@@ -4,6 +4,11 @@ import "./App.css";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
 
+import { motion, AnimatePresence } from "framer-motion";
+
+
+
+
 /* ---------------------------
    Dynamic imports
    --------------------------- */
@@ -105,11 +110,34 @@ export default function App() {
    --------------------------- */
 
 function HomePage() {
+
+
+
+
+
   const [menuOpen, setMenuOpen] = useState(false);
   
 
+  
+  <motion.div
+  className="hero-inner"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+>
+  <h1>Bake, learn, create, connect</h1>
+
+
+
+</motion.div>
+
+
+
+
+
 
   const [photoIndex, setPhotoIndex] = useState(0);
+  
   const [autoPlay, setAutoPlay] = useState(true);
 
   useEffect(() => {
@@ -190,94 +218,94 @@ const shorts = [
   return (
     <div className="page-wrapper">
       {/* NAV + HAMBURGER */}
+{/* NAV + HAMBURGER (ALL SCREENS) */}
 <nav className="menu">
   <div className="nav-inner">
 
-    {/* LOGO on left */}
+    {/* LOGO */}
     <div className="nav-logo">
       <img src={LOGO_URL} alt="logo" />
       <span>Salem Cake Craft Studio</span>
     </div>
 
-    {/* HAMBURGER BUTTON (mobile only) */}
-<button
-  className={`hamburger ${menuOpen ? "active" : ""}`}
-  onClick={() => setMenuOpen(!menuOpen)}
-  aria-label="Toggle menu"
->
-  <span className="bar"></span>
-  <span className="bar"></span>
-  <span className="bar"></span>
-</button>
+    {/* RIGHT ACTIONS */}
+    <div className="nav-actions">
+      <a href="#offline-workshops" className="book-btn">Register</a>
 
-{/* BACKDROP */}
-<div
-  className={`menu-backdrop ${menuOpen ? "show" : ""}`}
-  onClick={() => setMenuOpen(false)}
-></div>
-
-{/* NAV LINKS */}
-<div className={`nav-links ${menuOpen ? "open" : ""}`}>
-  <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
-  <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-  <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online Classes</a>
-  <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Hands On Classes</a>
-  <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
-
-  {/* MOBILE-ONLY CONTACT INFO */}
-  <a
-  href="#contact"
-  className="mobile-contact"
-  onClick={() => setMenuOpen(false)}
->
-  <p>📍46/18, Gun Firing Street,<br />Fort, Salem-636001</p>
-  <p>📞 7810940789</p>
-</a>
-
-
-      {/* SOCIAL ICONS */}
-      <div className="nav-icons">
-        <a href="https://facebook.com/SalemCakeCraftStudio" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-        <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
-        <a href="https://instagram.com/salemcakecraftstudio" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
-      </div>
-      
+      <button
+        className={`hamburger ${menuOpen ? "active" : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
+      </button>
     </div>
-    
+  </div>
+
+  {/* BACKDROP */}
+  <div
+    className={`menu-backdrop ${menuOpen ? "show" : ""}`}
+    onClick={() => setMenuOpen(false)}
+  ></div>
+
+  {/* DROPDOWN PANEL */}
+  <div className={`menu-panel ${menuOpen ? "open" : ""}`}>
+    <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
+    <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
+    <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online Classes</a>
+    <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Hands-on Classes</a>
+    <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+
+    <div className="menu-divider"></div>
+
+    <div className="menu-socials">
+      <a href="https://facebook.com/SalemCakeCraftStudio" target="_blank" rel="noreferrer"><FaFacebook /></a>
+      <a href="https://youtube.com/@SalemCakeCraftStudio" target="_blank" rel="noreferrer"><FaYoutube /></a>
+      <a href="https://instagram.com/salemcakecraftstudio" target="_blank" rel="noreferrer"><FaInstagram /></a>
+    </div>
   </div>
 </nav>
 
+
+
 {/* HEADER */}
-<header id="home" className="header">
- {/* <img src={LOGO_URL} alt="Logo" className="logo-img" />*/}
-  <h1>Learn Baking The Right Way</h1>
- <p>Professional online & offline baking courses for all skill levels.</p>
+<header id="home" className="hero">
+  <div className="hero-inner">
+    <h1>Discover the art<br />of baking with us</h1>
 
-<div className="shorts-wrapper">
-  <div className="shorts-scroll">
-    {shorts.map((id) => (
-      <div className="short-card" key={id}>
-        <iframe
-          src={`https://www.youtube.com/embed/${id}`}
-          title="YouTube Short"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-    ))}
+    <p className="hero-sub">
+      Join our vibrant community of baking enthusiasts and elevate your skills
+      with expert-led classes — online & hands-on.
+    </p>
+
+    <div className="hero-actions">
+      <a href="#offline-workshops" className="hero-btn primary">Join now</a>
+      <a href="#about" className="hero-btn secondary">See more</a>
+    </div>
   </div>
-</div>
 
-
-
+  {/* Shorts strip */}
+  <div className="shorts-wrapper hero-shorts">
+    <div className="shorts-scroll">
+      {shorts.map((id) => (
+        <div className="short-card" key={id}>
+          <iframe
+            src={`https://www.youtube.com/embed/${id}`}
+            title="YouTube Short"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      ))}
+    </div>
+  </div>
 </header>
 
-      {/* Caption */}
-      <section className="caption">
-        <p>Join us this <b>December 2025</b> for our thoughtfully curated <b>offline classes.</b></p>
-        <h3>Registrations are open — connect with us on WhatsApp at <b>7810940789</b></h3>
-      </section>
+
+
 
 
 
@@ -294,6 +322,8 @@ const shorts = [
               <p><strong>Time:</strong> {cls.time || "TBA"}</p>
               <p><strong>Fees:</strong> {cls.price || "—"}</p>
 
+              
+
               <div className="card-actions">
                 <Link to={`/class/${cls.id}`} className="learnMoreBtn">More Details</Link>
                 <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
@@ -305,7 +335,7 @@ const shorts = [
 
       {/* ONLINE WORKSHOPS */}
        <h2>Online Workshops</h2> 
-        <p>Pre-Recorded Videos</p>
+    
       <section id="online-workshops" className="classes-section online-section">
        
         <div className="horizontal-scroll" role="list">
@@ -339,24 +369,73 @@ const shorts = [
         </p>
       </section>
       
-      {/* FIXED SLIDER */}
-      <section className="slider-section" aria-label="Gallery">
-        <button className="navBtn" onClick={prevPhoto}>❮</button>
+     {/* FIXED SLIDER */}
+<section className="slider-section" aria-label="Gallery">
 
-        <div
-          className="big-photo-wrap"
-          onMouseEnter={() => setAutoPlay(false)}
-          onMouseLeave={() => setAutoPlay(true)}
-        >
-          <img
-            src={PHOTO_URLS[photoIndex]}
-            alt={`slide ${photoIndex}`}
-            className="big-photo"
-          />
-        </div>
+  <button className="navBtn" onClick={prevPhoto} aria-label="Previous photo">
+    ❮
+  </button>
 
-        <button className="navBtn" onClick={nextPhoto}>❯</button>
-      </section>
+  <div
+    className="big-photo-wrap"
+    onMouseEnter={() => setAutoPlay(false)}
+    onMouseLeave={() => setAutoPlay(true)}
+  >
+    <AnimatePresence mode="wait">
+      <motion.img
+        key={photoIndex}
+        src={PHOTO_URLS[photoIndex]}
+        alt={`slide ${photoIndex}`}
+        className="big-photo"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -40 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.15}
+        onDragEnd={(e, info) => {
+          if (info.offset.x < -80) nextPhoto();
+          if (info.offset.x > 80) prevPhoto();
+        }}
+      />
+    </AnimatePresence>
+  </div>
+
+  <button className="navBtn" onClick={nextPhoto} aria-label="Next photo">
+    ❯
+  </button>
+</section>
+{/* AUTOPLAY PROGRESS */}
+<div className="progress-track" aria-hidden="true">
+  <motion.div
+    key={photoIndex}
+    className="progress-bar"
+    initial={{ width: "0%" }}
+    animate={{ width: "100%" }}
+    transition={{
+      duration: 5,          // autoplay duration (seconds)
+      ease: "linear"
+    }}
+  />
+</div>
+
+
+{/* THUMBNAILS */}
+<div className="thumb-strip">
+  {PHOTO_URLS.map((url, i) => (
+    <button
+      key={i}
+      className={`thumb ${i === photoIndex ? "active" : ""}`}
+      onClick={() => setPhotoIndex(i)}
+      aria-label={`Go to slide ${i + 1}`}
+    >
+      <img src={url} alt={`thumbnail ${i}`} />
+    </button>
+  ))}
+</div>
+
+
 
       {/* REST OF YOUR CODE REMAINS SAME — omitted for brevity */}
 
@@ -517,39 +596,48 @@ function ClassDetails() {
 
   return (
 
-    <div style={{ padding: 20 }}>
-      <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
+   <div style={{ padding: 20 }}>
+  <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
 
-      <h1 style={{ textAlign: "left" }}>{cls.title}</h1>
-    
-      <p style={{ textAlign: "left" }}><strong>Date:</strong> {cls.date || "TBA"}</p>
-      <p style={{ textAlign: "left" }}><strong>Time:</strong> {cls.time || "TBA"}</p>
-      <p style={{ textAlign: "left" }}><strong>Fees:</strong> {cls.price || "—"}</p>
+  <h1 style={{ textAlign: "left" }}>{cls.title}</h1>
 
-      <h3 style={{ textAlign: "left" }}>Details</h3>
-      <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20, textAlign: "left" }}>{cls.details}</div>
+  <p style={{ textAlign: "left" }}><strong>Date:</strong> {cls.date || "TBA"}</p>
+  <p style={{ textAlign: "left" }}><strong>Time:</strong> {cls.time || "TBA"}</p>
+  <p style={{ textAlign: "left" }}><strong>Fees:</strong> {cls.price || "—"}</p>
 
-   
-    
-       {/* Register Section (hidden by default) */}
-      <div className="register-anchor" />
-      {showRegisterForm && selectedClass && (
-        <section className="register-section" aria-labelledby="register-heading">
-          <h2 id="register-heading">Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}</h2>
-          <form onSubmit={handleSubmit} className="register-form">
-            <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
-            <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
-            <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-            <div className="form-actions">
-              <button type="submit">Submit</button>
-              <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
-            </div>
-          </form>
-        </section>
-      )}
-       <button onClick={() => handleRegisterClick(cls)} className="registerBtn">Enquire</button>
-       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
-    </div>
+  <h3 style={{ textAlign: "left" }}>Details</h3>
+  <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20, textAlign: "left" }}>
+    {cls.details}
+  </div>
+
+  {/* Register Form */}
+  <div className="register-anchor" />
+  {showRegisterForm && selectedClass && (
+    <section className="register-section" aria-labelledby="register-heading">
+      <h2 id="register-heading">
+        Enquire for: {selectedClass.title} {selectedClass.date ? `on ${selectedClass.date}` : ""}
+      </h2>
+
+      <form onSubmit={handleSubmit} className="register-form">
+        <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+        <input name="phone" placeholder="Phone (Required)" value={formData.phone} onChange={handleChange} required />
+        <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+
+        <div className="form-actions">
+          <button type="submit">Submit</button>
+          <button type="button" onClick={() => setShowRegisterForm(false)}>Cancel</button>
+        </div>
+      </form>
+    </section>
+  )}
+
+  {/* New styled buttons */}
+  <div className="page-actions">
+    <button onClick={() => handleRegisterClick(cls)} className="enquireBtn">Enquire</button>
+    <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
+  </div>
+</div>
+
     
   );
 }
