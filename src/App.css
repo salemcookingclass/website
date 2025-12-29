@@ -430,12 +430,86 @@ h1, h2, h3 {
   width: min(90%, 900px);
 }
 
-/* ==========================
-   MEDIA SECTION
-========================== */
+/* ======================
+   PLAYER
+====================== */
+
+.player-wrapper {
+  position: sticky;
+  top: 72px;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  transition: all 0.35s ease;
+}
+
+.player-box {
+  width: 380px;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  animation: snapOpen 0.35s ease;
+}
+
+@keyframes snapOpen {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.player-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Buttons */
+.btn {
+  position: absolute;
+  top: 8px;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.btn.minimize { right: 42px; }
+.btn.close { right: 8px; }
+
+/* ======================
+   MINIMIZED MODE
+====================== */
+
+.player-wrapper.minimized {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  top: auto;
+  padding: 0;
+}
+
+.player-wrapper.minimized .player-box {
+  width: 180px;
+  border-radius: 14px;
+  animation: snapMinimize 0.3s ease;
+}
+
+@keyframes snapMinimize {
+  from { transform: scale(1); }
+  to   { transform: scale(0.85); }
+}
+
+/* ======================
+   PREVIEWS
+====================== */
 
 .media-section {
-  width: 100%;
   padding: 40px 0;
   display: flex;
   justify-content: center;
@@ -443,110 +517,51 @@ h1, h2, h3 {
 
 .media-container {
   display: flex;
-  gap: clamp(16px, 4vw, 32px);
-  justify-content: center;
-  align-items: center;
+  gap: 24px;
   flex-wrap: wrap;
 }
 
-/* ==========================
-   MEDIA CARD
-========================== */
-
 .media-card {
-  width: clamp(220px, 30vw, 320px);
+  width: 260px;
   aspect-ratio: 9 / 16;
-  position: relative;
-  cursor: pointer;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
-  transition: transform 0.35s ease;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+  transition: transform 0.25s ease;
 }
 
 .media-card:hover {
   transform: translateY(-6px);
 }
 
-.media-preview {
+.media-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* ==========================
-   PLAY OVERLAY
-========================== */
-
-.media-overlay {
+.overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.15)
-  );
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #fff;
   font-weight: 600;
-}
-
-.media-overlay span {
-  font-size: 48px;
-  margin-bottom: 6px;
-}
-
-.media-overlay.yt p::before {
-  content: "YouTube • ";
-}
-
-.media-overlay.ig p::before {
-  content: "Instagram • ";
-}
-
-/* ==========================
-   FULLSCREEN MODAL
-========================== */
-
-.media-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.media-modal-box {
-  width: min(90vw, 420px);
-  aspect-ratio: 9 / 16;
-  background: #000;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.media-modal-box iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Close button */
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.6);
   color: #fff;
-  border: none;
-  border-radius: 999px;
-  padding: 6px 12px;
-  cursor: pointer;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+}
+
+.overlay.yt { color: #ffd1d1; }
+.overlay.ig { color: #ffd1f0; }
+
+/* ======================
+   MOBILE
+====================== */
+
+@media (max-width: 480px) {
+  .player-box { width: 300px; }
 }
 
 

@@ -250,14 +250,47 @@ const isRecent = (i) => i === testimonials.length - 1;
 const YT_ID = "kJyQpzrg5tU";
 const IG_REEL_ID = "DSw-_AGkjJG"; // reel ID only
 
-const [fullscreen, setFullscreen] = useState(null);
+ const [active, setActive] = useState(null); // "yt" | "ig"
+  const [minimized, setMinimized] = useState(false);
+  const playerRef = useRef(null);
 
-const openFullscreen = (type) => {
-  setFullscreen(null); // stop existing media
-  setTimeout(() => setFullscreen(type), 80);
-};
+  /* ======================
+     VIEW TRACKING
+  ====================== */
+  const trackView = (type) => {
+    const views = JSON.parse(sessionStorage.getItem("mediaViews")) || {};
+    views[type] = (views[type] || 0) + 1;
+    sessionStorage.setItem("mediaViews", JSON.stringify(views));
+  };
 
-const closeFullscreen = () => setFullscreen(null);
+  /* ======================
+     PLAY HISTORY
+  ====================== */
+  const saveHistory = (type) => {
+    const history = JSON.parse(sessionStorage.getItem("playHistory")) || [];
+    const updated = [type, ...history.filter(i => i !== type)].slice(0, 5);
+    sessionStorage.setItem("playHistory", JSON.stringify(updated));
+  };
+
+  const openPlayer = (type) => {
+    setMinimized(false);
+    setActive(type);
+    trackView(type);
+    saveHistory(type);
+  };
+
+  const minimizePlayer = () => setMinimized(true);
+  const closePlayer = () => {
+    setActive(null);
+    setMinimized(false);
+  };
+
+  /* AUTO SCROLL */
+  useEffect(() => {
+    if (active && !minimized && playerRef.current) {
+      playerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [active, minimized]);
 
     
 
@@ -491,75 +524,55 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
   {/* Shorts strip & reels*/}
  <>
-    <section className="media-section">
-      <div className="media-container">
-
-        {/* YOUTUBE SHORT */}
+      {/* PLAYER */}
+      {active && (
         <div
-          className="media-card"
-          onClick={() => openFullscreen("yt")}
-          role="button"
+          ref={playerRef}
+          className={`player-wrapper ${minimized ? "minimized" : "open"}`}
         >
-          <img
-            src={`https://img.youtube.com/vi/${YT_ID}/hqdefault.jpg`}
-            alt="YouTube Short Preview"
-            className="media-preview"
-          />
-          <div className="media-overlay yt">
-            <span>▶</span>
-            <p>YouTube Short</p>
+          <div className="player-box">
+            <button className="btn minimize" onClick={minimizePlayer}>—</button>
+            <button className="btn close" onClick={closePlayer}>✕</button>
+
+            {active === "yt" && (
+              <iframe
+                src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            )}
+
+            {active === "ig" && (
+              <iframe
+                src={`https://www.instagram.com/reel/${IG_REEL_ID}/embed`}
+                allow="encrypted-media"
+              />
+            )}
           </div>
         </div>
+      )}
 
-        {/* INSTAGRAM REEL */}
-        <div
-          className="media-card"
-          onClick={() => openFullscreen("ig")}
-          role="button"
-        >
-          <img
-            src="/ig-reel-preview.jpg"  
-            alt="Instagram Reel Preview"
-            className="media-preview"
-          />
-          <div className="media-overlay ig">
-            <span>▶</span>
-            <p>Instagram Reel</p>
+      {/* PREVIEWS */}
+      <section className="media-section">
+        <div className="media-container">
+
+          <div className="media-card" onClick={() => openPlayer("yt")}>
+            <img
+              src={`https://img.youtube.com/vi/${YT_ID}/hqdefault.jpg`}
+              alt="YouTube"
+            />
+            <div className="overlay yt">▶ YouTube</div>
           </div>
+
+          <div className="media-card" onClick={() => openPlayer("ig")}>
+            <img src="/ig-reel-preview.jpg" alt="Instagram" />
+            <div className="overlay ig">▶ Instagram</div>
+          </div>
+
         </div>
-
-      </div>
-    </section>
-
-    {/* FULLSCREEN PLAYER */}
-    {fullscreen && (
-      <div className="media-modal" onClick={closeFullscreen}>
-        <div
-          className="media-modal-box"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {fullscreen === "yt" && (
-            <iframe
-              src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1`}
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
-          )}
-
-          {fullscreen === "ig" && (
-            <iframe
-              src={`https://www.instagram.com/reel/${IG_REEL_ID}/embed`}
-              allow="encrypted-media"
-            />
-          )}
-
-          <button className="close-btn">✕</button>
-        </div>
-      </div>
-    )}
-  </>
-  
-</header>
+      </section>
+    </>
+    </header>
 
 
 <section id="offline-workshops">
