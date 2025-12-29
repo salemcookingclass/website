@@ -446,6 +446,7 @@ h1, h2, h3 {
 .testimonials-section {
   padding: 70px 20px;
   background: #cfe8f0;
+  
 }
 
 h2 {
@@ -549,6 +550,7 @@ h2 {
   overflow-y: hidden;
   padding: 40px 0;
   -webkit-overflow-scrolling: touch;
+  
 }
 
 .horizontal-scroll {
@@ -557,6 +559,7 @@ h2 {
   gap: 24px;
   width: max-content;
   padding: 0 16px;
+  margin: 0 auto;                          /* ⭐ PERFECT CENTERING */
 }
 
 /* ==============================
