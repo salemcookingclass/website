@@ -408,33 +408,147 @@ h1, h2, h3 {
   color: #2e2035;
 }
 
-/* ==============================
-   SHORTS
-============================== */
+/* =====================================
+   SECTION LAYOUT
+===================================== */
 
-.shorts-wrapper {
-  max-width: 1100px;
-  margin: 40px auto 0;
-  padding: 0 16px;
+.media-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 32px 0;
+  background: #f3f3f3;
 }
 
-.shorts-scroll {
+/* Center container */
+.media-container {
   display: flex;
-  gap: 14px;
-  overflow-x: auto;
+  gap: clamp(16px, 4vw, 40px);
+  align-items: center;
+  justify-content: center;
+
+  width: min(90%, 900px);
+}
+
+/* ==========================
+   MEDIA SECTION
+========================== */
+
+.media-section {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
   justify-content: center;
 }
 
-.short-card {
-  width: 180px;
-  aspect-ratio: 9 / 16;
+.media-container {
+  display: flex;
+  gap: clamp(16px, 4vw, 32px);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.short-card iframe {
+/* ==========================
+   MEDIA CARD
+========================== */
+
+.media-card {
+  width: clamp(220px, 30vw, 320px);
+  aspect-ratio: 9 / 16;
+  position: relative;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+  transition: transform 0.35s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-6px);
+}
+
+.media-preview {
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  object-fit: cover;
 }
+
+/* ==========================
+   PLAY OVERLAY
+========================== */
+
+.media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.15)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+
+.media-overlay span {
+  font-size: 48px;
+  margin-bottom: 6px;
+}
+
+.media-overlay.yt p::before {
+  content: "YouTube • ";
+}
+
+.media-overlay.ig p::before {
+  content: "Instagram • ";
+}
+
+/* ==========================
+   FULLSCREEN MODAL
+========================== */
+
+.media-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.media-modal-box {
+  width: min(90vw, 420px);
+  aspect-ratio: 9 / 16;
+  background: #000;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.media-modal-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
 
 /* ==============================
    SECTION BASE
