@@ -780,8 +780,9 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
 
       {/* Contact & Map */}
+       <h2>Contact Us</h2>
       <section id="contact" className="contact-section">
-        <h2>Contact Us</h2>
+       
         <p>Email: <a href="mailto:enquire@salemcakecraftstudio.in">enquire@salemcakecraftstudio.in</a></p>
         <p>Phone: +91-7810940789</p>
         <h3>Location</h3>
