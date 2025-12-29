@@ -30,6 +30,13 @@
   --font-heading: "Playfair Display", serif;
 }
 
+section {
+  scroll-margin-top: 80px; /* adjust based on your navbar height */
+}
+
+.about-section {
+  scroll-margin-top: 200px; /* adjust based on your navbar height */
+}
 /* ==============================
    BASE RESETS
 ============================== */
@@ -48,6 +55,7 @@ html {
   background: #cfe8f0;
   color: #2e2035;
   line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -740,14 +748,20 @@ h2 {
    TESTIMONIAL SECTION — 2 VERTICAL FLOATING COLUMNS
 ====================================================== */
 
+
 .testimonials-section {
   width: 100%;
-  padding: 40px 0 60px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   background: #f3f3f3;
+
+  /* 1 inch ≈ 96px max height */
+  max-height: 960x;
+  height: clamp(720px, 18vw, 960px);
+
+  overflow: hidden;
 }
+
 
 /* GRID: 2 columns */
 .testi-grid {
@@ -761,11 +775,12 @@ h2 {
 /* TWO COLUMN WRAPPER */
 .testi-columns {
   display: flex;
-  gap: 40px;
+   gap: 28px;   /* was 40px */
+  padding: 12px 0;
   width: 90%;
   max-width: 1400px;
   overflow: hidden;
-  padding: 20px 0;
+
 }
 
 /* Each column */
@@ -796,7 +811,8 @@ h2 {
 
 .testi-card {
   background: #fff;
-  padding: 22px;
+    padding: 18px; 
+
   border-radius: 18px;
   border: 1px solid #eee;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
@@ -911,7 +927,7 @@ h2 {
 /* Column animation container (if used) */
 .testi-col {
   width: 90%;
-  animation-duration: 25s;
+  animation-duration: 40s;
 }
 
 /* ======================================================

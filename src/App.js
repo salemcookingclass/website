@@ -498,22 +498,24 @@ const shorts = [
 </header>
 
 
-<WorkshopCarousel
-  title="Hands On Workshops"
-  classes={offlineClasses}
-  type="offline"
-  onEnquire={handleRegisterClick}
-/>
+<section id="offline-workshops">
+  
+  <WorkshopCarousel
+    title="Hands On Workshops"
+    classes={offlineClasses}
+    type="offline"
+    onEnquire={handleRegisterClick}
+  />
+</section>
 
-
-
-<WorkshopCarousel
-  title="Online Workshops"
-  classes={onlineClasses}
-  type="online"
-  onEnquire={handleRegisterClick}
-/>
-
+<section id="online-workshops">
+  <WorkshopCarousel
+    title="Online Workshops"
+    classes={onlineClasses}
+    type="online"
+    onEnquire={handleRegisterClick}
+  />
+</section>
 
 <h2>About Us</h2>
 
@@ -550,8 +552,7 @@ const shorts = [
             </div>
           </form>
         </section>
-      )}
-<h2 id="testimonials-heading">What Our Students Say</h2>
+      )}<h2 id="testimonials-heading">What Our Students Say</h2>
 
 <section
   className="testimonials-section"
@@ -560,26 +561,32 @@ const shorts = [
 >
   <div className="testi-columns">
 
-    {[0, 1].map((col) => (
-      <div
-        key={col}
-        className={`testi-col ${col === 1 ? "reverse" : ""}`}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        {testimonials.map((t, idx) => {
-          const isActive = idx === activeIndex;
+    {/* COLUMN 1 — Even index testimonials */}
+    <div
+      className="testi-col"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {testimonials
+        .filter((_, idx) => idx % 2 === 0)
+        .map((t, idx) => {
+          const originalIndex = idx * 2;
+          const isActive = originalIndex === activeIndex;
           const highlight =
-            isBest(idx) ? "best" : isRecent(idx) ? "recent" : "";
+            isBest(originalIndex)
+              ? "best"
+              : isRecent(originalIndex)
+              ? "recent"
+              : "";
 
           return (
             <article
-              key={`${col}-${idx}`}
+              key={originalIndex}
               className={`testi-card ${isActive ? "active" : ""} ${highlight}`}
               tabIndex={0}
               role="button"
               aria-label={`Testimonial from ${t.name}`}
-              onClick={() => setPopupIndex(idx)}
+              onClick={() => setPopupIndex(originalIndex)}
             >
               <p className="testi-text">“{t.feedback}”</p>
 
@@ -599,17 +606,80 @@ const shorts = [
                   <p className="testi-name">{t.name}</p>
                   <p className="testi-role">{t.role || "Student"}</p>
 
-                  {isBest(idx) && <span className="badge">🌟 Best Review</span>}
-                  {isRecent(idx) && <span className="badge recent">🆕 Recent</span>}
+                  {isBest(originalIndex) && (
+                    <span className="badge">🌟 Best Review</span>
+                  )}
+                  {isRecent(originalIndex) && (
+                    <span className="badge recent">🆕 Recent</span>
+                  )}
                 </div>
               </div>
             </article>
           );
         })}
-      </div>
-    ))}
+    </div>
+
+    {/* COLUMN 2 — Odd index testimonials */}
+    <div
+      className="testi-col reverse"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {testimonials
+        .filter((_, idx) => idx % 2 !== 0)
+        .map((t, idx) => {
+          const originalIndex = idx * 2 + 1;
+          const isActive = originalIndex === activeIndex;
+          const highlight =
+            isBest(originalIndex)
+              ? "best"
+              : isRecent(originalIndex)
+              ? "recent"
+              : "";
+
+          return (
+            <article
+              key={originalIndex}
+              className={`testi-card ${isActive ? "active" : ""} ${highlight}`}
+              tabIndex={0}
+              role="button"
+              aria-label={`Testimonial from ${t.name}`}
+              onClick={() => setPopupIndex(originalIndex)}
+            >
+              <p className="testi-text">“{t.feedback}”</p>
+
+              {renderStars(t.rating || 5)}
+
+              <div className="testi-bottom">
+                {t.avatar && (
+                  <img
+                    src={t.avatar}
+                    className="testi-avatar"
+                    alt={`Avatar of ${t.name}`}
+                    loading="lazy"
+                  />
+                )}
+
+                <div>
+                  <p className="testi-name">{t.name}</p>
+                  <p className="testi-role">{t.role || "Student"}</p>
+
+                  {isBest(originalIndex) && (
+                    <span className="badge">🌟 Best Review</span>
+                  )}
+                  {isRecent(originalIndex) && (
+                    <span className="badge recent">🆕 Recent</span>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+    </div>
+
   </div>
 </section>
+
 
 {popupIndex !== null && (
   <div
