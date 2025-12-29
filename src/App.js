@@ -559,6 +559,7 @@ const shorts = [
   aria-labelledby="testimonials-heading"
   aria-live="polite"
 >
+  <div className="testi-scroll">
   <div className="testi-columns">
 
     {/* COLUMN 1 — Even index testimonials */}
@@ -676,7 +677,7 @@ const shorts = [
           );
         })}
     </div>
-
+</div>
   </div>
 </section>
 

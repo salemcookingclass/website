@@ -742,91 +742,147 @@ h2 {
     height: 210px;
   }
 }
-
-
 /* ======================================================
-   TESTIMONIAL SECTION — 2 VERTICAL FLOATING COLUMNS
+   TESTIMONIAL SECTION — FLOAT + MOBILE HORIZONTAL SCROLL
 ====================================================== */
-
 
 .testimonials-section {
   width: 100%;
+  max-width: 1100px;            /* keeps layout neat and contained */
+  margin: 0 auto;               /* ⭐ Centers the whole section */
+   
+  background: #f3f3f3;
+  border-radius: 18px;
+
   display: flex;
   justify-content: center;
-  background: #f3f3f3;
+  align-items: center;
 
-  /* 1 inch ≈ 96px max height */
-  max-height: 960x;
-  height: clamp(720px, 18vw, 960px);
+    padding: 24px 0;
+  box-sizing: border-box;
+}
 
-  overflow: hidden;
+/* Disable scroll bar overflow on large screens */
+@media (min-width: 900px) {
+  .testimonials-section {
+    overflow-x: hidden;
+  }
 }
 
 
-/* GRID: 2 columns */
-.testi-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  width: 90%;
-  max-width: 1100px;
+
+
+/* ======================================================
+   FIXED ASPECT CONTAINER (16:9)
+====================================================== */
+
+.testi-scroll {
+  width: min(92vw, 960px);       /* compact width */
+  aspect-ratio: 16 / 9;          /* 🔒 horizontal layout */
+
+  background: transparent;
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding-inline: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+
+  -webkit-overflow-scrolling: touch;
 }
 
-/* TWO COLUMN WRAPPER */
+/* Smaller devices — slightly taller but still compact */
+@media (max-width: 768px) {
+  .testi-scroll {
+    width: 94vw;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 480px) {
+  .testi-scroll {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* ======================================================
+   COLUMNS CONTAINER
+====================================================== */
+
+/* ======================================================
+   COLUMNS CONTAINER
+====================================================== */
+
 .testi-columns {
   display: flex;
-   gap: 28px;   /* was 40px */
-  padding: 12px 0;
-  width: 90%;
-  max-width: 1400px;
-  overflow: hidden;
+  gap: clamp(16px, 4vw, 28px);
 
+  width: max-content;     /* required for horizontal scroll */
+    margin: 0 auto;                          /* ⭐ PERFECT CENTERING */
 }
 
-/* Each column */
+/* ======================================================
+   EACH COLUMN — FLOATING
+====================================================== */
+
 .testi-col {
+  width: 280px;
+  flex-shrink: 0;
+
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  width: 350px;
-  animation: floatScroll 18s linear infinite;
+  gap: 18px;
+
+  animation: verticalFloat 18s linear infinite;
 }
 
 .testi-col.reverse {
   animation-direction: reverse;
 }
 
-/* Scroll animation */
-@keyframes floatScroll {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
+/* Vertical float animation */
+@keyframes verticalFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
+
+
 /* ======================================================
-   TESTIMONIAL CARD
+   CARD — RESPONSIVE & COMPACT
 ====================================================== */
 
 .testi-card {
   background: #fff;
-    padding: 18px; 
 
-  border-radius: 18px;
+  width: clamp(210px, 26vw, 300px);
+  padding: clamp(12px, 1.8vw, 18px);
+
+  border-radius: 16px;
   border: 1px solid #eee;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  box-shadow: 0 5px 16px rgba(0,0,0,0.06);
+
+  flex-shrink: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  animation: floatUpDown 4s ease-in-out infinite alternate;
-  transition: transform 0.3s ease;
+  animation: cardFloat 4s ease-in-out infinite alternate;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .testi-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.1);
+}
+
+@keyframes cardFloat {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
 }
 
 /* ======================================================
@@ -834,15 +890,10 @@ h2 {
 ====================================================== */
 
 .testi-text {
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
   line-height: 1.55;
   color: #474747;
-  margin-bottom: 16px;
-}
-
-.testi-name {
-  font-weight: 600;
-  color: #dd6633;
+  margin-bottom: 14px;
 }
 
 .testi-bottom {
@@ -852,136 +903,102 @@ h2 {
 }
 
 .testi-avatar {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
 }
 
+.testi-name {
+  font-weight: 600;
+  color: #dd6633;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+}
+
 .testi-role {
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
   color: #777;
 }
 
 /* ======================================================
-   POPUP
+   MOBILE TUNING
+====================================================== */
+
+@media (max-width: 900px) {
+  .testi-col {
+    width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testi-col {
+    width: 220px;
+  }
+
+  .testi-card {
+    padding: 12px;
+  }
+}
+
+/* ======================================================
+   OPTIONAL SCROLLBAR
+====================================================== */
+
+.testi-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.testi-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+}
+
+/* ======================================================
+   POPUP (UNCHANGED, CLEAN)
 ====================================================== */
 
 .popup-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.45);
   backdrop-filter: blur(4px);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   z-index: 999;
 }
 
 .popup-box {
   background: #fff;
-  padding: 30px 28px;
+  padding: 28px;
   border-radius: 20px;
+
   width: 90%;
   max-width: 360px;
+
   box-shadow: 0 12px 40px rgba(0,0,0,0.15);
   animation: popupFade 0.3s ease forwards;
 }
 
 @keyframes popupFade {
-  from { transform: translateY(20px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-.popup-box h3 {
-  margin-bottom: 10px;
-  color: #dd6633;
-  font-size: 1.4rem;
-}
-
-.popup-box p {
-  color: #3d2f3f;
-  line-height: 1.6;
-}
-
-/* ======================================================
-   FLOAT ANIMATION
-====================================================== */
-
-@keyframes floatUpDown {
-  from { transform: translateY(0px); }
-  to   { transform: translateY(-12px); }
-}
-
-/* ======================================================
-   RESPONSIVE
-====================================================== */
-
-@media (max-width: 768px) {
-  .testi-grid {
-    grid-template-columns: 1fr;
-    width: 94%;
-  }
-}
-
-/* Column animation container (if used) */
-.testi-col {
-  width: 90%;
-  animation-duration: 40s;
-}
-
-/* ======================================================
-   TESTIMONIAL POPUP — CLOSE BUTTON
-====================================================== */
 
 .popup-box button {
   margin-top: 20px;
-  align-self: center;
-
   padding: 10px 26px;
-  border-radius: 999px;
 
+  border-radius: 999px;
   border: none;
-  outline: none;
 
   background: linear-gradient(135deg, #dd6633, #f08b5d);
   color: #fff;
 
-  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.3px;
-
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(221, 102, 51, 0.35);
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
-}
-
-/* Hover */
-.popup-box button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(221, 102, 51, 0.45);
-}
-
-/* Active click */
-.popup-box button:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(221, 102, 51, 0.3);
-}
-
-/* Keyboard focus (accessibility) */
-.popup-box button:focus-visible {
-  outline: 3px solid rgba(221, 102, 51, 0.45);
-  outline-offset: 4px;
-}
-
-/* Dark mode support */
-body.dark .popup-box button {
-  background: linear-gradient(135deg, #ff9966, #ff784e);
-  box-shadow: 0 6px 18px rgba(255, 153, 102, 0.35);
 }
 
 
