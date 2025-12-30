@@ -440,7 +440,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
     {/* RIGHT ACTIONS */}
     <div className="nav-actions">
-      <a href="#offline-workshops" className="book-btn">Register</a>
+      <a href="#classes" className="book-btn">Register</a>
 
       <button
         className={`hamburger ${menuOpen ? "active" : ""}`}
@@ -464,8 +464,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   <div className={`menu-panel ${menuOpen ? "open" : ""}`}>
     <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
     <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-    <a href="#online-workshops" onClick={() => setMenuOpen(false)}>Online Classes</a>
-    <a href="#offline-workshops" onClick={() => setMenuOpen(false)}>Hands-on Classes</a>
+    <a href="#classes" onClick={() => setMenuOpen(false)}>Classes</a>
     <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
 
     <div className="menu-divider"></div>
@@ -491,7 +490,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     </p>
 
     <div className="hero-actions">
-      <a href="#offline-workshops" className="hero-btn primary">Join now</a>
+      <a href="#classes" className="hero-btn primary">Join now</a>
       <a href="#about" className="hero-btn secondary">See more</a>
     </div>
   </div>
