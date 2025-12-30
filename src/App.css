@@ -566,7 +566,7 @@ h1, h2, h3 {
 /* ================= FLOW SECTION (BASE / MOBILE-FIRST) ================= */
 
 .flow-section {
-  background: #fbf7f2;
+  /*background: #fbf7f2;*/
   padding: 72px 14px;
   position: relative;
 
