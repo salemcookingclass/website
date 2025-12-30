@@ -1045,7 +1045,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
         <div className="map-wrap">
           <iframe
             title="salem-map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.305310094525!2d78.155972!3d11.653648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf5bd663bbacf%3A0x80f80fbd1e5f2de4!2s46%2F18%2C%20Gun%20Firing%20St%2C%20Fort%2C%20Salem%2C%20Tamil%20Nadu%20636001!5e0!3m2!1sen!2sin!4v1700000000000"
+            src="https://maps.app.goo.gl/Pe5tQgW4jQ3ZXDyK8"
             width="100%"
             height="300"
             style={{ border: 0 }}
