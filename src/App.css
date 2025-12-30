@@ -563,6 +563,226 @@ h1, h2, h3 {
 @media (max-width: 480px) {
   .player-box { width: 300px; }
 }
+/* ================= FLOW SECTION (BASE / MOBILE-FIRST) ================= */
+
+.flow-section {
+  background: #fbf7f2;
+  padding: 72px 14px;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* ✅ default LEFT */
+  overflow-x: hidden;
+}
+
+/* ================= HEADER ================= */
+
+.flow-header {
+  max-width: 100%;
+  margin-bottom: 48px;
+  text-align: left; /* ✅ default LEFT */
+}
+
+.flow-header .eyebrow {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #9c9c9c;
+}
+
+.flow-header h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  font-weight: 500;
+  color: #2b1c1c;
+  margin-top: 12px;
+}
+
+/* ================= CARDS (MOBILE STACK) ================= */
+
+.flow-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ================= CARD BASE ================= */
+
+.flow-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+
+  background: #fff7f1;
+  border-radius: 14px;
+  padding: 20px 18px;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+
+  text-align: left;
+  opacity: 1;
+  transform: none;
+
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Icon */
+
+.flow-card .icon {
+  font-size: 24px;
+  color: #e55b2f;
+  margin-bottom: 12px;
+}
+
+/* Text */
+
+.flow-card p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #3a2a2a;
+  margin: 0;
+}
+
+/* ================= SMALL MOBILE (≤480px) ================= */
+
+@media (max-width: 480px) {
+  .flow-section {
+    padding: 64px 10px;
+  }
+
+  .flow-card {
+  /*  max-width: 94vw; /* ✅ never clips */
+    padding: 18px 16px;
+     flex: 0 0 92%;
+    max-width: 92%;
+    padding: 18px;
+  }
+
+  .flow-card .icon {
+    font-size: 22px;
+  }
+
+  .flow-card p {
+    font-size: 14px;
+  }
+}
+/*#######mobile768px#########*/
+@media (max-width: 768px) {
+
+  .flow-cards {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    padding: 8px 14px 24px;
+    margin-left: -14px;   /* full-bleed effect */
+    margin-right: -14px;
+  }
+
+  .flow-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .flow-card {
+    flex: 0 0 85%;
+    max-width: 85%;
+
+    scroll-snap-align: start;
+
+    opacity: 1;
+    transform: none;
+
+    text-align: left;
+  }
+}
+
+
+/* ================= DESKTOP UPGRADE (≥769px) ================= */
+
+@media (min-width: 769px) {
+
+  .flow-section {
+    padding: 96px 16px;
+    align-items: center; /* ✅ CENTER ONLY ON DESKTOP */
+  }
+
+  .flow-header {
+    max-width: 720px;
+    margin-bottom: 80px;
+    text-align: center;
+  }
+
+  .flow-cards {
+    position: relative;
+    max-width: 1000px;
+    height: 620px;
+  }
+
+  .flow-card {
+    position: absolute;
+    width: 300px;
+
+    padding: 28px;
+    border-radius: 16px;
+
+    text-align: center;
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+
+    transition:
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.6s ease;
+  }
+
+  .flow-card.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .flow-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 32px 80px rgba(0,0,0,0.16);
+  }
+
+  /* Floating positions */
+
+  .flow-card:nth-child(1) {
+    top: 0;
+    left: 50%;
+    transform: translateX(-160%) rotate(-6deg);
+  }
+
+  .flow-card:nth-child(2) {
+    top: 40px;
+    left: 50%;
+    transform: translateX(60%);
+  }
+
+  .flow-card:nth-child(3) {
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%) rotate(6deg);
+  }
+
+  .flow-card:nth-child(4) {
+    top: 320px;
+    left: 50%;
+    transform: translateX(70%) rotate(-6deg);
+  }
+
+  .flow-card:nth-child(5) {
+    top: 460px;
+    left: 50%;
+    transform: translateX(-140%);
+  }
+}
 
 
 /* ==============================
@@ -668,8 +888,11 @@ h2 {
 
 
 /* ==============================
-   WRAPPER
-============================== *//* ==============================
+  Class Card
+============================== 
+
+
+*//* ==============================
    CONTINUOUS CENTERED SCROLL
 ============================== */
 

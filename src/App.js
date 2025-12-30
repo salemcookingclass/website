@@ -38,6 +38,43 @@ function importClasses() {
 
 const classes = importClasses();
 
+/*Flow Card Section*/
+
+
+const cards = [
+  {
+    title: "Expert-led Classes",
+    text: "Hands-on baking classes designed for all skill levels.",
+    media: "/images/class1.jpg"
+  },
+  {
+    title: "Creative Studio",
+    text: "Learn advanced pastry skills in a nurturing environment.",
+    media: "/images/class2.jpg"
+  },
+  {
+    title: "Live Interaction",
+    text: "Real-time feedback from passionate instructors.",
+    media: "/images/class3.jpg"
+  },
+  {
+    title: "Step-by-step Learning",
+    text: "Clear guidance from basics to mastery.",
+    media: "/images/class4.jpg"
+  },
+  {
+    title: "Bold Creations",
+    text: "Experiment with flavors, textures, and cake art.",
+    media: "/images/class5.jpg"
+  }
+];
+
+
+
+  
+    
+  
+
 
 /* ---------------------------
    FIXED PHOTO IMPORT (THIS WAS THE BUG)
@@ -168,16 +205,7 @@ const ScrollRow = ({ items, isOffline }) => {
     Details
   </Link>
 
-  <a
-    href={`https://wa.me/917810940789?text=Hi%2C%20I%20want%20to%20enquire%20about%20${encodeURIComponent(
-      cls.title
-    )}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="registerBtn"
-  >
-    WhatsApp
-  </a>
+
 </div>
 
           </motion.article>
@@ -195,6 +223,9 @@ export { ScrollRow};
    --------------------------- */
 
 function HomePage() {
+
+ 
+    
 
 
 /* ---------------------------
@@ -233,7 +264,7 @@ useEffect(() => {
 const isBest = (i) => i === 0;
 const isRecent = (i) => i === testimonials.length - 1;
 
-  <motion.div
+ /* <motion.div
   className="hero-inner"
   initial={{ opacity: 0, y: 30 }}
   animate={{ opacity: 1, y: 0 }}
@@ -243,7 +274,32 @@ const isRecent = (i) => i === testimonials.length - 1;
 
 
 
-</motion.div>
+</motion.div>*/
+
+/*flow Card section*/
+useEffect(() => {
+  if (window.innerWidth > 768) return;
+
+  const cards = document.querySelectorAll(".flow-card");
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.scrollIntoView({
+            behavior: "smooth",
+            inline: "start"
+          });
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+
+  cards.forEach(card => observer.observe(card));
+  return () => observer.disconnect();
+}, []);
+
 
 /*Instagram and Youtube shorts*/
 
@@ -520,7 +576,53 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   />
 </div>
 
+{/* Flow Card*/}
 
+    <section className="flow-section">
+      <div className="flow-header">
+        <span className="eyebrow">WELCOME TO A BAKING ADVENTURE</span>
+        <h1>
+          Enhance your <br /> baking skills daily
+        </h1>
+      </div>
+
+      <div className="flow-cards">
+        <div className="flow-card tilt-left">
+          <span className="icon">🍰</span>
+          <p>
+            Unlock your creativity with expert-led, hands-on baking classes.
+          </p>
+        </div>
+
+        <div className="flow-card">
+          <span className="icon">💬</span>
+          <p>
+            Learn advanced pastry skills in a nurturing studio environment.
+          </p>
+        </div>
+
+        <div className="flow-card tilt-right">
+          <span className="icon">📩</span>
+          <p>
+            Participate in live interactive sessions with instant feedback.
+          </p>
+        </div>
+
+        <div className="flow-card tilt-left">
+          <span className="icon">✅</span>
+          <p>
+            Step-by-step lessons designed for beginners to professionals.
+          </p>
+        </div>
+
+        <div className="flow-card tilt-right">
+          <span className="icon">❤️</span>
+          <p>
+            Experiment with bold flavors and creative cake designs.
+          </p>
+        </div>
+      </div>
+    </section>
 
   {/* Shorts strip & reels*/}
  <>
@@ -575,24 +677,24 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     </header>
 
 
-<section id="offline-workshops">
-  
-  <WorkshopCarousel
-    title="Hands On Workshops"
-    classes={offlineClasses}
-    type="offline"
-    onEnquire={handleRegisterClick}
-  />
-</section>
+  <section id="offline-workshops">
+    
+    <WorkshopCarousel
+      title="Hands On Workshops"
+      classes={offlineClasses}
+      type="offline"
+      onEnquire={handleRegisterClick}
+    />
+  </section>
 
-<section id="online-workshops">
-  <WorkshopCarousel
-    title="Online Workshops"
-    classes={onlineClasses}
-    type="online"
-    onEnquire={handleRegisterClick}
-  />
-</section>
+  <section id="online-workshops">
+    <WorkshopCarousel
+      title="Online Workshops"
+      classes={onlineClasses}
+      type="online"
+      onEnquire={handleRegisterClick}
+    />
+  </section>
 
 <h2>About Us</h2>
 
