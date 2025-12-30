@@ -12,6 +12,7 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
 import WorkshopCarousel from "./components/WorkshopCarousel";
 
+
 /* ---------------------------
    Dynamic imports
    --------------------------- */
@@ -40,34 +41,6 @@ const classes = importClasses();
 
 /*Flow Card Section*/
 
-
-const cards = [
-  {
-    title: "Expert-led Classes",
-    text: "Hands-on baking classes designed for all skill levels.",
-    media: "/images/class1.jpg"
-  },
-  {
-    title: "Creative Studio",
-    text: "Learn advanced pastry skills in a nurturing environment.",
-    media: "/images/class2.jpg"
-  },
-  {
-    title: "Live Interaction",
-    text: "Real-time feedback from passionate instructors.",
-    media: "/images/class3.jpg"
-  },
-  {
-    title: "Step-by-step Learning",
-    text: "Clear guidance from basics to mastery.",
-    media: "/images/class4.jpg"
-  },
-  {
-    title: "Bold Creations",
-    text: "Experiment with flavors, textures, and cake art.",
-    media: "/images/class5.jpg"
-  }
-];
 
 
 
@@ -224,8 +197,14 @@ export { ScrollRow};
 
 function HomePage() {
 
- 
-    
+ // const [selectedFilter, setSelectedFilter] = useState("all");
+const [activePreview, setActivePreview] = useState(null);
+
+
+ const [preview, setPreview] = useState(null);
+
+   
+
 
 
 /* ---------------------------
@@ -409,6 +388,9 @@ const IG_REEL_ID = "DSw-_AGkjJG"; // reel ID only
 
   const onlineClasses = classes.filter((c) => c.type === "online");
   const offlineClasses = classes.filter((c) => c.type === "offline");
+
+  const [selectedFilter, setSelectedFilter] = useState("all");
+
 
 const [selectedIndex, setSelectedIndex] = useState(null);
   const wrapperRef = useRef(null);
@@ -681,25 +663,192 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     </>
     </header>
 
+{/* =========================
+   CLASSES SECTION
+========================= */}
 
-  <section id="offline-workshops">
-    
-    <WorkshopCarousel
-      title="Hands On Workshops"
-      classes={offlineClasses}
-      type="offline"
-      onEnquire={handleRegisterClick}
-    />
-  </section>
+<section className="classes-section" id="classes">
+  <motion.h2
+    className="classes-title"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+  >
+    Discover our classes
+  </motion.h2>
 
-  <section id="online-workshops">
-    <WorkshopCarousel
-      title="Online Workshops"
-      classes={onlineClasses}
-      type="online"
-      onEnquire={handleRegisterClick}
-    />
-  </section>
+  {/* FILTERS */}
+  <div className="class-filters">
+    {["all", "offline", "online"].map((t, index) => (
+      <motion.button
+        key={t}
+        className={`filter-btn ${selectedFilter === t ? "active" : ""}`}
+        onClick={() => setSelectedFilter(t)}
+        whileTap={{ scale: 0.92 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.05, duration: 0.3 }}
+      >
+        {t.charAt(0).toUpperCase() + t.slice(1)}
+      </motion.button>
+    ))}
+  </div>
+
+  {/* FILTER + RENDER */}
+  {(() => {
+    const filteredClasses = classes.filter((cls) => {
+      const type = cls.type?.toLowerCase();
+      return selectedFilter === "all" || type === selectedFilter;
+    });
+
+    if (filteredClasses.length === 0) {
+      return (
+        <motion.p
+          className="no-classes"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          No classes available
+        </motion.p>
+      );
+    }
+
+    return (
+      <div className="classes-grid">
+        {filteredClasses.map((cls, idx) => {
+          const isOnline = cls.type?.toLowerCase() === "online";
+
+          return (
+            <motion.article
+              key={cls.id}
+              className={`class-item ${cls.isFeatured ? "featured" : ""}`}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1, duration: 0.4 }}
+              whileHover={{ scale: 1.03, y: -6 }}
+            >
+              {cls.isFeatured && (
+                <motion.span
+                  className="badge"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                >
+                  Featured
+                </motion.span>
+              )}
+
+              {/* CALENDAR — OFFLINE ONLY */}
+              {!isOnline && cls.date && (
+                <motion.div
+                  className="calendar-box red"
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: idx * 0.1 + 0.2 }}
+                >
+                  <span className="month">{cls.date.split(" ")[1]}</span>
+                  <span className="day">{cls.date.split(" ")[0]}</span>
+                  <span className="dot">•</span>
+                </motion.div>
+              )}
+
+              {/* INFO */}
+              <div className="class-info">
+                <h3>{cls.title}</h3>
+
+                {cls.rating && (
+                  <div className="rating">
+                    ⭐ {cls.rating} <span>({cls.reviews})</span>
+                  </div>
+                )}
+
+                {!isOnline && cls.countdown && (
+                  <span className="countdown">
+                    ⏳ Starts in {cls.countdown}
+                  </span>
+                )}
+
+                <div className="class-meta">
+                  <span>🕒 {cls.time || "Flexible"}</span>
+                  <span>{isOnline ? "🌐 Online" : "📍 Offline"}</span>
+                </div>
+
+                {/* FOOTER */}
+                <div className="class-footer">
+                  <span className="price">{cls.price}</span>
+
+                  <div className="actions">
+                    <Link to={`/class/${cls.id}`} className="notify-btn">
+                      Details
+                    </Link>
+
+                    <button
+                      className="preview-btn"
+                      onClick={() => handleRegisterClick(cls)}
+                    >
+                      Enquire
+                    </button>
+
+                    {cls.preview && (
+                      <button
+                        className="preview-btn"
+                        onClick={() => setPreview(cls.preview)}
+                      >
+                        ▶ Preview
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.article>
+          );
+        })}
+      </div>
+    );
+  })()}
+
+  {/* PREVIEW MODAL */}
+  <AnimatePresence>
+    {preview && (
+      <motion.div
+        className="preview-modal"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div
+          className="preview-box"
+          initial={{ scale: 0.85, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 120 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="close-preview"
+            onClick={() => setPreview(null)}
+          >
+            ✕
+          </button>
+
+          <iframe
+            src={`https://www.youtube.com/embed/${preview}?autoplay=1&mute=1`}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            title="Class Preview"
+          />
+        </motion.div>
+
+        <motion.div
+          className="preview-overlay"
+          onClick={() => setPreview(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+      </motion.div>
+    )}
+  </AnimatePresence>
+</section>
 
 <h2>About Us</h2>
 
