@@ -653,57 +653,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       </div>
     </section>
 
-  {/* Shorts strip & reels*/}
- <>
-      {/* PLAYER */}
-      {active && (
-        <div
-          ref={playerRef}
-          className={`player-wrapper ${minimized ? "minimized" : "open"}`}
-        >
-          <div className="player-box">
-            <button className="btn minimize" onClick={minimizePlayer}>—</button>
-            <button className="btn close" onClick={closePlayer}>✕</button>
-
-            {active === "yt" && (
-              <iframe
-                src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1`}
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-
-            {active === "ig" && (
-              <iframe
-                src={`https://www.instagram.com/reel/${IG_REEL_ID}/embed`}
-                allow="encrypted-media"
-              />
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* PREVIEWS */}
-      <section className="media-section">
-        <div className="media-container">
-
-          <div className="media-card" onClick={() => openPlayer("yt")}>
-            <img
-              src={`https://img.youtube.com/vi/${YT_ID}/hqdefault.jpg`}
-              alt="YouTube"
-            />
-            <div className="overlay yt">▶ YouTube</div>
-          </div>
-
-          <div className="media-card" onClick={() => openPlayer("ig")}>
-            <img src="/ig-reel-preview.jpg" alt="Instagram" />
-            <div className="overlay ig">▶ Instagram</div>
-          </div>
-
-        </div>
-      </section>
-    </>
-    </header>
+     </header>
 
 {/* =========================
    CLASSES SECTION
@@ -918,7 +868,57 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       </p>
     </section>
 
+{/* Shorts strip & reels*/}
+ <>
+      {/* PLAYER */}
+      {active && (
+        <div
+          ref={playerRef}
+          className={`player-wrapper ${minimized ? "minimized" : "open"}`}
+        >
+          <div className="player-box">
+            <button className="btn minimize" onClick={minimizePlayer}>—</button>
+            <button className="btn close" onClick={closePlayer}>✕</button>
 
+            {active === "yt" && (
+              <iframe
+                src={`https://www.youtube.com/embed/${YT_ID}?autoplay=1`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
+            )}
+
+            {active === "ig" && (
+              <iframe
+                src={`https://www.instagram.com/reel/${IG_REEL_ID}/embed`}
+                allow="encrypted-media"
+              />
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* PREVIEWS */}
+      <section className="media-section">
+        <div className="media-container">
+
+          <div className="media-card" onClick={() => openPlayer("yt")}>
+            <img
+              src={`https://img.youtube.com/vi/${YT_ID}/hqdefault.jpg`}
+              alt="YouTube"
+            />
+            <div className="overlay yt">▶ YouTube</div>
+          </div>
+
+          <div className="media-card" onClick={() => openPlayer("ig")}>
+            <img src="/ig-reel-preview.jpg" alt="Instagram" />
+            <div className="overlay ig">▶ Instagram</div>
+          </div>
+
+        </div>
+      </section>
+    </>
+ 
 
       {/* REST OF YOUR CODE REMAINS SAME — omitted for brevity */}
 
