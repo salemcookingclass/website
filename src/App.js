@@ -278,25 +278,30 @@ const isRecent = (i) => i === testimonials.length - 1;
 
 /*flow Card section*/
 useEffect(() => {
-  if (window.innerWidth > 768) return;
-
   const cards = document.querySelectorAll(".flow-card");
 
   const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
+    (entries) => {
+      entries.forEach((entry) => {
+        const index = [...cards].indexOf(entry.target);
+
         if (entry.isIntersecting) {
-          entry.target.scrollIntoView({
-            behavior: "smooth",
-            inline: "start"
-          });
+          entry.target.style.transitionDelay = `${index * 0.18}s`;
+          entry.target.classList.add("show", "active");
+        } else {
+          // allow replay when scrolling back up
+          entry.target.classList.remove("show", "active");
+          entry.target.style.transitionDelay = "0s";
         }
       });
     },
-    { threshold: 0.6 }
+    {
+      threshold: 0.35,
+      rootMargin: "0px 0px -80px 0px",
+    }
   );
 
-  cards.forEach(card => observer.observe(card));
+  cards.forEach((card) => observer.observe(card));
   return () => observer.disconnect();
 }, []);
 
