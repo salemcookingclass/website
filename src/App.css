@@ -1056,14 +1056,15 @@ h2 {
   opacity: 0.85;
 }
 /* ===============================
-   CLASSES SECTION (NEW THEME)
+   LUXURY ROSE-GOLD BAKERY THEME
 =============================== */
 
 .classes-section {
   padding: 96px 16px;
-  background: #f0f7fb;                   /* matches soft blue background behind buttons */
+  background: linear-gradient(135deg, #fff7f5, #fdecee);
   max-width: 1200px;
   margin: auto;
+  font-family: "Playfair Display", serif;
 }
 
 /* Title */
@@ -1071,7 +1072,10 @@ h2 {
   text-align: center;
   font-size: clamp(2rem, 4vw, 3rem);
   margin-bottom: 36px;
-  color: #2c2c2c;
+  color: #4a3b37;
+  text-shadow: 0 3px 6px rgba(255, 170, 150, 0.5);
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 /* ===============================
@@ -1089,18 +1093,20 @@ h2 {
 .filter-btn {
   padding: 10px 22px;
   border-radius: 999px;
-  border: 2px solid #f5b9a4;
-  background: #f8d9cc;
+  border: 2px solid #eac2b1;
+  background: linear-gradient(145deg, #ffe8df, #f9d2c4);
   font-weight: 600;
   cursor: pointer;
-  color: #3b2f32;
+  color: #5e4744;
   transition: all .25s ease;
+  box-shadow: 0 8px 16px rgba(255, 180, 160, .25);
 }
 
 .filter-btn.active {
-  background: #e56a3f;                   /* button orange */
+  background: linear-gradient(145deg, #e88d62, #e05634);
   color: #fff;
   border-color: #e56a3f;
+  box-shadow: 0 12px 24px rgba(229, 106, 63, .35);
 }
 
 /* ===============================
@@ -1114,7 +1120,7 @@ h2 {
 }
 
 /* ===============================
-   CLASS CARD
+   CLASS CARD — LUXURY FRAME
 =============================== */
 
 .class-item {
@@ -1123,71 +1129,99 @@ h2 {
   border-radius: 26px;
   padding: 24px;
   display: flex;
+  justify-content: space-between;
   gap: 22px;
-  box-shadow: 0 18px 40px rgba(0,0,0,.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.08),
+    inset 0 0 0 2px rgba(218, 185, 160, 0.5);
+
+  border: 1px solid rgba(255, 215, 200, 0.6);
   transition: transform .3s ease, box-shadow .3s ease;
 }
 
 .class-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 28px 65px rgba(0,0,0,.12);
+  box-shadow:
+    0 28px 65px rgba(0,0,0,.12),
+    0 0 18px rgba(255, 200, 180, .55);
 }
 
 /* ===============================
-   BADGE
+   BADGE — GOLDEN GLOW
 =============================== */
 
 .badge {
   position: absolute;
   top: -12px;
   right: -12px;
-  background: #2c2c2c;
+  background: linear-gradient(135deg, #3c2f2a, #1f1614);
   color: #fff;
   font-size: 12px;
   padding: 6px 14px;
   border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
 /* ===============================
-   NEW iMAC-STYLE CALENDAR
+   3D ROSE-GOLD EMBOSSED CALENDAR
 =============================== */
 
 .calendar-box {
   width: 90px;
   min-width: 90px;
-  height: 110px;
-  background: red;                   /* soft orange */
+  height: 160px; /* HALF HEIGHT */
+  background: linear-gradient(145deg, #d74747, #a81d1d);
+  /*  background: radial-gradient(
+      circle at top,
+      #3d2b2f 0%,
+      #2a1d20 40%,
+      #1a1416 100%
+  ); */
+ /* background: #4a3b37; */
   color: white;
-  border-radius: 24px;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-radius: 18px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  font-family: "SF Pro Display", sans-serif;
+  margin-left: auto;
+  position: relative;
+
+  /* 3D embossed */
+  box-shadow:
+    0 8px 20px rgba(180, 0, 0, 0.3),
+    inset 0 -3px 6px rgba(0,0,0,0.25),
+    inset 0 3px 6px rgba(255,255,255,0.2);
+}
+
+/* Glossy highlight */
+.calendar-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 40%;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.25);
+  filter: blur(6px);
 }
 
 .calendar-box .month {
-  font-size: 12px;
-  opacity: .9;
-  margin-top: -6px;
-  letter-spacing: 1px;
+  font-size: 11px;
+  opacity: .95;
+  letter-spacing: 1.5px;
+  margin-bottom: -2px;
+  text-transform: uppercase;
 }
 
 .calendar-box .day {
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 800;
   line-height: 1;
-  margin-top: -4px;
-}
-
-.calendar-box .suffix {
-  font-size: 16px;
-  font-weight: 600;
-  margin-left: 2px;
+  text-shadow: 0 3px 3px rgba(0,0,0,0.25);
 }
 
 /* ===============================
@@ -1196,20 +1230,22 @@ h2 {
 
 .class-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .class-info h3 {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 700;
-  color: #2c2c2c;
+  color: #4a3b3b;
 }
 
 .class-meta {
   display: flex;
   gap: 16px;
   font-size: 14px;
-  color: #777;
+  color: #7d6663;
   margin-bottom: 12px;
 }
 
@@ -1217,7 +1253,7 @@ h2 {
   color: #e56a3f;
   font-size: 14px;
   margin-bottom: 12px;
-  display: inline-block;
+  text-shadow: 0 2px 4px rgba(229,106,63,0.45);
 }
 
 /* ===============================
@@ -1226,39 +1262,45 @@ h2 {
 
 .class-footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 10px;
   margin-top: 14px;
 }
 
 .price {
   font-weight: 700;
-  color: #333;
+  color: #3b2f2f;
+  font-size: 18px;
+  text-shadow: 0 2px 4px rgba(255,180,160,.45);
 }
 
 .actions {
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
 .notify-btn {
-  background: #f8d9cc;
-  border: 2px solid #f5b9a4;
+  background: #ffe8df;
+  border: 2px solid #eac2b1;
   padding: 8px 14px;
   border-radius: 10px;
   font-size: 13px;
   cursor: pointer;
-  color: #3b2f32;
+  color: #5e4744;
+  box-shadow: 0 6px 14px rgba(255,200,180,.25);
 }
 
 .preview-btn {
-  background: #e56a3f;
+  background: linear-gradient(135deg, #e88d62, #e05634);
   color: white;
   border: none;
   padding: 8px 16px;
   border-radius: 10px;
   font-size: 13px;
   cursor: pointer;
+  box-shadow: 0 6px 14px rgba(229,106,63,.35);
 }
 
 /* ===============================
@@ -1283,18 +1325,17 @@ h2 {
     scroll-snap-align: start;
   }
 
-  /* mobile calendar layout */
   .calendar-box {
     width: 100%;
-    height: 70px;
-    border-radius: 18px;
+    height: 60px;
+    border-radius: 14px;
     flex-direction: row;
     justify-content: center;
     gap: 4px;
   }
 
   .calendar-box .day {
-    font-size: 26px;
+    font-size: 22px;
   }
 }
 

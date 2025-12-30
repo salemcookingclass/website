@@ -656,12 +656,13 @@ const [selectedIndex, setSelectedIndex] = useState(null);
      </header>
 
 {/* =========================
-   CLASSES SECTION
+   CLASSES SECTION — LUXURY THEME
 ========================= */}
-
 <section className="classes-section" id="classes">
+
+  {/* TITLE */}
   <motion.h2
-    className="classes-title"
+    className="classes-title luxury-title"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
@@ -686,7 +687,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     ))}
   </div>
 
-  {/* FILTER + RENDER */}
+  {/* FILTER + GRID */}
   {(() => {
     const filteredClasses = classes.filter((cls) => {
       const type = cls.type?.toLowerCase();
@@ -706,22 +707,23 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     }
 
     return (
-      <div className="classes-grid">
+      <div className="classes-grid luxury-classes-grid">
         {filteredClasses.map((cls, idx) => {
           const isOnline = cls.type?.toLowerCase() === "online";
 
           return (
             <motion.article
               key={cls.id}
-              className={`class-item ${cls.isFeatured ? "featured" : ""}`}
+              className={`class-item luxury-class ${cls.isFeatured ? "featured" : ""}`}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1, duration: 0.4 }}
               whileHover={{ scale: 1.03, y: -6 }}
             >
+              {/* FEATURE BADGE */}
               {cls.isFeatured && (
                 <motion.span
-                  className="badge"
+                  className="badge luxury-badge"
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                 >
@@ -729,23 +731,26 @@ const [selectedIndex, setSelectedIndex] = useState(null);
                 </motion.span>
               )}
 
-              {/* CALENDAR — OFFLINE ONLY */}
+              {/* UPDATED LUXURY CALENDAR — OFFLINE ONLY */}
               {!isOnline && cls.date && (
                 <motion.div
-                  className="calendar-box red"
+                  className="calendar-box luxury-calendar"
                   initial={{ scale: 0.7, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: idx * 0.1 + 0.2 }}
                 >
-                  <span className="month">{cls.date.split(" ")[1]}</span>
-                  <span className="day">{cls.date.split(" ")[0]}</span>
-                  <span className="dot">•</span>
+                  <div className="calendar-top">
+                    {cls.date.split(" ")[1]}
+                  </div>
+                  <div className="calendar-bottom">
+                    {cls.date.split(" ")[0]}
+                  </div>
                 </motion.div>
               )}
 
               {/* INFO */}
               <div className="class-info">
-                <h3>{cls.title}</h3>
+                <h3 className="luxury-class-title">{cls.title}</h3>
 
                 {cls.rating && (
                   <div className="rating">
@@ -766,15 +771,15 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
                 {/* FOOTER */}
                 <div className="class-footer">
-                  <span className="price">{cls.price}</span>
+                  <span className="price luxury-price">{cls.price}</span>
 
                   <div className="actions">
-                    <Link to={`/class/${cls.id}`} className="notify-btn">
+                    <Link to={`/class/${cls.id}`} className="notify-btn luxury-details-btn">
                       Details
                     </Link>
 
                     <button
-                      className="preview-btn"
+                      className="preview-btn luxury-enquire-btn"
                       onClick={() => handleRegisterClick(cls)}
                     >
                       Enquire
@@ -782,7 +787,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
 
                     {cls.preview && (
                       <button
-                        className="preview-btn"
+                        className="preview-btn luxury-preview-btn"
                         onClick={() => setPreview(cls.preview)}
                       >
                         ▶ Preview
@@ -841,6 +846,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
     )}
   </AnimatePresence>
 </section>
+
 
 
 
