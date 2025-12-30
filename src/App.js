@@ -215,6 +215,49 @@ const [activeIndex, setActiveIndex] = useState(0);
 const [paused, setPaused] = useState(false);
 const [popupIndex, setPopupIndex] = useState(null);
 
+
+/* ABOUT US*/
+const aboutRef = useRef();
+ useEffect(() => {
+    const el = aboutRef.current;
+
+    // Split paragraphs into words
+    const paragraphs = el.querySelectorAll("p");
+    paragraphs.forEach((p, paraIdx) => {
+      const words = p.innerText.split(" ");
+      p.innerHTML = words
+        .map(
+          (w, i) =>
+            `<span class="word" style="transition-delay:${
+              i * 45 + paraIdx * 700
+            }ms">${w}</span>`
+        )
+        .join(" ");
+    });
+
+    // Start animation on scroll
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("visible");
+
+          // Golden highlight selection
+          const allWords = el.querySelectorAll(".word");
+          allWords.forEach((w, i) => {
+            if (i % 5 === 0 || Math.random() < 0.15) {
+              w.classList.add("glow");
+            }
+          });
+
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(el);
+  }, []);
+
 // auto-rotate testimonials
 useEffect(() => {
   if (paused) return;
@@ -849,18 +892,31 @@ const [selectedIndex, setSelectedIndex] = useState(null);
   </AnimatePresence>
 </section>
 
-<h2>About Us</h2>
+
 
  {/* About */}
-      <section id="about" className="about-section">
-        
-        <p>
-          Salem cake craft studio – Where Passion Meets Perfection in Pastry & Cake Art! At Salem cake craft studio we believe that baking is more than just a skill, it’s an art. Our institute is dedicated to providing world-class training in pastry and cake artistry, blending traditional techniques with modern innovations. Whether you’re a beginner exploring the world of baking or a professional looking to refine your skills, our hands-on courses cater to all levels.
-        </p>
-        <p>
-          Our workshops cover a wide range of topics, including classic pastries, artisanal bread, gourmet cakes, and advanced cake decorating techniques. With state-of-the-art facilities and small batch sizes, we ensure personalized attention and a comprehensive learning experience. Join us and embark on a sweet journey of creativity, precision, and excellence. Let’s bake your dreams into reality!
-        </p>
-      </section>
+    <section id="about" className="about-section" ref={aboutRef}>
+     <h2>About Us</h2>
+      {/* Floating 3D pastry icons */}
+      <div className="pastry-icon pastry-1">🥐</div>   {/* 3D Croissant */}
+      <div className="pastry-icon pastry-2">🧁</div>   {/* 3D Cupcake */}
+      <div className="pastry-icon pastry-3">🍰</div>   {/* 3D Cake Slice */}
+      <div className="pastry-icon pastry-4">🍩</div>   {/* 3D Donut */}
+      <div className="pastry-icon pastry-5">🍪</div>   {/* 3D Cookie */}
+
+      <p>
+        Salem cake craft studio – Where Passion Meets Perfection in Pastry
+        & Cake Art! At Salem cake craft studio, baking is not just a skill —
+        it’s a refined art form. Our institute delivers world-class training
+        in pastry, baking, and cake artistry with a luxury boutique experience.
+      
+        From artisanal pastries to advanced cake decorating, our workshops
+        combine creativity with precision. With state-of-the-art facilities
+        and intimate batch sizes, you receive personalized attention and a
+        premium learning journey. Step into a world where passion meets
+        craftsmanship — let’s turn your sweetest visions into reality.
+      </p>
+    </section>
 
 
 

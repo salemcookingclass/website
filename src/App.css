@@ -36,12 +36,161 @@ section {
 
 .about-section {
   scroll-margin-top: 200px; /* adjust based on your navbar height */
+
 }
 
+/* ---------------------------------------------------------
+   LUXURY ROSE-GOLD ABOUT SECTION (FIXED)
+----------------------------------------------------------*/
+.about-section {
+  max-width: 900px;
+  margin: 140px auto;
+  padding: 80px 55px;
 
-/* ==============================
-   BASE RESETS
-============================== */
+  background: radial-gradient(
+      circle at top,
+      #3d2b2f 0%,
+      #2a1d20 40%,
+      #1a1416 100%
+  );
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+
+  font-size: 1.3rem;
+  line-height: 1.9;
+  color: #ffe7ef;
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------
+   ROSE-GOLD LUX BORDER SHIMMER (FIXED MASK)
+----------------------------------------------------------*/
+.about-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+
+  background: linear-gradient(
+    120deg,
+    rgba(255, 150, 180, 0.95),
+    rgba(255, 190, 215, 1),
+    rgba(255, 140, 165, 0.95)
+  );
+
+  /* Mask Fix: Chrome + Safari */
+  -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+
+  /* Mask Fix: Firefox */
+  mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+
+  animation: borderGlow 4.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+
+/* ---------------------------------------------------------
+   TEXT: WORD-BY-WORD GLOW (ENHANCED)
+----------------------------------------------------------*/
+.word {
+  opacity: 0;
+  filter: blur(6px);
+  display: inline-block;
+  transition: opacity 0.35s ease, filter 0.35s ease;
+}
+
+.about-section.visible .word {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.about-section.visible .word.glow {
+  animation: roseGoldPulse 2s ease-in-out infinite;
+}
+
+@keyframes roseGoldPulse {
+  0% {
+    text-shadow: 
+      0 0 4px rgba(255,150,180,0.25),
+      0 0 8px rgba(255,120,150,0.2);
+  }
+  50% {
+    text-shadow: 
+      0 0 18px rgba(255,180,200,1),
+      0 0 33px rgba(255,145,165,0.8),
+      0 0 44px rgba(255,120,150,0.6);
+  }
+  100% {
+    text-shadow: 
+      0 0 4px rgba(255,150,180,0.25),
+      0 0 8px rgba(255,120,150,0.2);
+  }
+}
+
+/* ---------------------------------------------------------
+   TYPEWRITER + FADE FIX
+----------------------------------------------------------*/
+.about-section p {
+  opacity: 0;
+  animation: fadeInPara 0.8s ease forwards;
+}
+
+.about-section.visible p:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.about-section.visible p:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+@keyframes fadeInPara {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------
+   FLOATING 3D PASTRY ICONS (FIXED)
+----------------------------------------------------------*/
+.pastry-icon {
+  position: absolute;
+  font-size: 3.6rem;
+  opacity: 0.18;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.55));
+  user-select: none;
+  pointer-events: none;
+
+  animation: float3D 7.5s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes float3D {
+  0%   { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  50%  { transform: translateY(-40px) rotateX(20deg) rotateY(-20deg); }
+  100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+}
+
+/* Staggered placement */
+.pastry-1 { top: 12%; left: 10%; animation-delay: 0s; }
+.pastry-2 { top: 30%; right: 10%; animation-delay: 1.2s; }
+.pastry-3 { bottom: 18%; left: 22%; animation-delay: 2.4s; }
+.pastry-4 { top: 60%; right: 8%; animation-delay: 3.6s; }
+.pastry-5 { bottom: 10%; right: 28%; animation-delay: 4.8s; }
+
+
 /* ==============================
    RESET & GLOBAL
 ============================== */
@@ -815,7 +964,7 @@ h1, h2, h3 {
 .contact-section,
 .testimonials-section {
   padding: 70px 20px;
-  background: #cfe8f0;
+ /* background: #cfe8f0;*/
   
 }
 
