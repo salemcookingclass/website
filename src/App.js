@@ -1045,7 +1045,8 @@ const [selectedIndex, setSelectedIndex] = useState(null);
         <div className="map-wrap">
           <iframe
             title="salem-map"
-            src="https://maps.app.goo.gl/Pe5tQgW4jQ3ZXDyK8"
+           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d244.22518738386935!2d78.155741!3d11.651613!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf02d280b565f%3A0xde26aff35f19a2ea!2sSalem%20Cake%20Craft%20Studio!5e0!3m2!1sen!2sus!4v1767095301493!5m2!1sen!2sus" 
+            
             width="100%"
             height="300"
             style={{ border: 0 }}
