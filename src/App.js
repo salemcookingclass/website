@@ -1197,17 +1197,17 @@ function ClassDetails() {
 
   return (
 
-    <div style={{ padding: 20 }}>
+    <div style={{background: "linear-gradient(135deg, #fff7f5, #fdecee)", color: "#4a3b37", padding: 20 }}>
       <button onClick={() => navigate(-1)} className="backBtn">← Back</button>
 
-      <h1 style={{ textAlign: "left" }}>{cls.title}</h1>
+      <h1 style={{    textAlign: "left" }}>{cls.title}</h1>
     
-      <p style={{ textAlign: "left" }}><strong>Date:</strong> {cls.date || "TBA"}</p>
-      <p style={{ textAlign: "left" }}><strong>Time:</strong> {cls.time || "TBA"}</p>
-      <p style={{ textAlign: "left" }}><strong>Fees:</strong> {cls.price || "—"}</p>
+      <p style={{   textAlign: "left" }}><strong>Date:</strong> {cls.date || "TBA"}</p>
+      <p style={{    textAlign: "left" }}><strong>Time:</strong> {cls.time || "TBA"}</p>
+      <p style={{   textAlign: "left" }}><strong>Fees:</strong> {cls.price || "—"}</p>
 
-      <h3 style={{ textAlign: "left" }}>Details</h3>
-      <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20, textAlign: "left" }}>{cls.details}</div>
+      <h3 style={{   textAlign: "left" }}>Details</h3>
+      <div style={{     whiteSpace: "pre-wrap", lineHeight: 1.6, marginBottom: 20, textAlign: "left" }}>{cls.details}</div>
 
    
     

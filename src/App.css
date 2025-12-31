@@ -737,6 +737,7 @@ h1, h2, h3 {
 
 .flow-section {
   /*background: #fbf7f2;*/
+  
   padding: 72px 14px;
   position: relative;
 
@@ -982,7 +983,7 @@ h2 {
   max-width: 480px;
   margin: 40px auto;
   padding: 28px;
-  background: #ffffff;
+  background: linear-gradient(135deg, #fff7f5, #fdecee);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -992,7 +993,8 @@ h2 {
   font-size: 1.6rem;
   margin-bottom: 22px;
   font-weight: 600;
-  color: #2d1f2f; /* Dark plum text for harmony */
+   color: #4a3b37;
+  text-shadow: 0 3px 6px rgba(255, 170, 150, 0.5);
   text-align: center;
 }
 
@@ -1006,6 +1008,8 @@ h2 {
 .register-form input {
   padding: 12px 14px;
   font-size: 1rem;
+   color: #4a3b37;
+  text-shadow: 0 3px 6px rgba(255, 170, 150, 0.5);
   border: 1px solid #d8d8d8;
   border-radius: 14px;
   outline: none;
@@ -1125,7 +1129,14 @@ h2 {
 
 .class-item {
   position: relative;
-  background: #fff;
+  /*background: #fff;*/
+    background: radial-gradient(
+      circle at top,
+      #3d2b2f 0%,
+      #2a1d20 40%,
+      #1a1416 100%
+  );
+  
   border-radius: 26px;
   padding: 24px;
   display: flex;
@@ -1171,15 +1182,17 @@ h2 {
   width: 90px;
   min-width: 90px;
   height: 160px; /* HALF HEIGHT */
-  background: linear-gradient(145deg, #d74747, #a81d1d);
-  /*  background: radial-gradient(
+  /*background: linear-gradient(145deg, #d74747, #a81d1d);*/
+  /* background: radial-gradient(
       circle at top,
       #3d2b2f 0%,
       #2a1d20 40%,
       #1a1416 100%
   ); */
- /* background: #4a3b37; */
-  color: white;
+  background: #fffefe; 
+  color: red;
+  font-size: 24px;
+  font-weight: 400;
   border-radius: 18px;
 
   display: flex;
@@ -1238,14 +1251,14 @@ h2 {
   margin: 0 0 8px;
   font-size: 20px;
   font-weight: 700;
-  color: #4a3b3b;
+  color: #ffe7ef;
 }
 
 .class-meta {
   display: flex;
   gap: 16px;
   font-size: 14px;
-  color: #7d6663;
+  color: #ffe7ef;
   margin-bottom: 12px;
 }
 
@@ -1270,7 +1283,7 @@ h2 {
 
 .price {
   font-weight: 700;
-  color: #3b2f2f;
+  color: #ffe7ef;
   font-size: 18px;
   text-shadow: 0 2px 4px rgba(255,180,160,.45);
 }
