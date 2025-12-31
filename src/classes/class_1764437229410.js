@@ -3,7 +3,7 @@
 const class_1764437229410 = 
   {
     id: 1764437229410,
-    title: "CHRISTMAS BAKING ONLINE WORKSHOP",
+    title: "Christmas Baking Online Workshop",
     date: "",
     details: `Make this festive season sweeter with a special Christmas Baking Workshop you can watch anytime, anywhere! Perfect for home bakers, gifting ideas, and anyone who wants to create stunning Christmas treats with ease.
 🎅 Menu Includes:

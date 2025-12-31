@@ -3,7 +3,7 @@
 const class_1764437503691 = 
   {
     id: 1764437503691,
-    title: "GOURMET COOKIES ONLINE WORKSHOP",
+    title: "Gourmet Cookies Online Workshop",
     date: "",
     details: `✔️ 6 Recipe Videos
 ✔️7+ Variations taught in class + PDF
