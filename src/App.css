@@ -433,6 +433,7 @@ h1, h2, h3 {
 .nav-logo span {
   font-size: 18px;
   font-weight: 600;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .nav-actions {
