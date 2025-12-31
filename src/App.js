@@ -872,9 +872,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
         premium learning journey. Step into a world where passion meets
         craftsmanship — let’s turn your sweetest visions into reality.
       </p>
-    </section>
-
-{/* Shorts strip & reels*/}
+      {/* Shorts strip & reels*/}
  <>
       {/* PLAYER */}
       {active && (
@@ -925,6 +923,9 @@ const [selectedIndex, setSelectedIndex] = useState(null);
       </section>
     </>
  
+
+
+    </section>
 
       {/* REST OF YOUR CODE REMAINS SAME — omitted for brevity */}
 
