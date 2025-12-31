@@ -633,7 +633,7 @@ const [selectedIndex, setSelectedIndex] = useState(null);
         <div className="flow-card tilt-right">
           <span className="icon">📩</span>
           <p>
-            Participate in live interactive sessions with instant feedback.
+            Master the art of baking with real-time guidance and professional insight
           </p>
         </div>
 
